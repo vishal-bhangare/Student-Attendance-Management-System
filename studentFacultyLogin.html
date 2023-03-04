@@ -1,12 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Student/Faculty</title>
+    <link rel="stylesheet" href="studentFacultyLoginStyle.css">
+
 </head>
+
 <body>
-    <h1>Student / Faculty Login Page</h1>
+    <div class="center">
+        <div class="actionBtns">
+            <h1 class="Btn student">Student</h1>
+            <h1 class="Btn faculty">Faculty</h1>
+            <h1 class="Btn moveBtn ">Student</h1>
+        </div>
+        <form method="post" id="studentForm" class="form studentForm">
+            <div class="txt_field">
+                <input type="text" id="studentUser" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" id="studentPass" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <!-- <div class="pass">Forgot Password?</div> -->
+            <input type="submit" value="Login">
+
+        </form>
+        <form method="post" id="facultyForm" class="form">
+            <div class="txt_field">
+                <input type="text" id="facultyUser" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" id="facultyPass" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <!-- <div class="pass">Forgot Password?</div> -->
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <script src="studentFacultyLogin.js"></script>
 </body>
+
 </html>
