@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px;
+    background: #232323;
+}
+
+.sidebar .user-details {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* top right bottom left */
+    padding: 33px 10px;
+border-bottom: 2px solid gray;
+}
+
+.sidebar .user-details i {
+    font-size: 60px;
+    color: #fff;
+    height: 50px;
+    min-width: 80px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.sidebar .user-details .user-name {
+    font-size: 22px;
+    color: #fff;
+    line-height: 22px;
+}
+
+.sidebar .nav-links {
+    height: 100%;
+    padding-top: 20px;
+}
+
+.sidebar .nav-links li {
+    position: relative;
+    list-style: none;
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 400;
+    color: #fff;
+    padding: 10px 0px;
+}
+
+.sidebar .nav-links li a:hover {
+    background: #363434;
+}
+
+.sidebar .logout {
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    width: inherit;
+    max-width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: #fff;
+    font-size: 22px;
+    border-top: 2px solid gray;
+}
+
+.sidebar .logout i {
+    font-size: 35px;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+}
+.sidebar .logout span{
+    margin: 0px 40px;
+}
+.sidebar .logout:hover{
+    background:#363434;
+}
