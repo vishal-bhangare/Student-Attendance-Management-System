@@ -2,58 +2,191 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <link rel="stylesheet" href="/css/adminDashboard.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <link rel="stylesheet" href="/css/adminDashboard.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="sidebar">
-        <div class="user-details">
-            <i class='bx bxs-user-circle'></i>
-            <span class="user-name">Vishal Bhangare</span>
-        </div>
-
-        <ul class="nav-links">
-            <li>
-                <a href="#">
-                    <span class="home">Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="faculty">Faculty</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="student">student</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="academics">Academics</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="records">Records</span>
-                </a>
-            </li>
-
-        </ul>
-        <div class="logout">
-                    <i class='bx bx-log-out'></i>
-                    <span>Logout</span>
-        </div>
-
+  <div class="sidebar">
+    <div class="user-details">
+      <i class="bx bxs-user-circle"></i>
+      <span class="user-name">Admin</span>
     </div>
 
+    <ul class="nav-links">
+      <li data-li="home" class="homeBtn active">
+        <a href="#">
+          <span>Home</span>
+        </a>
+      </li>
+      <li data-li="faculty" class="facultyBtn">
+        <a href="#">
+          <span>Faculty</span>
+        </a>
+      </li>
+      <li data-li="students" class="studentBtn">
+        <a href="#">
+          <span>student</span>
+        </a>
+      </li>
+      <li data-li="academics" class="academicsBtn">
+        <a href="#">
+          <span>Academics</span>
+        </a>
+      </li>
+      <li data-li="records" class="recordsBtn">
+        <a href="#">
+          <span>Records</span>
+        </a>
+      </li>
+    </ul>
+    <div class="logout">
+      <i class="bx bx-log-out"></i>
+      <span>Logout</span>
+    </div>
+  </div>
+  <section class="main">
+    <div class="item home">
+      <div class="container">
+        <div class="header">
+          <div>Faculty</div>
+          <button type="button" class="addBtn">
+            <span>Add</span>
+          </button>
+        </div>
+        <div class="data">
+          <div class="filter">
+            <form action="" class="filter">
+              <input type="text" placeholder="Filter" id="filter-value">
+            </form>
+          </div>
+          <table>
+            <!-- <colgroup>
+              <col span="1" style="width: 40%;">
+              <col span="1" style="width: 40%;">
+              <col span="1" style="width: 20%;">
+            </colgroup> -->
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th style="width: 20%;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>vishal</td>
+                <td>bhangare</td>
+                <td>
+                  <button type="button" class="editBtn">
+                    <span>Edit</span>
+                  </button>
+                  <button type="button" class="deleteBtn">
+                    <span>Remove</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>akash</td>
+                <td>tiwari</td>
+                <td>
+                  <button type="button" class="editBtn">
+                    <span>Edit</span>
+                  </button>
+                  <button type="button" class="deleteBtn">
+                    <span>Remove</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>ritesh</td>
+                <td>tiwari</td>
+                <td>
+                  <button type="button" class="editBtn">
+                    <span>Edit</span>
+                  </button>
+                  <button type="button" class="deleteBtn">
+                    <span>Remove</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pages">
+            <span>Items per page:</span>
+            <div class="select-menu">
+              <div class="select-btn">
+                  <span class="sBtn-text">10</span>
+                  <i class="bx bx-chevron-down"></i>
+              </div>
+      
+              <ul class="options">
+                  <li class="option">
+                      <span class="option-text">10</span>
+                  </li>
+                  <li class="option">
+                      <span class="option-text">25</span>
+                  </li>
+                  <li class="option">
+                      <span class="option-text">50</span>
+                  </li>
+              </ul>
+          </div>
+          <span>11 - 20 of 50</span>
+          <div class="nav">
+            <i class='bx bx-skip-previous'></i>
+            <i class='bx bx-chevron-left'></i>
+            <i class='bx bx-chevron-right'></i>
+            <i class='bx bx-skip-next'></i>
+          </div>
+          </div>
+        </div>
+      </div>
 
-    <script src="/js/adminDashboard.js"></script>
+      <!-- buttons with text and icons -->
+      <!-- <button type="button" class="button">
+        <span>Edit</span>
+       <i class='bx bx-edit'></i>
+      </button>
+      <button type="button" class="button">
+        <span>Delete</span>
+        <i class='bx bx-trash-alt' ></i>
+      </button> -->
+      <!-- buttons with only text -->
+
+      <!-- <button type="button" class="editBtn">
+        <span>Edit</span>
+      </button>
+      <button type="button" class="deleteBtn">
+        <span>Remove</span>
+      </button> -->
+
+    </div>
+    <!-- <span>home Panel</span> -->
+    </div>
+    <div class="item faculty">
+      <!-- <span>faculty Panel</span> -->
+    </div>
+    <div class="item students">
+      <!-- <span>students Panel</span> -->
+    </div>
+    <div class="item academics">
+      <!-- <span>academics Panel</span> -->
+    </div>
+    <div class="item records">
+      <!-- <span>records Panel</span> -->
+    </div>
+  </section>
+
+  <script src="/js/adminDashboard.js"></script>
 </body>
 
 </html>
