@@ -3,7 +3,8 @@ var li_elements = document.querySelectorAll(".sidebar ul li");
 var item_elements = document.querySelectorAll(".item");
 
 item_elements.forEach(function (item) {
-  if (item.classList[1] != "students") item.style.display = "none";
+  if (item.classList[1] != "timetable")
+    item.style.display = "none";
 });
 
 for (var i = 0; i < li_elements.length; i++) {
@@ -33,26 +34,35 @@ for (var i = 0; i < li_elements.length; i++) {
   });
 }
 
-const optionMenu = document.querySelector(".select-menu"),
-  selectBtn = optionMenu.querySelector(".select-btn"),
-  options = optionMenu.querySelectorAll(".option"),
-  sBtn_text = optionMenu.querySelector(".sBtn-text");
+const optionMenus = document.querySelectorAll(".select-menu");
 
-selectBtn.addEventListener("click", () =>
-  optionMenu.classList.toggle("active2")
-);
+optionMenus.forEach((optionMenu) => {
 
-options.forEach((option) => {
-  option.addEventListener("click", () => {
-    options.forEach((option) => {
-      option.classList.remove("selected");
+  const selectBtns = optionMenu.querySelectorAll(".select-btn"),
+    options = optionMenu.querySelectorAll(".option"),
+    sBtn_text = optionMenu.querySelector(".sBtn-text");
+
+  selectBtns.forEach((selectBtn) => {
+    selectBtn.addEventListener("click", () =>
+      optionMenu.classList.toggle("active2")
+    );
+  })
+
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      options.forEach((option) => {
+        option.classList.remove("selected");
+      });
+      document.querySelector(".timetable .select-menu").style.width = "fit-content";
+      let selectedOption = option.querySelector(".option-text").innerText;
+      sBtn_text.innerText = selectedOption;
+      option.classList.add("selected");
+      optionMenu.classList.remove("active2");
     });
-    let selectedOption = option.querySelector(".option-text").innerText;
-    sBtn_text.innerText = selectedOption;
-    option.classList.add("selected");
-    optionMenu.classList.remove("active2");
   });
-});
+})
+
+
 
 const cardBackground = document.querySelector(".container .card-background"),
   nameFields = document.querySelectorAll(".data table td:nth-child(2)"),
@@ -71,7 +81,9 @@ const rollno = cardBackground.querySelector(".card #rollno");
 
 
 nameFields.forEach((nameField) => {
-  console.log(nameField.parentElement.children[0].innerHTML);
+  // console.log(nameField.parentElement.children[0].innerHTML);
+
+
   nameField.addEventListener("click", () => {
     cardBackground.style.display = "block";
     name.innerText = nameField.innerHTML;
@@ -115,11 +127,11 @@ const cardBackground3 = document.querySelector(".container .card-background3"),
   cancelBtn = document.querySelector(".container .card-background3 .card .cancelBtn");
 
 removeBtns.forEach((removeBtn) => {
-  removeBtn.addEventListener("click", () =>{
+  removeBtn.addEventListener("click", () => {
     cardBackground3.style.display = "block";
   })
 });
-cancelBtn.addEventListener("click", () =>{
+cancelBtn.addEventListener("click", () => {
   cardBackground3.style.display = "none";
 })
 const addBtn = document.querySelector(".container .header .addBtn");
@@ -128,14 +140,49 @@ addBtn.addEventListener("click", () => {
   document.querySelector(".container .card-background2 .card .saveBtn").style.padding = "1px 15px";
   cardBackground2.style.display = "block";
 })
-var role = "hod";
+var role = "faculty";
 
-if(role == "hod"){
+if (role == "hod") {
   document.querySelector(".students .container .header .addBtn").style.display = "block";
-  document.querySelector(".students .container .header").style.justifyContent =  "space-between";
+  document.querySelector(".students .container .header").style.justifyContent = "space-between";
   // document.querySelector(".students .container .header div").style.margin =  "50px";
-  document.querySelectorAll(".students .container .data table tr td:last-child").forEach((td) =>{
+  document.querySelectorAll(".students .container .data table tr td:last-child").forEach((td) => {
     td.style.display = "block";
   })
   document.querySelector(".students .container .data table thead th:last-child").style.display = "table-cell";
 }
+
+document.querySelector(".timetable .select-menu").style.width = $(".timetable .options").outerWidth() + "px";
+document.querySelector(".timetable .select-menu").style.minWidth = $(".timetable .options").outerWidth() + "px";
+
+
+
+const mediaQuery = window.matchMedia('(max-width: 480px)');
+if (mediaQuery.matches) {
+  const dayBtns = document.querySelectorAll(".timetable .content button");
+  for (var i = 0; i < dayBtns.length; i++) {
+    dayBtns[i].addEventListener("click", function () {
+      dayBtns.forEach(function (li) {
+        li.classList.remove("selected");
+      });
+      this.classList.add("selected");
+    });
+  }
+  console.log("YEsss");
+}
+else {
+
+  const dayBtns = document.querySelectorAll(".timetable .content button");
+
+  dayBtns.forEach((btn) => {
+    btn.classList.remove("selected");
+  })
+
+}
+const tableCells = document.querySelectorAll(".timetable .content table tbody tr td .empty");
+
+document.querySelector(".timetable .header .addBtn").addEventListener("click", ()=>{
+  tableCells.forEach((addBtn) =>{
+      addBtn.style.display="flex";
+  })
+})

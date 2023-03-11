@@ -14,6 +14,7 @@ body {
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+  line-height: 1.1;
 }
 
 .sidebar {
@@ -126,7 +127,6 @@ body {
 
 .main {
   position: relative;
-  background: rebeccapurple;
   left: 260px;
   width: calc(100% - 260px);
   height: 100vh;
@@ -292,13 +292,16 @@ body {
   border-top: none;
 }
 .select-menu {
-  width: 60px;
+  /* width: fit-content; */
   margin: 0;
+}
+.select-menu span{
+  margin: 0px auto;
 }
 .select-menu .select-btn {
   position: relative;
   display: flex;
-  height: auto;
+  height: 40px;
   background: #fff;
   /* padding: 6px; */
   font-size: 15px;
@@ -325,7 +328,7 @@ body {
   transform: rotate(-180deg);
 }
 .select-menu .options {
-  width: inherit;
+  width: fit-content;
   position: absolute;
   padding: 5px;
   margin-top: 6px;
@@ -394,7 +397,7 @@ body {
   padding: 5px;
   border: 2px solid rgb(216, 216, 216);
   color: #fff;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .container .card-background .card .content{
   display: grid;
@@ -478,7 +481,8 @@ body {
   align-items: center;
   justify-content: space-evenly;
 }
-.card-background2 .card div .saveBtn {
+.card-background2 .card div .saveBtn,
+ .timetable .content table .empty button{
   padding: 1px 6px;
   background: #239dc5;
   color: #fff;
@@ -488,7 +492,8 @@ body {
   font-weight: 500;
 }
 
-.card-background2 .card div .saveBtn:hover {
+.card-background2 .card div .saveBtn:hover,
+.timetable .content table .empty button:hover{
   background: #072f3b;
   color: #fff;
 }
@@ -573,4 +578,120 @@ body {
 }
 .container .card-background3 .card .cancelBtn:hover{
   background-color: #f0f0f0;
+}
+
+.timetable .header{
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background: rgb(226, 195, 255);;
+  padding: 20px;
+}
+
+.timetable .header > span{
+  font-size: 18px;
+  margin: 10px;
+}
+.timetable .header .select-menu{
+  margin: 10px;
+}
+.timetable .header button{
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+.timetable .content{
+  width: 100%;
+  background: rgb(226, 195, 255);
+  padding: 20px;
+}
+.timetable .content table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.timetable .content table thead{
+  height: 50px;
+  background: #ffffff;
+}
+.timetable .content table thead tr th{
+  width: 14%;
+}
+.timetable .content table thead tr th button.selected {
+  padding: 1px 6px;
+  background: #ef476f;
+  color: #fff;
+  border: 2px solid #ef476f;
+  border-radius: 18px;
+  font-size: 15px;
+  font-weight: 500;
+  width: 60%;
+  height: 35px;
+  margin: 5px 0px;
+}
+.timetable .content table thead tr th button {
+  padding: 1px 6px;
+  border: none;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  width: 60%;
+  height: 35px;
+  margin: 5px 0px;
+}
+.timetable .content table thead tr th:first-child{
+  background: none;
+  width: 10%;
+}
+.timetable .content table tbody{
+  background: #8d74eb;
+}
+.timetable .content table tbody tr{
+  height: 100px;
+  /* border-bottom: 1px solid rgb(255, 255, 255); */
+  vertical-align:top;
+  text-align: right;
+}
+.timetable .content table tbody tr td{
+  padding:0px 5px;
+  height: inherit;
+}
+.timetable .content table tbody tr td:nth-child(1){
+  border-right: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+}
+.timetable .content table tbody tr td:nth-child(1) span:nth-child(1){
+  margin-top: 4px;
+  width: 100%;
+  margin-bottom:calc((50% - (15px * 1.1)));
+  font-size: 15px;
+}
+.timetable .content table tbody tr td:nth-child(1) span:nth-child(2){
+  width: 100%;
+  margin-bottom:calc(50% - (12px * 1.1));
+  font-size: 12px;
+}
+.timetable .content table tbody tr td:nth-child(1) span:nth-child(2){
+  font-size: 12px;
+}
+
+.timetable .content table tbody tr td div{
+  background: red;
+  color: #fff;
+  height: 100%;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0px;
+}
+.timetable .content table tbody tr:nth-child(1) td div{
+  margin-top: 4px;
+}
+.timetable .content table tbody tr td .empty{
+  display: none;
 }
