@@ -1,9 +1,21 @@
+var role = "hod";
+
+if (role == "hod") {
+  document.querySelector(".students .container .header .addBtn").style.display = "block";
+  document.querySelector(".students .container .header").style.justifyContent = "space-between";
+  // document.querySelector(".students .container .header div").style.margin =  "50px";
+  document.querySelectorAll(".students > .container > .data table tr td:last-child").forEach((td) => {
+    td.style.display = "block";
+  })
+  document.querySelector(".students .container .data table thead th:last-child").style.display = "table-cell";
+}
+
 var li_elements = document.querySelectorAll(".sidebar ul li");
 
 var item_elements = document.querySelectorAll(".item");
 
 item_elements.forEach(function (item) {
-  if (item.classList[1] != "timetable")
+  if (item.classList[1] != "attendance")
     item.style.display = "none";
 });
 
@@ -34,9 +46,31 @@ for (var i = 0; i < li_elements.length; i++) {
   });
 }
 
-const optionMenus = document.querySelectorAll(".select-menu");
+const optionMenus = document.querySelectorAll(".select-menu ");
 
 optionMenus.forEach((optionMenu) => {
+  let max = 0;
+  if (optionMenu.parentElement.parentElement.classList.length > 1) {
+    optionMenu.parentElement.parentElement.classList[1]
+    document.querySelectorAll("." + optionMenu.parentElement.parentElement.classList[1] + " .options .option .option-text").forEach((elm) => {
+      if (max < getTextWidth(elm.innerText)) {
+        max = getTextWidth(elm.innerText);
+      }
+    })
+  } else {
+    document.querySelectorAll("." + optionMenu.parentElement.parentElement.classList[0] + " .options .option .option-text").forEach((elm) => {
+      if (max < getTextWidth(elm.innerText)) {
+        max = getTextWidth(elm.innerText);
+      }
+    })
+  }
+  // console.log(max);
+
+  var temp = document.querySelector("." + optionMenu.parentElement.parentElement.classList[1] + " .sBtn-text");
+  if (temp != null) {
+    temp.style.width = max + 4 + "px";
+  }
+  document.querySelector("." + optionMenu.parentElement.parentElement.classList[0] + " .select-menu").style.minWidth = "fit-content";
 
   const selectBtns = optionMenu.querySelectorAll(".select-btn"),
     options = optionMenu.querySelectorAll(".option"),
@@ -53,7 +87,6 @@ optionMenus.forEach((optionMenu) => {
       options.forEach((option) => {
         option.classList.remove("selected");
       });
-      document.querySelector(".timetable .select-menu").style.width = "fit-content";
       let selectedOption = option.querySelector(".option-text").innerText;
       sBtn_text.innerText = selectedOption;
       option.classList.add("selected");
@@ -65,9 +98,9 @@ optionMenus.forEach((optionMenu) => {
 
 
 const cardBackground = document.querySelector(".container .card-background"),
-  nameFields = document.querySelectorAll(".data table td:nth-child(2)"),
+  nameFields = document.querySelectorAll(".container .data table td:nth-child(2)"),
   idFields = document.querySelectorAll(".data table td:nth-child(1)"),
-  closeCard = document.querySelector(".card .close-card");
+  closeCardBtns = document.querySelectorAll(".card .close-card");
 
 const name = cardBackground.querySelector(".card #name");
 const id = cardBackground.querySelector(".card #id");
@@ -81,9 +114,6 @@ const rollno = cardBackground.querySelector(".card #rollno");
 
 
 nameFields.forEach((nameField) => {
-  // console.log(nameField.parentElement.children[0].innerHTML);
-
-
   nameField.addEventListener("click", () => {
     cardBackground.style.display = "block";
     name.innerText = nameField.innerHTML;
@@ -97,15 +127,24 @@ nameFields.forEach((nameField) => {
 // idFields.forEach((id) => {
 //     console.log(id.innerHTML);
 // })
-closeCard.addEventListener("click", () => {
-  name.innerHTML = "";
-  id.innerHTML = "";
-  dob.innerHTML = "";
-  Class.innerHTML = "";
-  div.innerHTML = "";
-  rollno.innerHTML = "";
-  cardBackground.style.display = "none";
+
+const attendanceNameFields = document.querySelectorAll(".attendance .data table td:nth-child(2)");
+
+attendanceNameFields.forEach((nameField) => {
+  nameField.addEventListener("click", () => {
+    document.querySelector(".attendance .data .card-background").style.display = "block";
+  });
 });
+
+closeCardBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".card-background").forEach((card) => {
+      card.style.display = "none";
+      console.log(card);
+    })
+
+  })
+})
 
 const editBtns = document.querySelectorAll(".container table tr .editBtn"),
   cardBackground2 = document.querySelector(".container .card-background2");
@@ -140,21 +179,21 @@ addBtn.addEventListener("click", () => {
   document.querySelector(".container .card-background2 .card .saveBtn").style.padding = "1px 15px";
   cardBackground2.style.display = "block";
 })
-var role = "faculty";
 
-if (role == "hod") {
-  document.querySelector(".students .container .header .addBtn").style.display = "block";
-  document.querySelector(".students .container .header").style.justifyContent = "space-between";
-  // document.querySelector(".students .container .header div").style.margin =  "50px";
-  document.querySelectorAll(".students .container .data table tr td:last-child").forEach((td) => {
-    td.style.display = "block";
-  })
-  document.querySelector(".students .container .data table thead th:last-child").style.display = "table-cell";
+
+function getTextWidth(text) {
+
+  inputText = text;
+  font = "15px Poppins";
+
+  canvas = document.createElement("canvas");
+  context = canvas.getContext("2d");
+  context.font = font;
+  width = context.measureText(inputText).width;
+  formattedWidth = Math.ceil(width);
+
+  return formattedWidth;
 }
-
-document.querySelector(".timetable .select-menu").style.width = $(".timetable .options").outerWidth() + "px";
-document.querySelector(".timetable .select-menu").style.minWidth = $(".timetable .options").outerWidth() + "px";
-
 
 
 const mediaQuery = window.matchMedia('(max-width: 480px)');
@@ -168,21 +207,105 @@ if (mediaQuery.matches) {
       this.classList.add("selected");
     });
   }
-  console.log("YEsss");
 }
 else {
 
   const dayBtns = document.querySelectorAll(".timetable .content button");
-
   dayBtns.forEach((btn) => {
     btn.classList.remove("selected");
   })
 
 }
-const tableCells = document.querySelectorAll(".timetable .content table tbody tr td .empty");
+const tableCells = document.querySelectorAll(".timetable .content table tbody tr td .unscheduled");
 
-document.querySelector(".timetable .header .addBtn").addEventListener("click", ()=>{
-  tableCells.forEach((addBtn) =>{
-      addBtn.style.display="flex";
+document.querySelector(".timetable .header .manageBtn").addEventListener("click", () => {
+  tableCells.forEach((addBtn) => {
+    addBtn.style.display = "flex";
   })
+})
+
+const tableCards = document.querySelectorAll(".timetable table tbody tr td div.scheduled");
+
+tableCards.forEach(card => {
+  card.addEventListener("click", () => {
+    card.style.background = "blue";
+
+    document.querySelector(".timetable .content .card-background").style.display = "block";
+
+    document.querySelector(".timetable ").style.overflowY = "auto";
+
+  })
+});
+
+document.querySelector(".timetable .content .card i").addEventListener("click", () => {
+  document.querySelector(".timetable .content .card-background").style.display = "none";
+  document.querySelector(".timetable ").style.overflowY = "auto";
+})
+
+const toggleBtn = document.querySelector(".toggle-sidebar");
+const sidebar = document.querySelector(".sidebar");
+toggleBtn.addEventListener("click", () => {
+  const sidebarStatus = window.getComputedStyle(sidebar).visibility;
+  if (sidebarStatus == "visible") {
+    sidebar.style.visibility = "hidden";
+    toggleBtn.style.left = "0";
+    document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 0;
+    `;
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+
+  } else {
+    sidebar.style.visibility = "visible";
+    document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 260px;
+    `;
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+    toggleBtn.style.left = "260px";
+    
+  }
+
+})
+/* JavaScript Media Queries */
+if (window.matchMedia('(max-width:768px)').matches) { 
+  sidebar.style.visibility = "hidden";
+    toggleBtn.style.left = "0";
+    document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 0;
+    `;
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+    
+}
+window.onresize = () =>{
+  if (window.matchMedia('(max-width:768px)').matches) { 
+    console.log('Media query matched!');
+    sidebar.style.visibility = "hidden";
+      toggleBtn.style.left = "0";
+      document.querySelector(".main").style.cssText = `
+      width: 100%;
+      left: 0;
+      `;
+      document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+      
+  }
+  else{
+    sidebar.style.visibility = "visible";
+    document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 260px;
+    `;
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+    toggleBtn.style.left = "260px";
+  }
+}
+const attendanceDetailsBtns = document.querySelectorAll(".attendance > .data > table tbody tr td i");
+attendanceDetailsBtns.forEach((btn)=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelector(".attendance > .studentData").style.display = "block";
+  })
+})
+document.querySelector(".attendance .studentData .close-card").addEventListener("click", ()=>{
+  document.querySelector(".attendance > .studentData").style.display = "none";
 })

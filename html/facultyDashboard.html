@@ -1,61 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faculty</title>
+    <link rel="stylesheet" href="/css/facultyDashboard.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="/res/jquery-3.6.4.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Faculty</title>
-  <link rel="stylesheet" href="/css/facultyDashboard.css" />
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <script src="/res/jquery-3.6.4.min.js"></script>
-</head>
-
-<body>
-  <div class="sidebar">
-    <div class="user-details">
-      <i class="bx bxs-user-circle"></i>
-      <span class="user-name">user name</span>
+  <body>
+    <div class="toggle-sidebar">
+      <i class='bx bx-chevrons-right'></i>
     </div>
+    <div class="sidebar">
+      <div class="user-details">
+        <i class="bx bxs-user-circle"></i>
+        <span class="user-name">user name</span>
+      </div>
 
-    <ul class="nav-links">
-      <li data-li="home" class="homeBtn active">
-        <a href="#">
-          <span>Home</span>
-        </a>
-      </li>
-      <li data-li="students" class="studentsBtn">
-        <a href="#">
-          <span>Students</span>
-        </a>
-      </li>
-      <li data-li="attendance" class="attendanceBtn">
-        <a href="#">
-          <span>Attendance</span>
-        </a>
-      </li>
-      <li data-li="timetable" class="timetableBtn">
-        <a href="#">
-          <span>Timetable</span>
-        </a>
-      </li>
-      <li data-li="leaves" class="leavesBtn">
-        <a href="#">
-          <span>Leaves</span>
-        </a>
-      </li>
-    </ul>
-    <div class="logout">
-      <div>
-        <i class="bx bx-log-out"></i>
-        <span>Logout</span>
+      <ul class="nav-links">
+        <li data-li="home" class="homeBtn active">
+          <a href="#">
+            <span>Home</span>
+          </a>
+        </li>
+        <li data-li="students" class="studentsBtn">
+          <a href="#">
+            <span>Students</span>
+          </a>
+        </li>
+        <li data-li="attendance" class="attendanceBtn">
+          <a href="#">
+            <span>Attendance</span>
+          </a>
+        </li>
+        <li data-li="timetable" class="timetableBtn">
+          <a href="#">
+            <span>Timetable</span>
+          </a>
+        </li>
+        <li data-li="leaves" class="leavesBtn">
+          <a href="#">
+            <span>Leaves</span>
+          </a>
+        </li>
+      </ul>
+      <div class="logout">
+        <div>
+          <i class="bx bx-log-out"></i>
+          <span>Logout</span>
+        </div>
       </div>
     </div>
-  </div>
-  <section class="main">
-    <div class="item home">
-      <!-- buttons with text and icons -->
-      <!-- <button type="button" class="button">
+    <section class="main">
+      
+      <div class="item home">
+        <!-- buttons with text and icons -->
+        <!-- <button type="button" class="button">
         <span>Edit</span>
        <i class='bx bx-edit'></i>
       </button>
@@ -63,92 +69,248 @@
         <span>Delete</span>
         <i class='bx bx-trash-alt' ></i>
       </button> -->
-      <!-- buttons with only text -->
+        <!-- buttons with only text -->
 
-      <!-- <button type="button" class="editBtn">
+        <!-- <button type="button" class="editBtn">
         <span>Edit</span>
       </button>
       <button type="button" class="deleteBtn">
         <span>Remove</span>
       </button> -->
-    </div>
-    <!-- <span>home Panel</span> -->
-    <div class="item students">
-      <div class="container">
+      </div>
+      <div class="item students">
+        <div class="container">
+          <div class="header">
+            <div>Students</div>
+            <button type="button" class="addBtn">
+              <span>Add</span>
+            </button>
+          </div>
+          <div class="data">
+            <div class="filter">
+                <input type="text" placeholder="Filter" id="filter-value" />
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th id="id" style="width: 5%">Id</th>
+                  <th id="name" style="width: 20%" class="name-field">Name</th>
+                  <th id="dob">DOB</th>
+                  <th id="department">Class</th>
+                  <th id="div">Div</th>
+                  <th>Roll No</th>
+                  <th style="width: 20%">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>44473</td>
+                  <td>Vishal Bhangare</td>
+                  <td>2003-08-21</td>
+                  <td>SYCS</td>
+                  <td>A</td>
+                  <td>10</td>
+                  <td>
+                    <button type="button" class="editBtn">
+                      <span>Edit</span>
+                    </button>
+                    <button type="button" class="removeBtn">
+                      <span>Remove</span>
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>44586</td>
+                  <td>Vikas Bhor</td>
+                  <td>2004-06-17</td>
+                  <td>SYIT</td>
+                  <td>A</td>
+                  <td>75</td>
+                  <td>
+                    <button type="button" class="editBtn">
+                      <span>Edit</span>
+                    </button>
+                    <button type="button" class="removeBtn">
+                      <span>Remove</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>43857</td>
+                  <td>Akash</td>
+                  <td>2004-04-04</td>
+                  <td>SYCS</td>
+                  <td>A</td>
+                  <td>69</td>
+                  <td>
+                    <button type="button" class="editBtn">
+                      <span>Edit</span>
+                    </button>
+                    <button type="button" class="removeBtn">
+                      <span>Remove</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="pages">
+              <span>Items per page:</span>
+              <div class="select-menu">
+                <div class="select-btn">
+                  <span class="sBtn-text">10</span>
+                  <i class="bx bx-chevron-down"></i>
+                </div>
+
+                <ul class="options">
+                  <li class="option">
+                    <span class="option-text">10</span>
+                  </li>
+                  <li class="option">
+                    <span class="option-text">25</span>
+                  </li>
+                  <li class="option">
+                    <span class="option-text">50</span>
+                  </li>
+                </ul>
+              </div>
+              <span>11 - 20 of 50</span>
+              <div class="nav">
+                <i class="bx bx-skip-previous"></i>
+                <i class="bx bx-chevron-left"></i>
+                <i class="bx bx-chevron-right"></i>
+                <i class="bx bx-skip-next"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-background">
+            <div class="card">
+              <i class="bx bx-x close-card"></i>
+              <div class="content">
+                <span>id</span>:<span id="id"></span> <span>Name</span>:<span
+                  id="name"
+                ></span>
+                <span>DOB</span>:<span id="dob"></span> <span>Email</span>:<span
+                  id="email"
+                ></span>
+                <span>Contact no</span>:<span id="contact"></span>
+                <span>Address</span>:<span id="address"></span>
+                <span>Class</span>:<span id="class"></span>
+                <span>Div</span>:<span id="div"></span>
+                <span>Roll no</span>:<span id="rollno"></span>
+              </div>
+            </div>
+          </div>
+          <div class="card-background2">
+            <form action="">
+              <div class="card">
+                <span>id</span>:<input type="text" id="id" />
+                <span>Name</span>:<input type="text" id="name" />
+                <span>DOB</span>:<input type="text" id="dob" />
+                <span>Email</span>:<input type="email" id="email" />
+                <span>Contact no</span>:<input type="text" id="contact" />
+                <span>Address</span>:<input type="text" id="address" />
+                <span>Class</span>:<input type="text" id="class" />
+                <span>Div</span>:<input type="text" id="div" />
+                <span>Roll no</span>:<input type="text" id="rollno" />
+                <div id="btns">
+                  <button type="button" class="saveBtn">Save</button>
+                  <button type="button" class="closeBtn">
+                    <span>Close</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-background3">
+            <div class="card">
+              <i class="bx bx-error"></i>
+              <span>Remove Faculty</span>
+              <span
+                >Are you sure you want to deactivate your account? All of your
+                data will be permanently removed. This action cannot be
+                undone.</span
+              >
+              <button type="button" class="removeBtn">
+                <span>Remove</span>
+              </button>
+              <button type="button" class="cancelBtn">
+                <span>Cancel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- <span>faculty Panel</span> -->
+      </div>
+      <div class="item attendance">
         <div class="header">
-          <div>Students</div>
-          <button type="button" class="addBtn">
-            <span>Add</span>
-          </button>
+          <!-- <span>select class : </span> -->
+          <div class="select-menu">
+            <div class="select-btn">
+              <span class="sBtn-text">select class :</span>
+              <i class="bx bx-chevron-down"></i>
+            </div>
+
+            <ul class="options">
+              <li class="option">
+                <span class="option-text">FYCS-A</span>
+              </li>
+              <li class="option">
+                <span class="option-text">FYCS-B</span>
+              </li>
+              <li class="option">
+                <span class="option-text">SYCS</span>
+              </li>
+              <li class="option">
+                <span class="option-text">TYCS</span>
+              </li>
+              <li class="option">
+                <span class="option-text">MSC-CS Part-1</span>
+              </li>
+              <li class="option">
+                <span class="option-text">MSC-CS Part-2</span>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="data">
           <div class="filter">
-            <form action="" class="filter">
               <input type="text" placeholder="Filter" id="filter-value" />
-            </form>
           </div>
           <table>
             <thead>
               <tr>
-                <th id="id" style="width: 5%">Id</th>
-                <th id="name" style="width: 20%" class="name-field">Name</th>
-                <th id="dob">DOB</th>
-                <th id="department">Class</th>
-                <th id="div">Div</th>
-                <th>Roll No</th>
-                <th style="width: 20%">Action</th>
+                <th id="rollno" style="width: 10%">Roll no</th>
+                <th id="name" style="width: 30%" class="name-field">Name</th>
+                <th id="present">Present(%)</th>
+                <th id="absent">Absent(%)</th>
+                <th style="width: 10%"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>44473</td>
+                <td>43</td>
                 <td>Vishal Bhangare</td>
-                <td>2003-08-21</td>
-                <td>SYCS</td>
-                <td>A</td>
-                <td>10</td>
-                <td>
-                  <button type="button" class="editBtn">
-                    <span>Edit</span>
-                  </button>
-                  <button type="button" class="removeBtn">
-                    <span>Remove</span>
-                  </button>
-                </td>
+                <td>70</td>
+                <td>30</td>
+                <td><i class='bx bx-chevron-right'></i></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Ram Birla</td>
+                <td>80</td>
+                <td>20</td>
+                <td><i class='bx bx-chevron-right'></i></td>
+              </tr>
+              <tr>
+                <td>38</td>
+                <td>John Bhangare</td>
+                <td>50</td>
+                <td>50</td>
+                <td><i class='bx bx-chevron-right'></i></td>
               </tr>
 
-              <tr>
-                <td>44586</td>
-                <td>Vikas Bhor</td>
-                <td>2004-06-17</td>
-                <td>SYIT</td>
-                <td>A</td>
-                <td>75</td>
-                <td>
-                  <button type="button" class="editBtn">
-                    <span>Edit</span>
-                  </button>
-                  <button type="button" class="removeBtn">
-                    <span>Remove</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>43857</td>
-                <td>Akash</td>
-                <td>2004-04-04</td>
-                <td>SYCS</td>
-                <td>A</td>
-                <td>69</td>
-                <td>
-                  <button type="button" class="editBtn">
-                    <span>Edit</span>
-                  </button>
-                  <button type="button" class="removeBtn">
-                    <span>Remove</span>
-                  </button>
-                </td>
-              </tr>
             </tbody>
           </table>
 
@@ -180,212 +342,340 @@
               <i class="bx bx-skip-next"></i>
             </div>
           </div>
-        </div>
-        <div class="card-background">
-          <div class="card">
-            <i class="bx bx-x close-card"></i>
-            <div class="content">
-              <span>id</span>:<span id="id"></span> <span>Name</span>:<span id="name"></span>
-              <span>DOB</span>:<span id="dob"></span> <span>Email</span>:<span id="email"></span>
-              <span>Contact no</span>:<span id="contact"></span>
-              <span>Address</span>:<span id="address"></span>
-              <span>Class</span>:<span id="class"></span>
-              <span>Div</span>:<span id="div"></span>
-              <span>Roll no</span>:<span id="rollno"></span>
-            </div>
-          </div>
-        </div>
-        <div class="card-background2">
-          <form action="">
+          <div class="card-background">
             <div class="card">
-              <span>id</span>:<input type="text" id="id" />
-              <span>Name</span>:<input type="text" id="name" />
-              <span>DOB</span>:<input type="text" id="dob" />
-              <span>Email</span>:<input type="email" id="email" />
-              <span>Contact no</span>:<input type="text" id="contact" />
-              <span>Address</span>:<input type="text" id="address" />
-              <span>Class</span>:<input type="text" id="class" />
-              <span>Div</span>:<input type="text" id="div" />
-              <span>Roll no</span>:<input type="text" id="rollno" />
-              <div id="btns">
-                <button type="button" class="saveBtn">Save</button>
-                <button type="button" class="closeBtn">
-                  <span>Close</span>
-                </button>
+              <i class="bx bx-x close-card"></i>
+              <div class="content">
+                <span>id</span>:<span id="id"></span> <span>Name</span>:<span
+                  id="name"
+                ></span>
+                <span>DOB</span>:<span id="dob"></span> <span>Email</span>:<span
+                  id="email"
+                ></span>
+                <span>Contact no</span>:<span id="contact"></span>
+                <span>Address</span>:<span id="address"></span>
+                <span>Class</span>:<span id="class"></span>
+                <span>Div</span>:<span id="div"></span>
+                <span>Roll no</span>:<span id="rollno"></span>
               </div>
             </div>
-          </form>
+          </div>
+          
         </div>
-        <div class="card-background3">
-          <div class="card">
-            <i class="bx bx-error"></i>
-            <span>Remove Faculty</span>
-            <span>Are you sure you want to deactivate your account? All of your
-              data will be permanently removed. This action cannot be
-              undone.</span>
-            <button type="button" class="removeBtn">
-              <span>Remove</span>
-            </button>
-            <button type="button" class="cancelBtn">
-              <span>Cancel</span>
-            </button>
+        <div class="studentData">
+          <i class="bx bx-x close-card"></i>
+          <div class="header">
+           <div class="info">
+            <span>Student Name</span> : <span id="studentName">Vishal Bhangare</span>
+           <span>Class</span> : <span class="studentClass">SYCS</span>
+           <span>Roll no</span> : <span class="rollno">10</span>
+           </div>
+          </div>
+          <div class="data">
+            <table>
+              <thead>
+                <tr>
+                  <th id="subName">Subject Name</th>
+                  <th id="facutlyName">Faculty Name</th>
+                  <th id="totalLec">Total Lecture</th>
+                  <th id="presentLec">Present Lecture</th>
+                  <th id="absentLec">Absent Lecture</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>COMPUTER NETWORKS</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>SOFTWARE ENGINEERING	</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>IOT TECHNOLOGIES</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ADVANCED APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ANDROID APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>THEORY OF COMPUTATION</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>IOT TECHNOLOGIES</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ADVANCED APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ANDROID APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>THEORY OF COMPUTATION</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>IOT TECHNOLOGIES</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ADVANCED APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ANDROID APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>THEORY OF COMPUTATION</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>IOT TECHNOLOGIES</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ADVANCED APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>ANDROID APPLICATION DEVELOPMENT</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>THEORY OF COMPUTATION</td>
+                  <td>unknown</td>
+                  <td>12</td>
+                  <td>10</td>
+                  <td>2</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <!-- <span>faculty Panel</span> -->
-    </div>
-    <div class="item attendance">
-      <!-- <span>students Panel</span> -->
-    </div>
-    <div class="item timetable">
-      <div class="header">
-        <span>select class : </span>
-        <div class="select-menu">
-          <div class="select-btn">
-            <span class="sBtn-text">---</span>
-            <i class="bx bx-chevron-down"></i>
-          </div>
+      <div class="item timetable">
+        <div class="header">
+          <div class="select-menu">
+            <div class="select-btn">
+              <span class="sBtn-text">select class</span>
+              <i class="bx bx-chevron-down"></i>
+            </div>
 
-          <ul class="options">
-            <li class="option">
-              <span class="option-text">FYCS</span>
-            </li>
-            <li class="option">
-              <span class="option-text">SYCS</span>
-            </li>
-            <li class="option">
-              <span class="option-text">TYCS</span>
-            </li>
-            <li class="option">
-              <span class="option-text">MSC-CS Part-1</span>
-            </li>
-            <li class="option">
-              <span class="option-text">MSC-CS Part-2</span>
-            </li>
-          </ul>
+            <ul class="options">
+              <li class="option">
+                <span class="option-text">FYCS</span>
+              </li>
+              <li class="option">
+                <span class="option-text">SYCS</span>
+              </li>
+              <li class="option">
+                <span class="option-text">TYCS</span>
+              </li>
+              <li class="option">
+                <span class="option-text">MSC-CS Part-1</span>
+              </li>
+              <li class="option">
+                <span class="option-text">MSC-CS Part-2</span>
+              </li>
+            </ul>
+          </div>
+          <button type="button" class="manageBtn">
+            <span>Manage</span>
+          </button>
         </div>
-        <button type="button" class="addBtn">
-          <span>Add</span>
-        </button>
-      </div>
-      <div class="content">
-        <table>
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>
-                <button type="button" class="monday selected">
-                  <span>Monday</span>
-                </button>
-              </th>
-              <th>
-                <button type="button" class="tuesday ">
-                  <span>Tuesday</span>
-                </button>
-              </th>
-              <th>
-                <button type="button" class="wednesday ">
-                  <span>Wednesday</span>
-                </button>
-              </th>
-              <th>
-                <button type="button" class="thursday ">
-                  <span>Thursday</span>
-                </button>
-              </th>
-              <th>
-                <button type="button" class="friday ">
-                  <span>Friday</span>
-                </button>
-              </th>
-              <th>
-                <button type="button" class="saturday ">
-                  <span>Saturday</span>
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span>07:00</span><span>07:30</span></td>
-              <td>
+        <div class="content">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>
+                  <button type="button" class="monday selected">
+                    <span>Monday</span>
+                  </button>
+                </th>
+                <th>
+                  <button type="button" class="tuesday">
+                    <span>Tuesday</span>
+                  </button>
+                </th>
+                <th>
+                  <button type="button" class="wednesday">
+                    <span>Wednesday</span>
+                  </button>
+                </th>
+                <th>
+                  <button type="button" class="thursday">
+                    <span>Thursday</span>
+                  </button>
+                </th>
+                <th>
+                  <button type="button" class="friday">
+                    <span>Friday</span>
+                  </button>
+                </th>
+                <th>
+                  <button type="button" class="saturday">
+                    <span>Saturday</span>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span>07:00</span><span>07:30</span></td>
+                <td>
+                  <div class="scheduled">
+                    <span>07:00-07:50</span>
+                    <span>Computer Network</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="unscheduled">
+                    <button type="button">
+                      <span>add</span>
+                    </button>
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span>08:00</span><span>08:30</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span>09:00</span><span>09:30</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span>10:00</span><span>10:30</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <div class="scheduled">
+                    <span>07:00-07:50</span>
+                    <span>Computer Network</span>
+                  </div>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span>11:00</span><span>11:30</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span>12:00</span><span>12:30</span></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="card-background">
+            <div class="card">
+              <i class="bx bx-x close-card"></i>
+              <div class="content">
+                <span>Time</span>:<span id="id"></span>
+                <span>Subject</span>:<span id="name"></span>
+                <span>Faculty</span>:<span id="dob"></span>
                 <div>
-                  <span>07:00-07:50</span>
-                  <span>Computer Network</span>
-                </div>
-              </td>
-              <td>
-                <div class="empty">
-                  <button type="button">
-                    <span>add</span>
+                  <button type="button" class="takeAttendanceBtn">
+                    Take Attendance
                   </button>
                 </div>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span>08:00</span><span>08:30</span></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span>09:00</span><span>09:30</span></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span>10:00</span><span>10:30</span></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div>
-                  <span>07:00-07:50</span>
-                  <span>Computer Network</span>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span>11:00</span><span>11:30</span></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span>12:00</span><span>12:30</span></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="item leaves">
-      <!-- <span>records Panel</span> -->
-    </div>
-  </section>
+      <div class="item leaves">
+        <!-- <span>records Panel</span> -->
+      </div>
+    </section>
 
-  <script src="/js/facultyDashboard.js"></script>
-</body>
-
+    <script src="/js/facultyDashboard.js"></script>
+  </body>
 </html>
