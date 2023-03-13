@@ -258,7 +258,7 @@ toggleBtn.addEventListener("click", () => {
   } else {
     sidebar.style.visibility = "visible";
     document.querySelector(".main").style.cssText = `
-    width: 100%;
+    width: calc(100% - 260px);
     left: 260px;
     `;
     document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
@@ -293,7 +293,7 @@ window.onresize = () =>{
   else{
     sidebar.style.visibility = "visible";
     document.querySelector(".main").style.cssText = `
-    width: 100%;
+    width: calc(100% - 260px);
     left: 260px;
     `;
     document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
