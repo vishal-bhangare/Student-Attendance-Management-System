@@ -204,7 +204,7 @@ body {
   font-weight: 550;
 }
 .removeBtn:hover {
-  background: #ef476f;
+  background: #f13854;
   color: #fff;
 }
 .addBtn, .timetable .manageBtn {
@@ -238,7 +238,7 @@ body {
 .students .container .header .addBtn{
   display: none;
 }
-.students .container .data, .attendance > .data, .attendance .studentData > .data {
+.students .container .data, .attendance > .data, .attendance .studentData > .data,.timetable > .takeAttendance > .data {
   padding: 10px;
   width: 100%;
   height: fit-content;
@@ -265,7 +265,8 @@ body {
 }
 .students > .container .data table,
 .attendance > .data table,
-.attendance > .studentData > .data table{
+.attendance > .studentData > .data table,
+.timetable > .takeAttendance > .data table{
   width: 100%;
   height: calc(100% - 160px);
   text-align: left;
@@ -277,7 +278,8 @@ body {
 }
 .students > .container .data table tr,
 .attendance > .data table tr,
-.attendance > .studentData > .data table tr{
+.attendance > .studentData > .data table tr,
+.timetable > .takeAttendance > .data table tr{
   border: 1px solid rgb(180, 180, 180);
   border-top: none;
   height: 45px;
@@ -287,7 +289,7 @@ body {
 .attendance > .data table tr td,
 .attendance > .data tr th,
 .attendance > .studentData > .data table tr th,
-.attendance > .studentData > .data table tr td{
+.attendance > .studentData > .data table tr td, .timetable > .takeAttendance > .data table tr td, .timetable > .takeAttendance > .data table tr th {
   padding: 5px;
   height: 45px;
 }
@@ -448,7 +450,7 @@ body {
   z-index: 2;
 }
 .card-background .card i:hover, .timetable .content .card-background .card i:hover{
-  color:#f3a8a8;
+  color:#f13854;
 }
 .card-background  .card span:nth-child(even) {
   padding-left: 10px;
@@ -610,14 +612,16 @@ body {
 .container .card-background3 .card .cancelBtn:hover{
   background-color: #f0f0f0;
 }
-
-.timetable::-webkit-scrollbar {
+.timetable{
+  overflow: auto;
+}
+.timetable::-webkit-scrollbar, .timetable >.takeAttendance::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 
-.timetable {
+.timetable,.timetable .takeAttendance {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
@@ -640,19 +644,20 @@ body {
   width: 100%;
   background: rgb(226, 195, 255);
   padding: 20px;
+
 }
-.timetable .content table{
+.timetable .content > table{
   width: 100%;
   border-collapse: collapse;
 }
-.timetable .content table thead{
+.timetable .content > table thead{
   height: 50px;
   background: #ffffff;
 }
-.timetable .content table thead tr th{
+.timetable .content > table thead tr th{
   width: 14%;
 }
-.timetable .content table thead tr th button.selected {
+.timetable .content > table thead tr th button.selected {
   padding: 1px 6px;
   background: #ef476f;
   color: #fff;
@@ -664,7 +669,7 @@ body {
   height: 35px;
   margin: 5px 0px;
 }
-.timetable .content table thead tr th button {
+.timetable .content > table thead tr th button {
   padding: 1px 6px;
   border: none;
   background: #fff;
@@ -674,44 +679,44 @@ body {
   height: 35px;
   margin: 5px 0px;
 }
-.timetable .content table thead tr th:first-child{
+.timetable .content > table thead tr th:first-child{
   background: none;
   width: 10%;
 }
-.timetable .content table tbody{
+.timetable .content >  table tbody{
   background: #8d74eb;
 }
-.timetable .content table tbody tr{
+.timetable .content > table tbody tr{
   height: 100px;
   /* border-bottom: 1px solid rgb(255, 255, 255); */
   vertical-align:top;
   text-align: right;
 }
-.timetable .content table tbody tr td{
+.timetable .content > table tbody tr td{
   padding:0px 5px;
   height: inherit;
 }
-.timetable .content table tbody tr td:nth-child(1){
+.timetable .content > table tbody tr td:nth-child(1){
   border-right: 1px solid #fff;
   display: flex;
   flex-direction: column;
 }
-.timetable .content table tbody tr td:nth-child(1) span:nth-child(1){
+.timetable .content > table tbody tr td:nth-child(1) span:nth-child(1){
   margin-top: 4px;
   width: 100%;
   margin-bottom:calc((50% - (15px * 1.1)));
   font-size: 15px;
 }
-.timetable .content table tbody tr td:nth-child(1) span:nth-child(2){
+.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2){
   width: 100%;
   margin-bottom:calc(50% - (12px * 1.1));
   font-size: 12px;
 }
-.timetable .content table tbody tr td:nth-child(1) span:nth-child(2){
+.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2){
   font-size: 12px;
 }
 
-.timetable .content table tbody tr td div{
+.timetable .content > table tbody tr td div{
   background: red;
   color: #fff;
   height: 100%;
@@ -723,10 +728,10 @@ body {
   align-items: center;
   margin: 5px 0px;
 }
-.timetable .content table tbody tr:nth-child(1) td div{
+.timetable .content > table tbody tr:nth-child(1) td div{
   margin-top: 4px;
 }
-.timetable .content table tbody tr td .unscheduled{
+.timetable .content > table tbody tr td .unscheduled{
   display: none;
 }
 
@@ -773,17 +778,18 @@ body {
 .attendance > .data > table tbody tr td i{
   font-size: 1.5rem;
 }
-.attendance > .studentData{
+.attendance > .studentData,.timetable > .takeAttendance {
   position: absolute;
   top: 0;
   background: #fff;
   width: 100%;
   height: 100%;
+  display: none;
 }
 .attendance .studentData > .header{
   width: 100%;
 }
-.attendance .studentData > .header .info{
+.attendance .studentData > .header .info,.timetable > .takeAttendance  > .header .info{
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto;
   gap: 8px;
@@ -794,7 +800,7 @@ body {
   z-index: 1;
   /* width: calc(100% - (1.8rem + 16px)); */
 }
-.attendance > .studentData table thead {
+.attendance > .studentData table thead, .timetable > .takeAttendance table thead{
   border: 1px solid rgb(180, 180, 180);
 }
 .toggle-sidebar{
@@ -808,14 +814,15 @@ body {
   z-index: 2;
   height: 1.4rem;
   padding: 0px;
-  width: fit-content;
+  width: calc(1.4rem - 2px);
 }
 .toggle-sidebar > i{
   transition: 0.3s;
   transform: rotate(-180deg);
+  translate: -2px 0;
 }
 
-.attendance .studentData .close-card {
+.attendance .studentData .close-card,.timetable > .takeAttendance .close-card {
   font-size: 1.8rem;
   background: transparent;
   position: sticky;
@@ -825,6 +832,41 @@ body {
   float: right;
   z-index: 5;
 }
+.attendance .studentData .close-card:hover,.timetable > .takeAttendance .close-card:hover{
+  color: #f13854;
+}
+.timetable > .takeAttendance {
+  display: none;
+  overflow-y: scroll;
+}
+.timetable > .takeAttendance .header{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: #fff;
+}
+.timetable > .takeAttendance .header > .info{
+  
+  display: grid;
+  grid-template-columns: fit-content(100%) fit-content(100%) auto fit-content(100%) fit-content(100%) auto ;
+  gap: 8px;
+  align-items: baseline;
+  grid-auto-rows: minmax(fit-content(100%), 20px);
+}
+
+.timetable > .takeAttendance table tbody .status{
+  padding: 4px 12px;
+  background-color: #e71f4d;
+  width: 35px;
+  border-radius: 3px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+
 /* @media screen and (max-width:768px) {
   .sidebar{
     visibility: hidden ; 

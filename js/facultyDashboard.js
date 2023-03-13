@@ -15,7 +15,7 @@ var li_elements = document.querySelectorAll(".sidebar ul li");
 var item_elements = document.querySelectorAll(".item");
 
 item_elements.forEach(function (item) {
-  if (item.classList[1] != "attendance")
+  if (item.classList[1] != "timetable")
     item.style.display = "none";
 });
 
@@ -244,68 +244,128 @@ document.querySelector(".timetable .content .card i").addEventListener("click", 
 
 const toggleBtn = document.querySelector(".toggle-sidebar");
 const sidebar = document.querySelector(".sidebar");
-toggleBtn.addEventListener("click", () => {
-  const sidebarStatus = window.getComputedStyle(sidebar).visibility;
-  if (sidebarStatus == "visible") {
-    sidebar.style.visibility = "hidden";
-    toggleBtn.style.left = "0";
-    document.querySelector(".main").style.cssText = `
+window.onload = () => {
+  if (window.matchMedia('(max-width:768px)').matches) {
+    toggleBtn.addEventListener("click", () => {
+      const sidebarStatus = window.getComputedStyle(sidebar).visibility;
+      if (sidebarStatus == "visible") {
+        sidebar.style.visibility = "hidden";
+        toggleBtn.style.left = "0";
+        document.querySelector(".main").style.cssText = `
     width: 100%;
     left: 0;
     `;
-    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
 
-  } else {
-    sidebar.style.visibility = "visible";
-    document.querySelector(".main").style.cssText = `
+      } else {
+        sidebar.style.visibility = "visible";
+       
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
+        toggleBtn.style.left = "260px";
+
+      }
+
+    })
+  }
+  else{
+    toggleBtn.addEventListener("click", () => {
+      const sidebarStatus = window.getComputedStyle(sidebar).visibility;
+      if (sidebarStatus == "visible") {
+        sidebar.style.visibility = "hidden";
+        toggleBtn.style.left = "0";
+        document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 0;
+    `;
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+
+      } else {
+        sidebar.style.visibility = "visible";
+        document.querySelector(".main").style.cssText = `
     width: calc(100% - 260px);
     left: 260px;
     `;
-    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
-    toggleBtn.style.left = "260px";
-    
-  }
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
+        toggleBtn.style.left = "260px";
 
-})
-/* JavaScript Media Queries */
-if (window.matchMedia('(max-width:768px)').matches) { 
-  sidebar.style.visibility = "hidden";
+      }
+
+    })
+  }
+}
+  
+  if (window.matchMedia('(max-width:768px)').matches) {
+    sidebar.style.visibility = "hidden";
     toggleBtn.style.left = "0";
     document.querySelector(".main").style.cssText = `
     width: 100%;
     left: 0;
     `;
     document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
-    
-}
-window.onresize = () =>{
-  if (window.matchMedia('(max-width:768px)').matches) { 
-    console.log('Media query matched!');
-    sidebar.style.visibility = "hidden";
+    document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+
+  }
+  window.onresize = () => {
+    if (window.matchMedia('(max-width:768px)').matches) {
+      sidebar.style.visibility = "hidden";
       toggleBtn.style.left = "0";
       document.querySelector(".main").style.cssText = `
       width: 100%;
       left: 0;
       `;
       document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
-      
-  }
-  else{
-    sidebar.style.visibility = "visible";
-    document.querySelector(".main").style.cssText = `
+      document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+    }
+    else {
+      sidebar.style.visibility = "visible";
+      document.querySelector(".main").style.cssText = `
     width: calc(100% - 260px);
     left: 260px;
     `;
-    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
-    toggleBtn.style.left = "260px";
+      document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+      document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
+      toggleBtn.style.left = "260px";
+    }
   }
-}
-const attendanceDetailsBtns = document.querySelectorAll(".attendance > .data > table tbody tr td i");
-attendanceDetailsBtns.forEach((btn)=>{
-  btn.addEventListener("click", ()=>{
-    document.querySelector(".attendance > .studentData").style.display = "block";
+
+
+  const attendanceDetailsBtns = document.querySelectorAll(".attendance > .data > table tbody tr td i");
+  attendanceDetailsBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelector(".attendance > .studentData").style.display = "block";
+    })
   })
-})
-document.querySelector(".attendance .studentData .close-card").addEventListener("click", ()=>{
-  document.querySelector(".attendance > .studentData").style.display = "none";
-})
+  document.querySelector(".attendance .studentData .close-card").addEventListener("click", () => {
+    document.querySelector(".attendance > .studentData").style.display = "none";
+  })
+
+
+  const attendanceStatusBtns = document.querySelectorAll(".timetable > .takeAttendance table tbody .status");
+
+  attendanceStatusBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const status = btn.innerText;
+      if (status == "A") {
+        btn.innerText = "P";
+        btn.style.cssText = `
+      background-color: #11d84d;
+      `;
+      } else {
+        btn.innerText = "P";
+        btn.style.cssText = `
+      background-color: #e71f4d;
+    `;
+      }
+    })
+  })
+
+  document.querySelector(".timetable > .content .card .takeAttendanceBtn").addEventListener("click",()=>{
+    document.querySelector(".timetable > .takeAttendance").style.display = "block";
+  })
+  document.querySelector(".timetable > .takeAttendance .close-card ").addEventListener("click",()=>{
+    document.querySelector(".timetable > .takeAttendance").style.display = "none";
+  })
