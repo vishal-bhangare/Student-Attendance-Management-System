@@ -207,7 +207,7 @@ body {
   background: #f13854;
   color: #fff;
 }
-.Btn, .addBtn, .timetable .manageBtn {
+.Btn, .addBtn{
   padding: 2px 10px;
   background: #fff;
   color: #e9972c;
@@ -216,40 +216,23 @@ body {
   font-size: 16px;
   font-weight: 550;
 }
-.Btn:hover, .addBtn:hover, .timetable .manageBtn:hover {
+.Btn:hover, .addBtn:hover{
   background: #e9972c;
   color: #fff;
 }
-.students .container .header {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 60px;
-  /* background: pink; */
-  padding: 20px;
 
-}
-.students .container .header div {
-  font-size: 30px;
-  font-weight: 800;
-  /* margin-left: 50px; */
-}
-.students .container .header .addBtn{
-  display: none;
-}
-.students .container .data, .attendance > .data, .attendance .studentData > .data,.timetable > .takeAttendance > .data {
+.attendance > .data,.timetable > .takeAttendance > .data {
   padding: 10px;
   width: 100%;
   height: fit-content;
 }
-.students .container .data .filter,
+
  .attendance > .data .filter {
   width: 100%;
   height: 50px;
   /* background:rgba(0, 0, 0, 1); */
 }
-.students .container .data .filter #filter-value,
+
 .attendance > .data #filter-value {
   height: 100%;
   width: 100%;
@@ -259,14 +242,12 @@ body {
   font-size: 15px;
   outline: none;
 }
-.students .container .data .filter #filter-value:focus,
+
 .attendance .data .filter #filter-value:focus {
   border-bottom: 2px solid #006e58;
 }
-.students > .container .data table,
-.attendance > .data table,
-.attendance > .studentData > .data table,
-.timetable > .takeAttendance > .data table{
+
+.attendance > .data table{
   width: 100%;
   height: calc(100% - 160px);
   text-align: left;
@@ -275,44 +256,23 @@ body {
 }
 .attendance .data table{
   text-align: center;
+  border: 1px solid gray;
+  margin-top: 35px;
 }
-.students > .container .data table tr,
-.attendance > .data table tr,
-.attendance > .studentData > .data table tr,
-.timetable > .takeAttendance > .data table tr{
+
+.attendance > .data table tr{
   border: 1px solid rgb(180, 180, 180);
   border-top: none;
   height: 45px;
 }
-.students > .container .data table tr td,
-.students > .container .data table tr th,
+
 .attendance > .data table tr td,
-.attendance > .data tr th,
-.attendance > .studentData > .data table tr th,
-.attendance > .studentData > .data table tr td, .timetable > .takeAttendance > .data table tr td, .timetable > .takeAttendance > .data table tr th {
+.attendance > .data tr th{
   padding: 5px;
   height: 45px;
 }
-.students >.container .data table tr td:last-child{
-  display: none;
-}
-.students >  .container .data table thead th:last-child{
-  display: none;
-}
 
-.students .container .data .pages,
-.attendance .data .pages{
-  width: 100%;
-  height: 50px;
-  /* background: rgba(13, 202, 114, 1); */
-  font-size: 15px;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  column-gap: 15px;
-  border: 1px solid rgb(180, 180, 180);
-  border-top: none;
-}
+
 .select-menu {
   /* width: fit-content; */
   margin: 0;
@@ -388,12 +348,6 @@ body {
 .options .selected {
   background: #e9e9e9;
 }
-.pages .nav {
-  font-size: 2em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
 .data table td:nth-child(2) {
   cursor: pointer;
 }
@@ -455,62 +409,6 @@ body {
 .card-background  .card span:nth-child(even) {
   padding-left: 10px;
 }
-.container .card-background2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: #0000002f;
-  display: none;
-}
-.container .card-background2 .card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 70%;
-  background: #333837;
-  border-radius: 4px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  padding: 4px;
-  display: grid;
-  grid-template-columns: fit-content(100%) fit-content(100%) auto;
-  gap: 8px;
-  align-items: baseline;
-  grid-auto-rows: minmax(fit-content(100%), 20px);
-  font-size: 18px;
-  padding: 10px;
-  padding-top: 10px;
-  border: 2px solid rgb(216, 216, 216);
-  color: #fff;
-}
-.container .card-background2 .card i {
-  position: absolute;
-  right: 0;
-  top: -5px;
-  padding: 5px;
-  font-size: 25px;
-  color: #fff;
-}
-.container .card-background2 .card span:nth-child(even) {
-  padding-left: 10px;
-}
-.container .card-background2 form input{
-  outline: none;
-  padding: 2px;
-}
-.card-background2 .card div {
-  grid-column: 1/4;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-.card-background2 .card div .saveBtn,
  .timetable .content table .unscheduled button,
  .timetable .content .takeAttendanceBtn{
   padding: 1px 6px;
@@ -522,95 +420,9 @@ body {
   font-weight: 500;
 }
 
-.card-background2 .card div .saveBtn:hover,
 .timetable .content table .unscheduled button:hover{
   background: #072f3b;
   color: #fff;
-}
-.card-background2 .card div .closeBtn {
-  padding: 1px 6px;
-  background: #ef476f;
-  color: #fff;
-  border: 2px solid #ef476f;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 500;
-}
-.timetable .content .takeAttendanceBtn:hover{
-  background: #0f91c5;
-  border: 2px solid #0f91c5;
-}
-.card-background2 .card div .closeBtn:hover {
-  background: #7e031f;
-  color: #fff;
-}
-.container .card-background3 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: #0000002f;
-  display: none;
-}
-.container .card-background3 .card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 60%;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  text-align: center;
-}
-.container .card-background3 .card > * {
-  margin: 5px 0px;
-}
-.container .card-background3 .card i{
-  position: relative;
-  font-size: 35px;
-  color: #d90429;
-  border-radius: 430%;  
-  background:rgba(255, 163, 163, 0.486);
-  padding: 7px;
-}
-.container .card-background3 .card .removeBtn{
-  padding: 1px 6px;
-  background: #ef233c;
-  color: #fff;
-  border: 2px solid #ef233c;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 500;
-  width: 80%;
-  height: 40px;
-}
-.container .card-background3 .card .removeBtn:hover{
-  background: #d81128;
-}
-.container .card-background3 .card .cancelBtn{
-  padding: 1px 6px;
-  background: #ffffff;
-  color: #000000;
-  border: 2px solid #ffffff;
-  border: 1px solid gray;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 500;
-  width: 80%;
-  height: 40px;
-}
-.container .card-background3 .card .cancelBtn:hover{
-  background-color: #f0f0f0;
 }
 .timetable{
   overflow: auto;
@@ -657,7 +469,7 @@ body {
 .timetable .content > table thead tr th{
   width: 14%;
 }
-.timetable .content > table thead tr th button.selected {
+.timetable > .content > table thead tr th button.selected {
   padding: 1px 6px;
   background: #ef476f;
   color: #fff;
@@ -778,31 +590,6 @@ body {
 .attendance > .data > table tbody tr td i{
   font-size: 1.5rem;
 }
-.attendance > .studentData,.timetable > .takeAttendance {
-  position: absolute;
-  top: 0;
-  background: #fff;
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-.attendance .studentData > .header{
-  width: 100%;
-}
-.attendance .studentData > .header .info,.timetable > .takeAttendance  > .header .info{
-  display: grid;
-  grid-template-columns: fit-content(100%) fit-content(100%) auto;
-  gap: 8px;
-  align-items: baseline;
-  grid-auto-rows: minmax(fit-content(100%), 20px);
-  padding: 20px;
-  font-size: 1.1rem;
-  z-index: 1;
-  /* width: calc(100% - (1.8rem + 16px)); */
-}
-.attendance > .studentData table thead, .timetable > .takeAttendance table thead{
-  border: 1px solid rgb(180, 180, 180);
-}
 .toggle-sidebar{
   font-size: 1.4rem;
   background-color: #4b49ac;
@@ -822,72 +609,18 @@ body {
   translate: -2px 0;
 }
 
-.attendance .studentData .close-card,.timetable > .takeAttendance .close-card {
-  font-size: 1.8rem;
-  background: transparent;
-  position: sticky;
-  top: 0;
-  left:  calc(100% - (1.8rem + 16px));
-  padding: 8px;
-  float: right;
-  z-index: 5;
-}
-.attendance .studentData .close-card:hover,.timetable > .takeAttendance .close-card:hover{
-  color: #f13854;
-}
-.timetable > .takeAttendance {
-  display: none;
-  overflow-y: scroll;
-}
-.timetable > .takeAttendance .header{
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background: #fff;
-}
-.timetable > .takeAttendance .header > .info{
-  
-  display: grid;
-  grid-template-columns: fit-content(100%) fit-content(100%) auto fit-content(100%) fit-content(100%) auto ;
-  gap: 8px;
-  align-items: baseline;
-  grid-auto-rows: minmax(fit-content(100%), 20px);
-}
 
-.timetable > .takeAttendance table tbody .status{
-  padding: 4px 12px;
-  background-color: #e71f4d;
-  width: 35px;
-  border-radius: 3px;
-  font-weight: 500;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-}
-.timetable .takeAttendance .data > .submitAttendance{
-  height: fit-content;
-  /* background-color: #b3cec8; */
+.attendance .endSection{
+  display: flex;
   width: 100%;
-  display:flex;
-  justify-content: center;
   align-items: center;
-  gap: 5px;
-  padding: 15px 10px;
-  padding-right: 50px;
-  font-size: 1rem;
-}
-.timetable .takeAttendance > .data > .submitAttendance .Btn{
-  /* 06d6a0 */
-  background: #fff;
-  color: #06d6a0;
-  border: 2px solid #06d6a0;
-  margin-left: 20px;
-}
-.timetable .takeAttendance .data > .submitAttendance .Btn:hover{
-  background: #06d6a0;
-  color: #fff;
-}
+  justify-content: center;
 
+}
+.attendance .endSection #reportBtn{
+  margin: 10px 0px;
+  padding: 1px 8px;
+}
 /* @media screen and (max-width:768px) {
   .sidebar{
     visibility: hidden ; 
