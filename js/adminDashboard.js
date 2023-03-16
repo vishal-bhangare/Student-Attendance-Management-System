@@ -70,7 +70,7 @@ const designation = cardBackground.querySelector(".card #designation");
 
 
 nameFields.forEach((nameField) => {
-  console.log(nameField.parentElement.children[0].innerHTML);
+  
   nameField.addEventListener("click", () => {
     cardBackground.style.display = "block";
     name.innerText = nameField.innerHTML;
@@ -101,7 +101,7 @@ editBtns.forEach((editBtn) => {
   })
 });
 
-const closeCard2 = document.querySelector(".card-background2 form .card .closeBtn");
+const closeCard2 = document.querySelector(".card-background2 .card .closeBtn");
 
 closeCard2.addEventListener("click", () => {
   cardBackground2.style.display = "none";
@@ -125,3 +125,94 @@ addBtn.addEventListener("click", () => {
   document.querySelector(".container .card-background2 .card .saveBtn").style.padding = "1px 15px";
   cardBackground2.style.display = "block";
 })
+
+
+const toggleBtn = document.querySelector(".toggle-sidebar");
+const sidebar = document.querySelector(".sidebar");
+window.onload = () => {
+  if (window.matchMedia('(max-width:768px)').matches) {
+    toggleBtn.addEventListener("click", () => {
+      const sidebarStatus = window.getComputedStyle(sidebar).visibility;
+      if (sidebarStatus == "visible") {
+        sidebar.style.visibility = "hidden";
+        toggleBtn.style.left = "0";
+        document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 0;
+    `;
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+
+      } else {
+        sidebar.style.visibility = "visible";
+       
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
+        toggleBtn.style.left = "260px";
+
+      }
+
+    })
+  }
+  else{
+    toggleBtn.addEventListener("click", () => {
+      const sidebarStatus = window.getComputedStyle(sidebar).visibility;
+      if (sidebarStatus == "visible") {
+        sidebar.style.visibility = "hidden";
+        toggleBtn.style.left = "0";
+        document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 0;
+    `;
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+
+      } else {
+        sidebar.style.visibility = "visible";
+        document.querySelector(".main").style.cssText = `
+    width: calc(100% - 260px);
+    left: 260px;
+    `;
+        document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+        document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
+        toggleBtn.style.left = "260px";
+
+      }
+
+    })
+  }
+}
+  
+  if (window.matchMedia('(max-width:768px)').matches) {
+    sidebar.style.visibility = "hidden";
+    toggleBtn.style.left = "0";
+    document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 0;
+    `;
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+    document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+
+  }
+  window.onresize = () => {
+    if (window.matchMedia('(max-width:768px)').matches) {
+      sidebar.style.visibility = "hidden";
+      toggleBtn.style.left = "0";
+      document.querySelector(".main").style.cssText = `
+      width: 100%;
+      left: 0;
+      `;
+      document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+      document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+    }
+    else {
+      sidebar.style.visibility = "visible";
+      document.querySelector(".main").style.cssText = `
+    width: calc(100% - 260px);
+    left: 260px;
+    `;
+      document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+      document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
+      toggleBtn.style.left = "260px";
+    }
+  }

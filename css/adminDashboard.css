@@ -221,7 +221,7 @@ body {
   height: 50px;
   /* background:rgba(0, 0, 0, 1); */
 }
-.faculty .container .data .filter form #filter-value {
+.faculty .container .data .filter #filter-value {
   height: 100%;
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -230,7 +230,7 @@ body {
   font-size: 15px;
   outline: none;
 }
-.faculty .container .data .filter form #filter-value:focus {
+.faculty .container .data .filter #filter-value:focus {
   border-bottom: 2px solid #006e58;
 }
 .faculty .container .data table {
@@ -428,9 +428,14 @@ body {
 .container .card-background2 .card span:nth-child(even) {
   padding-left: 10px;
 }
-.container .card-background2 form input{
+textarea{
+  resize: none;
+  overflow: hidden;
+}
+.container .card-background2 input, textarea{
   outline: none;
   padding: 2px;
+  padding-left: 5px;
 }
 .card-background2 .card div {
   grid-column: 1/4;
@@ -535,4 +540,58 @@ body {
 }
 .container .card-background3 .card .cancelBtn:hover{
   background-color: #f0f0f0;
+}
+
+
+.toggle-sidebar{
+  font-size: 1.4rem;
+  background-color: #4b49ac;
+  color: #fff;
+  border-radius: 0px 5px 5px 0px;
+  position: fixed;
+  top: 22px;
+  left: 260px;
+  z-index: 2;
+  height: 1.4rem;
+  padding: 0px;
+  line-height: 1.1;
+  width: calc(1.4rem - 2px);
+}
+.toggle-sidebar > i{
+  transition: 0.3s;
+  transform: rotate(-180deg);
+  translate: -2px 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+#success-msg{
+  background: #DEF1D8;
+  color: green;
+  padding: 10px;
+  margin: 10px;
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 5px;
+}
+#error-msg{
+  background: #EFDCDD;
+  color: red;
+  padding: 10px;
+  margin: 10px;
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 5px;
 }

@@ -16,7 +16,7 @@
             <h1 class="Btn faculty">Faculty</h1>
             <h1 class="Btn moveBtn ">Student</h1>
         </div>
-        <form method="post" id="studentForm" class="form studentForm">
+        <div id="studentForm" class="form studentForm">
             <div class="txt_field">
                 <input type="text" id="studentUser" required>
                 <span></span>
@@ -28,10 +28,10 @@
                 <label>Password</label>
             </div>
             <!-- <div class="pass">Forgot Password?</div> -->
-            <input type="submit" value="Login">
+            <input type="submit" value="Login" id="submitBtn">
 
-        </form>
-        <form method="post" id="facultyForm" class="form">
+        </div>
+        <div id="facultyForm" class="form">
             <div class="txt_field">
                 <input type="text" id="facultyUser" required>
                 <span></span>
@@ -44,9 +44,9 @@
             </div>
             <!-- <div class="pass">Forgot Password?</div> -->
             <input type="submit" value="Login">
-        </form>
+        </div>
     </div>
-    <script src="/js/studentFacultyLogin.js"></script>
+    <script src="http://127.0.0.1:8080/js/studentFacultyLogin.js"></script>
 </body>
 
 </html>

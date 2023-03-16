@@ -10,24 +10,52 @@
   <body>
     <div class="center">
       <h1>Login</h1>
-      <form method="post">
+      <div id="card">
         <div class="txt_field">
-          <input type="text" required>
+          <input type="text" id="username" required>
           <span></span>
           <label>Username</label>
         </div>
         <div class="txt_field">
-          <input type="password" required>
+          <input type="password" id="password" required>
           <span></span>
           <label>Password</label>
         </div>
         <!-- <div class="pass">Forgot Password?</div> -->
-        <input type="submit" value="Login">
-        <!-- <div class="signup_link">
-          Not a member? <a href="#">Signup</a>
-        </div> -->
-      </form>
+        <input type="submit" value="Login" id="loginBtn">
+      </div>
     </div>
 
+    <script src="/res/jquery-3.6.4.min.js"></script>
+    <script>
+
+      $(document).ready(function() {
+        $("#loginBtn").on("click",(btn)=>{
+          btn.preventDefault();
+          var user = $("#username").val();
+          var pass = $("#password").val();
+
+          $.ajax({
+            url : "/php/adminLogin.php",
+            type : "POST",
+            data : {action : "adminlogin",username : user, password: pass},
+            success : function(data){
+              console.log(data);
+              if(data == 1){
+                $("#username").val("");
+                $("#password").val("");
+                window.open("/html/adminDashboard.html","_self")
+              }
+              else if(data == 0){
+                $("#username").val("");
+                $("#password").val("");
+                alert("Invalid username and password");
+              }
+            }
+          })
+        })
+      });
+    
+    </script>
   </body>
 </html>

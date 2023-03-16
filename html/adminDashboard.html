@@ -11,6 +11,9 @@
 </head>
 
 <body>
+  <div class="toggle-sidebar">
+    <i class='bx bx-chevrons-right'></i>
+  </div>
   <div class="sidebar">
     <div class="user-details">
       <i class="bx bxs-user-circle"></i>
@@ -23,7 +26,7 @@
           <span>Home</span>
         </a>
       </li>
-      <li data-li="faculty" class="facultyBtn">
+      <li data-li="faculty" class="facultyBtn" id="facultyBtn">
         <a href="#">
           <span>Faculty</span>
         </a>
@@ -85,63 +88,56 @@
         </div>
         <div class="data">
           <div class="filter">
-            <form action="" class="filter">
-              <input type="text" placeholder="Filter" id="filter-value">
-            </form>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th id="id" style="width:5%;">Id</th>
-                <th id="name" style="width: 20%;" class="name-field">Name</th>
-                <!-- <th>Last Name</th> -->
-                <th id="dob">DOB</th>
-                <!--  <th>Email</th>
-                <th>Contact no</th>
-                <th>Address</th> -->
-                <th id="department">Department</th>
-                <th>Designation</th>
-                <th style="width: 20%;"></th>
-              </tr>
-            </thead>
-            <tbody>
-<!--<td>Pandey</td> -
-                <td>johnpandey@rediff.com</td>
-                <td>919898912818</td>
-                <td>101/E, Anand vilas,satara road, pune-410002Maharashtra</td> -->
-              <tr>
-                <td>1</td>
-                <td>John Pandey</td>
-                <td>1990-11-21</td>
-                <td>Computer Science</td>
-                <td>Assi. Professor</td>
-                <td>
-                  <button type="button" class="editBtn">
-                    <span>Edit</span>
-                  </button>
-                  <button type="button" class="removeBtn">
-                    <span>Remove</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jasn Pandey</td>
-                <td>1992-12-22</td>
-                <td>Computer Science</td>
-                <td>Professor</td>
-                <td>
-                  <button type="button" class="editBtn">
-                    <span>Edit</span>
-                  </button>
-                  <button type="button" class="removeBtn">
-                    <span>Remove</span>
-                  </button>
-                </td>
-              </tr>
 
-            </tbody>
-          </table>
+            <input type="text" placeholder="Filter" id="filter-value">
+          </div>
+          <div id="table-data">
+            <table>
+              <thead>
+                <tr>
+                  <th id="id" style="width:5%;">Id</th>
+                  <th id="name" style="width: 20%;" class="name-field">Name</th>
+                  <th id="dob">DOB</th>
+                  <th id="department">Department</th>
+                  <th>Designation</th>
+                  <th style="width: 20%;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>John Pandey</td>
+                  <td>1990-11-21</td>
+                  <td>Computer Science</td>
+                  <td>Assi. Professor</td>
+                  <td>
+                    <button type="button" class="editBtn">
+                      <span>Edit</span>
+                    </button>
+                    <button type="button" class="removeBtn">
+                      <span>Remove</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jasn Pandey</td>
+                  <td>1992-12-22</td>
+                  <td>Computer Science</td>
+                  <td>Professor</td>
+                  <td>
+                    <button type="button" class="editBtn">
+                      <span>Edit</span>
+                    </button>
+                    <button type="button" class="removeBtn">
+                      <span>Remove</span>
+                    </button>
+                  </td>
+                </tr>
+  
+              </tbody>
+            </table>
+          </div>
 
           <div class="pages">
             <span>Items per page:</span>
@@ -173,7 +169,7 @@
           </div>
         </div>
         <div class="card-background">
-          <div class="card"> 
+          <div class="card">
             <i class='bx bx-x close-card'></i>
             <span>id</span>:<span id="id"></span>
             <span>Name</span>:<span id="name"></span>
@@ -186,31 +182,32 @@
           </div>
         </div>
         <div class="card-background2">
-          <form action="">
-          <div class="card"> 
-              <span>id</span>:<input type="text" id="id" >
-              <span>Name</span>:<input type="text" id="name">
-              <span>DOB</span>:<input type="text" id="dob">
-              <span>Email</span>:<input type="email" id="email">
-              <span>Contact no</span>:<input type="text" id="contact">
-              <span>Address</span>:<input type="text" id="address">
-              <span>Department</span>:<input type="text" id="department">
-              <span>Designation</span>:<input type="designation" id="id">
-              <div id="btns">
-                <button type="button" class="saveBtn">Save</button>
-                <button type="button" class="closeBtn">
-                  <span>Close</span>
-              </div>
-              </button>
+          <div class="card">
+            <span>id</span>:<input type="text" id="id" disabled>
+            <span>Name</span>:<input type="text" id="name">
+            <span>DOB</span>:<input type="date" id="dob">
+            <span>Email</span>:<input type="email" id="email">
+            <span>Contact no</span>:<input type="number" maxlength="10" id="contact"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+
+            <span>Address</span>: <textarea name="" id="address" cols="30" rows="2"></textarea>           <!-- <input type="text" id="address"> -->
+            <span>Department</span>:<input type="text" id="department">
+            <span>Designation</span>:<input type="designation" id="designation" >
+            <div id="btns">
+              <button type="button" class="saveBtn">Save</button>
+              <button type="button" class="closeBtn">
+                <span>Close</span>
             </div>
-          </form>
+            </button>
+          </div>
 
         </div>
         <div class="card-background3">
-          <div class="card"> 
+          <div class="card">
             <i class='bx bx-error'></i>
             <span>Remove Faculty</span>
-            <span>Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.</span>
+            <span>Are you sure you want to deactivate your account? All of your data will be permanently removed. This
+              action cannot be undone.</span>
             <button type="button" class="removeBtn">
               <span>Remove</span>
             </button>
@@ -219,7 +216,9 @@
           </div>
         </div>
       </div>
-      <!-- <span>faculty Panel</span> -->
+
+      <div id="error-msg"></div>
+      <div id="success-msg"></div>
     </div>
     <div class="item students">
       <!-- <span>students Panel</span> -->
@@ -233,6 +232,86 @@
   </section>
 
   <script src="/js/adminDashboard.js"></script>
+
+  <script src="/res/jquery-3.6.4.min.js"></script>
+  <script>
+
+    $(document).ready(function () {
+      $(".card-background2 .saveBtn").on("click", (btn) => {
+
+        btn.preventDefault();
+        var name = $(".card-background2 #name");
+        var dob = $(".card-background2 #dob");
+        var email = $(".card-background2 #email");
+        var contact = $(".card-background2 #contact");
+        var address = $(".card-background2 #address");
+        var department = $(".card-background2 #department");
+        var designation = $(".card-background2 #designation");
+
+        if (name.val() == "" || dob.val() == "" || email.val() == "" || contact.val() == "" || address.val() == "" || department.val() == "" || designation.val() == "") {
+          $("#error-msg").html("All field are required").slideDown().delay(2000).slideUp();
+        } 
+        else {
+          $.ajax({
+            url: "/php/admin.php",
+            type: "POST",
+            data: {
+              action: "addFaculty",
+              name: name.val(),
+              dob: dob.val(),
+              email: email.val(),
+              contact: contact.val(),
+              address: address.val(),
+              department: department.val(),
+              designation: designation.val(),
+            },
+            success: function (data) {
+              console.log(data);
+              if (data == 1) {
+                name.val("");
+                dob.val("");
+                email.val("");
+                contact.val("");
+                address.val("");
+                department.val("");
+                designation.val("");
+                $("#success-msg").html("Faculty Added").slideDown().delay(2000).slideUp();
+                loadData();
+              }
+              else if (data == 0) {
+                name.val("");
+                dob.val("");
+                email.val("");
+                contact.val("");
+                address.val("");
+                department.val("");
+                designation.val("");
+                $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+              }
+            }
+          })
+        }
+      })
+      function loadData(){
+        $.ajax({
+          url: "/php/admin.php",
+            type: "POST",
+            data: {action: "loadData" },
+            success: function (data) {
+              $("#table-data").empty()
+              $("#table-data").append(data);
+              
+            }
+        })
+      }
+      $("#facultyBtn").on("click", (btn) => {
+        ;
+        loadData()
+      })
+    });
+
+
+  </script>
 </body>
 
 </html>
