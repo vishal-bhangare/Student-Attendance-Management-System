@@ -3,7 +3,7 @@ var li_elements = document.querySelectorAll(".sidebar ul li");
 var item_elements = document.querySelectorAll(".item");
 
 item_elements.forEach(function (item) {
-  if (item.classList[1] != "faculty") item.style.display = "none";
+  if (item.classList[1] != "home") item.style.display = "none";
 });
 
 for (var i = 0; i < li_elements.length; i++) {
@@ -70,7 +70,7 @@ const designation = cardBackground.querySelector(".card #designation");
 
 
 nameFields.forEach((nameField) => {
-  
+
   nameField.addEventListener("click", () => {
     cardBackground.style.display = "block";
     name.innerText = nameField.innerHTML;
@@ -95,34 +95,9 @@ closeCard.addEventListener("click", () => {
 const editBtns = document.querySelectorAll(".container table tr .editBtn"),
   cardBackground2 = document.querySelector(".container .card-background2");
 
-editBtns.forEach((editBtn) => {
-  editBtn.addEventListener("click", () => {
-    cardBackground2.style.display = "block";
-  })
-});
-
-const closeCard2 = document.querySelector(".card-background2 .card .closeBtn");
-
-closeCard2.addEventListener("click", () => {
-  cardBackground2.style.display = "none";
-});
-
-const cardBackground3 = document.querySelector(".container .card-background3"),
-  removeBtns = document.querySelectorAll(".container .data table tr .removeBtn"),
-  cancelBtn = document.querySelector(".container .card-background3 .card .cancelBtn");
-
-removeBtns.forEach((removeBtn) => {
-  removeBtn.addEventListener("click", () =>{
-    cardBackground3.style.display = "block";
-  })
-});
-cancelBtn.addEventListener("click", () =>{
-  cardBackground3.style.display = "none";
-})
 const addBtn = document.querySelector(".container .header .addBtn");
 addBtn.addEventListener("click", () => {
-  document.querySelector(".container .card-background2 .card .saveBtn").innerText = "Add";
-  document.querySelector(".container .card-background2 .card .saveBtn").style.padding = "1px 15px";
+
   cardBackground2.style.display = "block";
 })
 
@@ -131,21 +106,32 @@ const toggleBtn = document.querySelector(".toggle-sidebar");
 const sidebar = document.querySelector(".sidebar");
 window.onload = () => {
   if (window.matchMedia('(max-width:768px)').matches) {
+
+    sidebar.style.visibility = "hidden";
+    toggleBtn.style.left = "0";
+    document.querySelector(".main").style.cssText = `
+    width: 100%;
+    left: 0;
+    `;
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+    document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+
     toggleBtn.addEventListener("click", () => {
       const sidebarStatus = window.getComputedStyle(sidebar).visibility;
       if (sidebarStatus == "visible") {
         sidebar.style.visibility = "hidden";
         toggleBtn.style.left = "0";
         document.querySelector(".main").style.cssText = `
-    width: 100%;
-    left: 0;
-    `;
+        width: 100%;
+        left: 0;
+        `;
         document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
         document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
 
-      } else {
+      }
+      else {
         sidebar.style.visibility = "visible";
-       
+
         document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
         document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
         toggleBtn.style.left = "260px";
@@ -154,7 +140,7 @@ window.onload = () => {
 
     })
   }
-  else{
+  else {
     toggleBtn.addEventListener("click", () => {
       const sidebarStatus = window.getComputedStyle(sidebar).visibility;
       if (sidebarStatus == "visible") {
@@ -182,37 +168,246 @@ window.onload = () => {
     })
   }
 }
-  
+
+// if (window.matchMedia('(max-width:768px)').matches) {
+// sidebar.style.visibility = "hidden";
+// toggleBtn.style.left = "0";
+// document.querySelector(".main").style.cssText = `
+// width: 100%;
+// left: 0;
+// `;
+// document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+// document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+
+// }
+window.onresize = () => {
   if (window.matchMedia('(max-width:768px)').matches) {
     sidebar.style.visibility = "hidden";
     toggleBtn.style.left = "0";
     document.querySelector(".main").style.cssText = `
-    width: 100%;
-    left: 0;
-    `;
-    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
-    document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
-
-  }
-  window.onresize = () => {
-    if (window.matchMedia('(max-width:768px)').matches) {
-      sidebar.style.visibility = "hidden";
-      toggleBtn.style.left = "0";
-      document.querySelector(".main").style.cssText = `
       width: 100%;
       left: 0;
       `;
-      document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
-      document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
-    }
-    else {
-      sidebar.style.visibility = "visible";
-      document.querySelector(".main").style.cssText = `
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(0deg)";
+    document.querySelector(".toggle-sidebar > i").style.translate = "0 0";
+  }
+  else {
+    sidebar.style.visibility = "visible";
+    document.querySelector(".main").style.cssText = `
     width: calc(100% - 260px);
     left: 260px;
     `;
-      document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
-      document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
-      toggleBtn.style.left = "260px";
-    }
+    document.querySelector(".toggle-sidebar > i").style.transform = "rotate(-180deg)";
+    document.querySelector(".toggle-sidebar > i").style.translate = "-2px 0";
+    toggleBtn.style.left = "260px";
   }
+}
+
+$(document).on("click", ".container .card-background3 .card .cancelBtn", function () {
+  document.querySelector(".container .card-background3").style.display = "none";
+  document.querySelector(".container").style.overflow = "auto";
+})
+
+
+$(document).on("click", ".card-background4 .card .closeBtn", function () {
+  document.querySelector(".container .card-background4").style.display = "none";
+  document.querySelector(".container").style.overflow = "auto";
+})
+
+$(document).on("click", ".card-background2 .card .closeBtn", function () {
+  document.querySelector(".container .card-background2").style.display = "none";
+  document.querySelector(".container").style.overflow = "auto";
+})
+
+
+
+
+
+
+
+$(document).ready(function () {
+  $(".card-background2 .addBtn").on("click", (btn) => {
+
+    btn.preventDefault();
+    var name = $(".card-background2 #name");
+    var dob = $(".card-background2 #dob");
+    var email = $(".card-background2 #email");
+    var contact = $(".card-background2 #contact");
+    var address = $(".card-background2 #address");
+    var department = $(".card-background2 #department");
+    var designation = $(".card-background2 #designation");
+
+    if (name.val() == "" || dob.val() == "" || email.val() == "" || contact.val() == "" || address.val() == "" || department.val() == "" || designation.val() == "") {
+      $("#error-msg").html("All field are required").slideDown().delay(2000).slideUp();
+    }
+    else {
+      $.ajax({
+        url: "/php/admin.php",
+        type: "POST",
+        data: {
+          action: "addFaculty",
+          name: name.val(),
+          dob: dob.val(),
+          email: email.val(),
+          contact: contact.val(),
+          address: address.val(),
+          department: department.val(),
+          designation: designation.val(),
+        },
+        success: function (data) {
+          console.log(data);
+          if (data == 1) {
+            name.val("");
+            dob.val("");
+            email.val("");
+            contact.val("");
+            address.val("");
+            department.val("");
+            designation.val("");
+            $("#success-msg").html("Faculty Added").slideDown().delay(2000).slideUp();
+            loadData();
+          }
+          else if (data == 0) {
+            name.val("");
+            dob.val("");
+            email.val("");
+            contact.val("");
+            address.val("");
+            department.val("");
+            designation.val("");
+            $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+          }
+        }
+      })
+    }
+  })
+  function loadData() {
+    $.ajax({
+      url: "/php/admin.php",
+      type: "POST",
+      data: { action: "loadData" },
+      success: function (data) {
+        $("#table-data").empty()
+        $("#table-data").append(data);
+
+      }
+    })
+  }
+
+  $("#facultyBtn").on("click", (btn) => {
+    ;
+    loadData()
+  })
+
+  $(document).on("click", ".container .data table tr .removeBtn", function () {
+
+    document.querySelector(".container .card-background3").style.display = "block";
+    document.querySelector(".container").style.overflow = "hidden";
+
+    var element = this;
+    var facultyId = $(this).data('id');
+
+    $(document).on("click", ".card-background3 .removeBtn", function () {
+      $.ajax({
+        url: "/php/admin.php",
+        type: "POST",
+        data: { action: "removeFaculty", facultyId: facultyId },
+        success: function (data) {
+          if (data == 1) {
+            document.querySelector(".container .card-background3").style.display = "none";
+            $("#success-msg").html("Record removed").slideDown().delay(2000).slideUp();
+            $(element).closest("tr").fadeOut();
+          }
+          else if (data == 0) {
+            $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+          }
+        }
+      })
+    })
+  })
+
+  $(document).on("click", ".container .data table tr .editBtn", function () {
+    var element = this;
+    var facultyId = $(this).data('id');
+
+    $.ajax({
+      url: "/php/admin.php",
+      type: "POST",
+      dataType: "JSON",
+      data: { action: "facultyData", id: facultyId },
+      success: function (data) {
+        // console.log(data);
+        if (data) {
+          $.each(data, (key, value) => {
+            $(".card-background4 #id").val(value.id);
+            $(".card-background4 #name").val(value.name);
+            $(".card-background4 #dob").val(value.dob);
+            $(".card-background4 #email").val(value.email);
+            $(".card-background4 #contact").val(value.contact);
+            $(".card-background4 #address").val(value.address);
+            $(".card-background4 #department").val(value.department);
+            $(".card-background4 #designation").val(value.designation);
+
+          })
+          $(document).on("click", ".container table tr .editBtn", function () {
+            document.querySelector(".container .card-background4").style.display = "block";
+            document.querySelector(".container").style.overflow = "hidden";
+          })
+        }
+        else {
+          $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+        }
+      }
+    })
+  })
+
+  $(".card-background4 .saveBtn").on("click", (btn) => {
+
+    btn.preventDefault();
+    var id = $(".card-background4 #id");
+    var name = $(".card-background4 #name");
+    var dob = $(".card-background4 #dob");
+    var email = $(".card-background4 #email");
+    var contact = $(".card-background4 #contact");
+    var address = $(".card-background4 #address");
+    var department = $(".card-background4 #department");
+    var designation = $(".card-background4 #designation");
+    console.log(id.val());
+    if (
+      id.val() == "" || name.val() == "" || dob.val() == "" ||
+      email.val() == "" || contact.val() == "" ||
+      address.val() == "" || department.val() == "" || designation.val() == ""
+      ){
+      $("#error-msg").html("All field are required").slideDown().delay(2000).slideUp();
+    }
+    else {
+      $.ajax({
+        url: "/php/admin.php",
+        type: "POST",
+        data: {
+          action: "updateFaculty",
+          id: id.val(),
+          name: name.val(),
+          dob: dob.val(),
+          email: email.val(),
+          contact: contact.val(),
+          address: address.val(),
+          department: department.val(),
+          designation: designation.val(),
+        },
+        success: function (data) {
+          console.log(data);
+          if (data == 1) {
+            $("#success-msg").html("Faculty Added").slideDown().delay(2000).slideUp();
+            loadData();
+            document.querySelector(".container .card-background4").style.display = "none";
+          }
+          else if (data == 0) {
+            $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+          }
+        }
+      })
+    }
+  })
+});
+

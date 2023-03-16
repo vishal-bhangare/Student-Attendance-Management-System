@@ -23,6 +23,7 @@ body {
   height: 100%;
   width: 260px;
   background: #232323;
+  z-index: 100;
 }
 
 .sidebar .user-details {
@@ -198,6 +199,17 @@ body {
   background: #e9972c;
   color: #fff;
 }
+.faculty{
+  overflow: auto;
+}
+.faculty::-webkit-scrollbar {
+  display: none;
+}
+.faculty .container{
+  -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
 .faculty .container .header {
   display: inline-flex;
   align-items: center;
@@ -240,7 +252,8 @@ body {
   border-collapse: collapse;
 }
 .faculty .container .data table tr {
-  border: 1px solid rgb(180, 180, 180);
+  border-top: 1px solid rgb(180, 180, 180);
+  border-bottom: 1px solid rgb(180, 180, 180);
   border-top: none;
   height: 45px;
 }
@@ -385,7 +398,7 @@ body {
 .container .card span:nth-child(even) {
   padding-left: 10px;
 }
-.container .card-background2 {
+.container .card-background2 ,.container .card-background4{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -395,7 +408,7 @@ body {
   background: #0000002f;
   display: none;
 }
-.container .card-background2 .card {
+.container .card-background2 .card ,.container .card-background4 .card{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -417,7 +430,7 @@ body {
   border: 2px solid rgb(216, 216, 216);
   color: #fff;
 }
-.container .card-background2 .card i {
+.container .card-background2 .card i,.container .card-background4 .card i {
   position: absolute;
   right: 0;
   top: -5px;
@@ -425,19 +438,19 @@ body {
   font-size: 25px;
   color: #fff;
 }
-.container .card-background2 .card span:nth-child(even) {
+.container .card-background2 .card span:nth-child(even),.card ,.container .card-background4 .card span:nth-child(even) {
   padding-left: 10px;
 }
 textarea{
   resize: none;
   overflow: hidden;
 }
-.container .card-background2 input, textarea{
+.container .card-background2 input, textarea,.card ,.container .card-background4 .card input{
   outline: none;
   padding: 2px;
   padding-left: 5px;
 }
-.card-background2 .card div {
+.card-background2 .card div, .card-background4 .card div  {
   grid-column: 1/4;
   width: 100%;
   height: fit-content;
@@ -445,7 +458,7 @@ textarea{
   align-items: center;
   justify-content: space-evenly;
 }
-.card-background2 .card div .saveBtn {
+.card-background2 .card div .saveBtn,.card-background4 .card div .saveBtn {
   padding: 1px 6px;
   background: #239dc5;
   color: #fff;
@@ -455,11 +468,11 @@ textarea{
   font-weight: 500;
 }
 
-.card-background2 .card div .saveBtn:hover {
+.card-background2 .card div .saveBtn:hover,.card-background4 .card div .saveBtn:hover {
   background: #072f3b;
   color: #fff;
 }
-.card-background2 .card div .closeBtn {
+.card-background2 .card div .closeBtn,.card-background4 .card div .closeBtn  {
   padding: 1px 6px;
   background: #ef476f;
   color: #fff;
@@ -469,7 +482,7 @@ textarea{
   font-weight: 500;
 }
 
-.card-background2 .card div .closeBtn:hover {
+.card-background2 .card div .closeBtn:hover,.card-background4 .card div .closeBtn:hover {
   background: #7e031f;
   color: #fff;
 }
@@ -594,4 +607,13 @@ input[type=number] {
   right: 15px;
   top: 15px;
   border-radius: 5px;
+}
+#table-data{
+  border-left: 1px solid rgb(180, 180, 180);
+  border-right: 1px solid rgb(180, 180, 180);
+}
+#table-data h1{
+  display: inline-block;
+  margin: 10px;
+ 
 }
