@@ -228,12 +228,12 @@ body {
   width: 100%;
   height: calc(100% - 60px);
 }
-.faculty .container .data .filter {
+.faculty .container .data .search-bar {
   width: 100%;
   height: 50px;
   /* background:rgba(0, 0, 0, 1); */
 }
-.faculty .container .data .filter #filter-value {
+.faculty .container .data .search-bar #search {
   height: 100%;
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -242,7 +242,7 @@ body {
   font-size: 15px;
   outline: none;
 }
-.faculty .container .data .filter #filter-value:focus {
+.faculty .container .data .search-bar #search:focus {
   border-bottom: 2px solid #006e58;
 }
 .faculty .container .data table {
@@ -273,15 +273,21 @@ body {
   column-gap: 15px;
   border: 1px solid rgb(180, 180, 180);
   border-top: none;
+  position: relative;
 }
+
 .select-menu {
-  width: 60px;
+  /* width: fit-content; */
   margin: 0;
+  display: inline-block;
+}
+.select-menu span{
+  margin: 0px auto;
 }
 .select-menu .select-btn {
   position: relative;
   display: flex;
-  height: auto;
+  height: 40px;
   background: #fff;
   /* padding: 6px; */
   font-size: 15px;
@@ -299,7 +305,8 @@ body {
   border-radius: 0px 2px 0px 2px;
 }
 .select-btn .sBtn-text {
-  padding: 5px;
+  margin: 5px;
+  /* width: 113px; */
 }
 .active2 {
   background: none;
@@ -308,17 +315,18 @@ body {
   transform: rotate(-180deg);
 }
 .select-menu .options {
-  width: inherit;
+  width: fit-content;
   position: absolute;
-  padding: 5px;
-  margin-top: 6px;
+  top: 40px;
+  padding: 10px;
+  margin-top: 10px;
   border-radius: 2px;
   background: #fff;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   display: none;
 }
 .select-menu.active2 .options {
-  display: block;
+  display: inline-block;
 }
 .options .option {
   display: flex;
@@ -616,4 +624,23 @@ input[type=number] {
   display: inline-block;
   margin: 10px;
  
+}
+.card-background input,.card-background textarea{
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 0.9rem;
+
+  resize: none;
+  overflow: hidden;
+
+}
+.card-background input[type="date"]::-webkit-inner-spin-button,
+.card-background input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.disable{
+  color:gray;
 }

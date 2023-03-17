@@ -33,64 +33,9 @@ for (var i = 0; i < li_elements.length; i++) {
   });
 }
 
-const optionMenu = document.querySelector(".select-menu"),
-  selectBtn = optionMenu.querySelector(".select-btn"),
-  options = optionMenu.querySelectorAll(".option"),
-  sBtn_text = optionMenu.querySelector(".sBtn-text");
-
-selectBtn.addEventListener("click", () =>
-  optionMenu.classList.toggle("active2")
-);
-
-options.forEach((option) => {
-  option.addEventListener("click", () => {
-    options.forEach((option) => {
-      option.classList.remove("selected");
-    });
-    let selectedOption = option.querySelector(".option-text").innerText;
-    sBtn_text.innerText = selectedOption;
-    option.classList.add("selected");
-    optionMenu.classList.remove("active2");
-  });
-});
-
-const cardBackground = document.querySelector(".container .card-background"),
-  nameFields = document.querySelectorAll(".data table td:nth-child(2)"),
-  idFields = document.querySelectorAll(".data table td:nth-child(1)"),
-  closeCard = document.querySelector(".card .close-card");
-
-const name = cardBackground.querySelector(".card #name");
-const id = cardBackground.querySelector(".card #id");
-const dob = cardBackground.querySelector(".card #dob");
-const email = cardBackground.querySelector(".card #email");
-const contact = cardBackground.querySelector(".card #contact");
-const address = cardBackground.querySelector(".card #address");
-const department = cardBackground.querySelector(".card #department");
-const designation = cardBackground.querySelector(".card #designation");
 
 
-nameFields.forEach((nameField) => {
 
-  nameField.addEventListener("click", () => {
-    cardBackground.style.display = "block";
-    name.innerText = nameField.innerHTML;
-    id.innerHTML = nameField.parentElement.children[0].innerHTML;
-    dob.innerHTML = nameField.parentElement.children[2].innerHTML;
-    department.innerHTML = nameField.parentElement.children[3].innerHTML;
-    designation.innerHTML = nameField.parentElement.children[4].innerHTML;
-  });
-});
-// idFields.forEach((id) => {
-//     console.log(id.innerHTML);
-// })
-closeCard.addEventListener("click", () => {
-  name.innerHTML = "";
-  id.innerHTML = "";
-  dob.innerHTML = "";
-  department.innerHTML = "";
-  designation.innerHTML = "";
-  cardBackground.style.display = "none";
-});
 
 const editBtns = document.querySelectorAll(".container table tr .editBtn"),
   cardBackground2 = document.querySelector(".container .card-background2");
@@ -220,9 +165,29 @@ $(document).on("click", ".card-background2 .card .closeBtn", function () {
 })
 
 
+const optionMenu = document.querySelector(".select-menu"),
+  selectBtn = optionMenu.querySelector(".select-btn"),
+  options = optionMenu.querySelectorAll(".option"),
+  sBtn_text = optionMenu.querySelector(".sBtn-text");
 
+$(".faculty .select-btn").on("click", () => {
+  optionMenu.classList.toggle("active2")
+})
+// selectBtn.addEventListener("click", () =>
+//   optionMenu.classList.toggle("active2")
+// );
 
-
+options.forEach((option) => {
+  option.addEventListener("click", () => {
+    options.forEach((option) => {
+      option.classList.remove("selected");
+    });
+    let selectedOption = option.querySelector(".option-text").innerText;
+    sBtn_text.innerText = selectedOption;
+    option.classList.add("selected");
+    optionMenu.classList.remove("active2");
+  });
+});
 
 
 $(document).ready(function () {
@@ -265,7 +230,9 @@ $(document).ready(function () {
             department.val("");
             designation.val("");
             $("#success-msg").html("Faculty Added").slideDown().delay(2000).slideUp();
-            loadData();
+            limit = $(".select-menu .sBtn-text").text();
+            loadTable(limit,1);
+            
           }
           else if (data == 0) {
             name.val("");
@@ -281,22 +248,92 @@ $(document).ready(function () {
       })
     }
   })
-  function loadData() {
+
+  let start, end, total, nop, limit;
+  let cur = 0;
+
+  $("#next").on("click", () => {
+    limit = $(".select-menu .sBtn-text").text();
+    cur = nop;
+    loadTable(limit, cur);
+  });
+
+  $("#right").on("click", () => {
+    limit = $(".select-menu .sBtn-text").text();
+    cur += 1;
+    loadTable(limit, cur);
+  });
+
+  $("#previous").on("click", () => {
+    limit = $(".select-menu .sBtn-text").text();
+    cur = 1;
+    loadTable(limit, cur);
+  });
+
+  $("#left").on("click", () => {
+    limit = $(".select-menu .sBtn-text").text();
+    cur -= 1;
+    loadTable(limit, cur);
+  });
+
+  $(".faculty .data .options .option").on("click", () => {
+    limit = $(".select-menu .sBtn-text").text();
+    loadTable(limit, 1);
+  })
+
+  function loadTable(pageLimit, curPage) {
     $.ajax({
       url: "/php/admin.php",
       type: "POST",
-      data: { action: "loadData" },
+      dataType: "json",
+      data: { action: "loadTable", pageLimit: pageLimit, curPage: curPage },
       success: function (data) {
-        $("#table-data").empty()
-        $("#table-data").append(data);
+        if (data) {
+          $.each(data, (key, value) => {
+            $("#table-data").empty()
+            $("#table-data").append(value.table);
+            start = value.start;
+            end = value.end;
+            total = value.total;
+            nop = value.nop;
+            console.log(total);
+            $(".pages #info").text(start + " - " + end + " of " + total);
+            
+            if (nop == 1) {
+              $("#previous").css("color", "grey").css("pointer-events","none");
+              $("#left").css("color", "grey").css("pointer-events","none");
+              $("#next").css("color", "grey").css("pointer-events","none");
+              $("#right").css("color", "grey").css("pointer-events","none");
+              
+            }
+            else if (curPage == 1 && nop > 1) {
+              $("#previous").css("color", "grey").css("pointer-events","none");
+              $("#left").css("color", "grey").css("pointer-events","none");
+
+              $("#next").css("color", "#111").css("pointer-events","auto");
+              $("#right").css("color", "#111").css("pointer-events","auto");
+            }
+            else if ((curPage > 1 && curPage < nop) && (nop > 1)) {
+              $("#previous").css("color", "#111").css("pointer-events","auto");
+              $("#left").css("color", "#111").css("pointer-events","auto");
+              $("#next").css("color", "#111").css("pointer-events","auto");
+              $("#right").css("color", "#111").css("pointer-events","auto");
+            }
+            else if (curPage == nop && nop > 1) {
+              $("#next").css("color", "grey").css("pointer-events","none");
+              $("#right").css("color", "grey").css("pointer-events","none");
+              $("#previous").css("color", "#111").css("pointer-events","auto");
+              $("#left").css("color", "#111").css("pointer-events","auto");      
+            }
+          })
+        }
 
       }
     })
   }
 
   $("#facultyBtn").on("click", (btn) => {
-    ;
-    loadData()
+    loadTable(10, 1);
   })
 
   $(document).on("click", ".container .data table tr .removeBtn", function () {
@@ -377,7 +414,7 @@ $(document).ready(function () {
       id.val() == "" || name.val() == "" || dob.val() == "" ||
       email.val() == "" || contact.val() == "" ||
       address.val() == "" || department.val() == "" || designation.val() == ""
-      ){
+    ) {
       $("#error-msg").html("All field are required").slideDown().delay(2000).slideUp();
     }
     else {
@@ -399,7 +436,8 @@ $(document).ready(function () {
           console.log(data);
           if (data == 1) {
             $("#success-msg").html("Faculty Added").slideDown().delay(2000).slideUp();
-            loadData();
+            limit = $(".select-menu .sBtn-text").text();
+            loadTable(limit,1);
             document.querySelector(".container .card-background4").style.display = "none";
           }
           else if (data == 0) {
@@ -409,5 +447,51 @@ $(document).ready(function () {
       })
     }
   })
-});
+  $(document).on("click", ".data table td:nth-child(2)", function () {
+    document.querySelector(".container .card-background").style.display = "block"
+    var facultyId = $(this).data('id');
 
+    $.ajax({
+      url: "/php/admin.php",
+      type: "POST",
+      dataType: "JSON",
+      data: { action: "facultyData", id: facultyId },
+      success: function (data) {
+        // console.log(data);
+        if (data) {
+          $.each(data, (key, value) => {
+            $(".card-background #id").val(value.id);
+            $(".card-background #name").val(value.name);
+            $(".card-background #dob").val(value.dob);
+            $(".card-background #email").val(value.email);
+            $(".card-background #contact").val(value.contact);
+            $(".card-background #address").val(value.address);
+            $(".card-background #department").val(value.department);
+            $(".card-background #designation").val(value.designation);
+
+          })
+        }
+        else {
+          $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+        }
+      }
+    })
+  })
+  $(document).on("click", ".card-background .card .close-card", function () {
+    document.querySelector(".container .card-background").style.display = "none"
+  })
+
+  $(".search-bar #search").on("keyup", () => {
+    var search_value = $(".search-bar #search").val();
+    $.ajax({
+      url: "/php/admin.php",
+      type: "POST",
+      data: { action: "searchFaculty", value: search_value},
+      success: function (data) {
+        $("#table-data").html(data);
+      }
+    })
+  })
+ 
+
+});

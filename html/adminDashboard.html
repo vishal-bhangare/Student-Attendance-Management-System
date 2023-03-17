@@ -87,9 +87,8 @@
           </button>
         </div>
         <div class="data">
-          <div class="filter">
-
-            <input type="text" placeholder="Filter" id="filter-value">
+          <div class="search-bar">
+            <input type="text" placeholder="Search" id="search" autocomplete="off">
           </div>
           <div id="table-data">
             <table>
@@ -144,26 +143,26 @@
                 </li>
               </ul>
             </div>
-            <span>11 - 20 of 50</span>
+            <span id="info"></span>
             <div class="nav">
-              <i class='bx bx-skip-previous'></i>
-              <i class='bx bx-chevron-left'></i>
-              <i class='bx bx-chevron-right'></i>
-              <i class='bx bx-skip-next'></i>
+              <i class='bx bx-skip-previous' id="previous"></i>
+              <i class='bx bx-chevron-left' id="left"></i>
+              <i class='bx bx-chevron-right' id="right"></i>
+              <i class='bx bx-skip-next' id="next"></i>
             </div>
           </div>
         </div>
         <div class="card-background">
           <div class="card">
             <i class='bx bx-x close-card'></i>
-            <span>id</span>:<span id="id"></span>
-            <span>Name</span>:<span id="name"></span>
-            <span>DOB</span>:<span id="dob"></span>
-            <span>Email</span>:<span id="email"></span>
-            <span>Contact no</span>:<span id="contact"></span>
-            <span>Address</span>:<span id="address"></span>
-            <span>Department</span>:<span id="department"></span>
-            <span>Designation</span>:<span id="designation"></span>
+            <span>id</span>:<input type="text" id="id" disabled>
+            <span>Name</span>:<input type="text" id="name" disabled>
+            <span>DOB</span>:<input type="date" id="dob" disabled>
+            <span>Email</span>:<input type="email" id="email" disabled>
+            <span>Contact no</span>:<input type="number" id="contact" disabled>
+            <span>Address</span>: <textarea name="" id="address" cols="30" rows="2" disabled></textarea>
+            <span>Department</span>:<input type="text" id="department" disabled>
+            <span>Designation</span>:<input type="designation" id="designation" disabled>
           </div>
         </div>
         <div class="card-background2">
