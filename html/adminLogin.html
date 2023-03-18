@@ -25,7 +25,7 @@
         <input type="submit" value="Login" id="loginBtn">
       </div>
     </div>
-
+    
     <script src="/res/jquery-3.6.4.min.js"></script>
     <script>
 
@@ -44,7 +44,7 @@
               if(data == 1){
                 $("#username").val("");
                 $("#password").val("");
-                window.open("/html/adminDashboard.html","_self")
+                window.location.href = '/html/adminDashboard.html';
               }
               else if(data == 0){
                 $("#username").val("");

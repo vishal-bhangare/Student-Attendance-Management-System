@@ -16,7 +16,3 @@ studentBtn.addEventListener("click", ()=>{
     studentForm.classList.add("studentForm");
     moveBtn.innerHTML = "Student";
 })
-
-document.querySelector("#studentForm #submitBtn").addEventListener("click",()=>{
-    window.open("http://127.0.0.1:8080/php/index","_self")
-})

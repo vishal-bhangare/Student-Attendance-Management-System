@@ -20,17 +20,20 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 25vw;
-    height: 55vh;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+        width: fit-content;
+    height: fit-content;
+    /* padding: 10px 10px; */
+    padding-bottom: 30px;
 }
 
 .actionBtns {
     display: flex;
     justify-content: space-between;
     position: relative;
+    width:25vw;
 }
 
 .actionBtns h1 {
@@ -163,10 +166,6 @@ input[type="submit"]:hover {
 
 
 @media only screen and (max-width: 767px) {
-    .center {
-        width: 60vw;
-        height: 35vh;
-    }
 
     form .txt_field {
         margin: 20px -10px;
@@ -174,5 +173,11 @@ input[type="submit"]:hover {
 
     .center h1 {
         padding: 10px 0;
+    }
+    .actionBtns {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        width:45vw;
     }
 }
