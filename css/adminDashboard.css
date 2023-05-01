@@ -45,7 +45,7 @@ body {
   line-height: 50px;
 }
 
-.sidebar .user-details .user-name {
+.sidebar .user-details #username {
   font-size: 22px;
   color: #fff;
   line-height: 22px;
@@ -205,12 +205,12 @@ body {
 .faculty::-webkit-scrollbar {
   display: none;
 }
-.faculty .container{
+.faculty .container,.students .container{
   -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;
 }
 
-.faculty .container .header {
+.faculty .container .header,.students .container .header{
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -219,21 +219,24 @@ body {
   /* background: pink; */
   padding: 20px;
 }
-.faculty .container .header div {
+.students .container .header{
+  justify-content: center;
+}
+.faculty .container .header div, .students .container .header div {
   font-size: 30px;
   font-weight: 800;
 }
-.faculty .container .data {
+.faculty .container .data ,.students .container .data{
   padding: 10px;
   width: 100%;
   height: calc(100% - 60px);
 }
-.faculty .container .data .search-bar {
+.faculty .container .data .search-bar, .students .container .data .search-bar {
   width: 100%;
   height: 50px;
   /* background:rgba(0, 0, 0, 1); */
 }
-.faculty .container .data .search-bar #search {
+.faculty .container .data .search-bar #search, .students .container .data .search-bar #search {
   height: 100%;
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -242,27 +245,30 @@ body {
   font-size: 15px;
   outline: none;
 }
-.faculty .container .data .search-bar #search:focus {
+.faculty .container .data .search-bar #search:focus,.students .container .data .search-bar #search:focus  {
   border-bottom: 2px solid #006e58;
 }
-.faculty .container .data table {
+.faculty .container .data table,.students .container .data table  {
   width: 100%;
   height: calc(100% - 160px);
   text-align: left;
   border-collapse: collapse;
 }
-.faculty .container .data table tr {
+.faculty .container .data table tr, .students .container .data table tr {
   border-top: 1px solid rgb(180, 180, 180);
   border-bottom: 1px solid rgb(180, 180, 180);
   border-top: none;
   height: 45px;
 }
 .faculty .container .data table tr td,
-.faculty .container .data table tr th {
+.faculty .container .data table tr th ,
+.students .container .data table tr td,
+.students .container .data table tr th{
   padding: 5px;
 }
 
-.faculty .container .data .pages {
+.faculty .container .data .pages,
+.students .container .data .pages {
   width: 100%;
   height: 50px;
   /* background: rgba(13, 202, 114, 1); */
@@ -643,4 +649,7 @@ input[type=number] {
 
 .disable{
   color:gray;
+}
+.container{
+  height: 100%;
 }

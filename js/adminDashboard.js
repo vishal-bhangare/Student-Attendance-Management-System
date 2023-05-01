@@ -165,32 +165,56 @@ $(document).on("click", ".card-background2 .card .closeBtn", function () {
 })
 
 
-const optionMenu = document.querySelector(".select-menu"),
-  selectBtn = optionMenu.querySelector(".select-btn"),
-  options = optionMenu.querySelectorAll(".option"),
-  sBtn_text = optionMenu.querySelector(".sBtn-text");
+let optionMenu_faculty = document.querySelector(".faculty .select-menu"),
+  selectBtn_faculty = optionMenu_faculty.querySelector(".faculty .select-btn"),
+  options_faculty = optionMenu_faculty.querySelectorAll(".faculty .option"),
+  sBtn_text_faculty = optionMenu_faculty.querySelector(".faculty .sBtn-text");
 
 $(".faculty .select-btn").on("click", () => {
-  optionMenu.classList.toggle("active2")
+  optionMenu_faculty.classList.toggle("active2")
 })
-// selectBtn.addEventListener("click", () =>
-//   optionMenu.classList.toggle("active2")
-// );
 
-options.forEach((option) => {
+options_faculty.forEach((option) => {
   option.addEventListener("click", () => {
-    options.forEach((option) => {
+    options_faculty.forEach((option) => {
       option.classList.remove("selected");
     });
-    let selectedOption = option.querySelector(".option-text").innerText;
-    sBtn_text.innerText = selectedOption;
+    let selectedOption_faculty = option.querySelector(".faculty .option-text").innerText;
+    sBtn_text_faculty.innerText = selectedOption_faculty;
     option.classList.add("selected");
-    optionMenu.classList.remove("active2");
+    optionMenu_faculty.classList.remove("active2");
+  });
+});
+optionMenu_students = document.querySelector(".students .select-menu"),
+  selectBtn_students = optionMenu_students.querySelector(".students .select-btn"),
+  options_students = optionMenu_students.querySelectorAll(".students .option"),
+  sBtn_text_students = optionMenu_students.querySelector(".students .sBtn-text");
+
+$(".students .select-btn").on("click", () => {
+  optionMenu_students.classList.toggle("active2")
+})
+
+options_students.forEach((option) => {
+  option.addEventListener("click", () => {
+    options_faculty.forEach((option) => {
+      option.classList.remove("selected");
+    });
+    let selectedOption_students = option.querySelector(".students .option-text").innerText;
+    sBtn_text_students.innerText = selectedOption_students;
+    option.classList.add("selected");
+    optionMenu_students.classList.remove("active2");
   });
 });
 
+$.fn.gparent = function( recursion ){
+  //console.log( 'recursion: ' + recursion );
+  if( recursion > 1 ) return $(this).parent().gparent( recursion - 1 );
+  return $(this).parent();
+};
 
 $(document).ready(function () {
+  var user = sessionStorage.getItem("username");
+  $("#username").text(user);
   $(".card-background2 .addBtn").on("click", (btn) => {
 
     btn.preventDefault();
@@ -250,30 +274,34 @@ $(document).ready(function () {
   })
 
   let start, end, total, nop, limit;
-  let cur = 0;
+  let cur = 1;
 
-  $("#next").on("click", () => {
-    limit = $(".select-menu .sBtn-text").text();
+  $(".next").on("click", function() {
+    tableName = $(this).gparent(5)[0].classList[1];
+    limit = $("."+tableName+ " .select-menu .sBtn-text").text();
     cur = nop;
-    loadTable(limit, cur);
+    loadTable(limit, cur,tableName);
   });
 
-  $("#right").on("click", () => {
-    limit = $(".select-menu .sBtn-text").text();
+  $(".right").on("click", function() {
+    tableName = $(this).gparent(5)[0].classList[1];
+    limit = $("."+tableName+ " .select-menu .sBtn-text").text();
     cur += 1;
-    loadTable(limit, cur);
+    loadTable(limit, cur,tableName);
   });
 
-  $("#previous").on("click", () => {
-    limit = $(".select-menu .sBtn-text").text();
+  $(".previous").on("click", function() {
+    tableName = $(this).gparent(5)[0].classList[1];
+    limit = $("."+tableName+ " .select-menu .sBtn-text").text();
     cur = 1;
-    loadTable(limit, cur);
+    loadTable(limit, cur,tableName);
   });
-
-  $("#left").on("click", () => {
-    limit = $(".select-menu .sBtn-text").text();
+  
+  $(".left").on("click", function() {
+    tableName = $(this).gparent(5)[0].classList[1];
+    limit = $("."+tableName+ " .select-menu .sBtn-text").text();
     cur -= 1;
-    loadTable(limit, cur);
+    loadTable(limit, cur,tableName);
   });
 
   $(".faculty .data .options .option").on("click", () => {
@@ -281,51 +309,57 @@ $(document).ready(function () {
     loadTable(limit, 1);
   })
 
-  function loadTable(pageLimit, curPage) {
+  function loadTable(pageLimit, curPage,tableName) {
     $.ajax({
       url: "/php/admin.php",
       type: "POST",
       dataType: "json",
-      data: { action: "loadTable", pageLimit: pageLimit, curPage: curPage },
-      success: function (data) {
+      data: { action: "loadTable", pageLimit: pageLimit, curPage: curPage, tableName : tableName},
+      success: (data) => {
+        console.log(data);
         if (data) {
           $.each(data, (key, value) => {
-            $("#table-data").empty()
-            $("#table-data").append(value.table);
+            if (tableName == "faculty"){
+              table = $(".faculty #table-data");
+            }
+            else if(tableName == "students"){
+              table = $(".students #table-data")
+            }
+            table.empty();
+            table.append(value.table);
             start = value.start;
             end = value.end;
             total = value.total;
             nop = value.nop;
-            console.log(total);
             $(".pages #info").text(start + " - " + end + " of " + total);
-            
+
             if (nop == 1) {
-              $("#previous").css("color", "grey").css("pointer-events","none");
-              $("#left").css("color", "grey").css("pointer-events","none");
-              $("#next").css("color", "grey").css("pointer-events","none");
-              $("#right").css("color", "grey").css("pointer-events","none");
-              
+              $(".previous").css("color", "grey").css("pointer-events", "none");
+              $(".left").css("color", "grey").css("pointer-events", "none");
+              $(".next").css("color", "grey").css("pointer-events", "none");
+              $(".right").css("color", "grey").css("pointer-events", "none");
+
             }
             else if (curPage == 1 && nop > 1) {
-              $("#previous").css("color", "grey").css("pointer-events","none");
-              $("#left").css("color", "grey").css("pointer-events","none");
+              $(".previous").css("color", "grey").css("pointer-events", "none");
+              $(".left").css("color", "grey").css("pointer-events", "none");
 
-              $("#next").css("color", "#111").css("pointer-events","auto");
-              $("#right").css("color", "#111").css("pointer-events","auto");
+              $(".next").css("color", "#111").css("pointer-events", "auto");
+              $(".right").css("color", "#111").css("pointer-events", "auto");
             }
             else if ((curPage > 1 && curPage < nop) && (nop > 1)) {
-              $("#previous").css("color", "#111").css("pointer-events","auto");
-              $("#left").css("color", "#111").css("pointer-events","auto");
-              $("#next").css("color", "#111").css("pointer-events","auto");
-              $("#right").css("color", "#111").css("pointer-events","auto");
+              $(".previous").css("color", "#111").css("pointer-events", "auto");
+              $(".left").css("color", "#111").css("pointer-events", "auto");
+              $(".next").css("color", "#111").css("pointer-events", "auto");
+              $(".right").css("color", "#111").css("pointer-events", "auto");
             }
             else if (curPage == nop && nop > 1) {
-              $("#next").css("color", "grey").css("pointer-events","none");
-              $("#right").css("color", "grey").css("pointer-events","none");
-              $("#previous").css("color", "#111").css("pointer-events","auto");
-              $("#left").css("color", "#111").css("pointer-events","auto");      
+              $(".next").css("color", "grey").css("pointer-events", "none");
+              $(".right").css("color", "grey").css("pointer-events", "none");
+              $(".previous").css("color", "#111").css("pointer-events", "auto");
+              $(".left").css("color", "#111").css("pointer-events", "auto");
             }
-          })
+          });
         }
 
       }
@@ -333,25 +367,28 @@ $(document).ready(function () {
   }
 
   $("#facultyBtn").on("click", (btn) => {
-    loadTable(10, 1);
+    loadTable(10, 1,"faculty");
+  })
+  $("#studentsBtn").on("click", (btn) => {
+    loadTable(10, 1,"students");
   })
 
-  $(document).on("click", ".container .data table tr .removeBtn", function () {
+  $(document).on("click", ".faculty .container .data table tr .removeBtn", function () {
 
-    document.querySelector(".container .card-background3").style.display = "block";
-    document.querySelector(".container").style.overflow = "hidden";
+    document.querySelector(".faculty .container .card-background3").style.display = "block";
+    document.querySelector(".faculty .container").style.overflow = "hidden";
 
     var element = this;
     var facultyId = $(this).data('id');
 
-    $(document).on("click", ".card-background3 .removeBtn", function () {
+    $(document).on("click", ".faculty .card-background3 .removeBtn", function () {
       $.ajax({
         url: "/php/admin.php",
         type: "POST",
         data: { action: "removeFaculty", facultyId: facultyId },
         success: function (data) {
           if (data == 1) {
-            document.querySelector(".container .card-background3").style.display = "none";
+            document.querySelector(".faculty .container .card-background3").style.display = "none";
             $("#success-msg").html("Record removed").slideDown().delay(2000).slideUp();
             $(element).closest("tr").fadeOut();
           }
@@ -363,7 +400,7 @@ $(document).ready(function () {
     })
   })
 
-  $(document).on("click", ".container .data table tr .editBtn", function () {
+  $(document).on("click", ".faculty .container .data table tr .editBtn", function () {
     var element = this;
     var facultyId = $(this).data('id');
 
@@ -376,14 +413,14 @@ $(document).ready(function () {
         // console.log(data);
         if (data) {
           $.each(data, (key, value) => {
-            $(".card-background4 #id").val(value.id);
-            $(".card-background4 #name").val(value.name);
-            $(".card-background4 #dob").val(value.dob);
-            $(".card-background4 #email").val(value.email);
-            $(".card-background4 #contact").val(value.contact);
-            $(".card-background4 #address").val(value.address);
-            $(".card-background4 #department").val(value.department);
-            $(".card-background4 #designation").val(value.designation);
+            $(".faculty .card-background4 #id").val(value.id);
+            $(".faculty .card-background4 #name").val(value.name);
+            $(".faculty .card-background4 #dob").val(value.dob);
+            $(".faculty .card-background4 #email").val(value.email);
+            $(".faculty .card-background4 #contact").val(value.contact);
+            $(".faculty .card-background4 #address").val(value.address);
+            $(".faculty .card-background4 #department").val(value.department);
+            $(".faculty .card-background4 #designation").val(value.designation);
 
           })
           $(document).on("click", ".container table tr .editBtn", function () {
@@ -401,14 +438,14 @@ $(document).ready(function () {
   $(".card-background4 .saveBtn").on("click", (btn) => {
 
     btn.preventDefault();
-    var id = $(".card-background4 #id");
-    var name = $(".card-background4 #name");
-    var dob = $(".card-background4 #dob");
-    var email = $(".card-background4 #email");
-    var contact = $(".card-background4 #contact");
-    var address = $(".card-background4 #address");
-    var department = $(".card-background4 #department");
-    var designation = $(".card-background4 #designation");
+    var id = $(".faculty .card-background4 #id");
+    var name = $(".faculty .card-background4 #name");
+    var dob = $(".faculty .card-background4 #dob");
+    var email = $(".faculty .card-background4 #email");
+    var contact = $(".faculty .card-background4 #contact");
+    var address = $(".faculty .card-background4 #address");
+    var department = $(".faculty .card-background4 #department");
+    var designation = $(".faculty .card-background4 #designation");
     console.log(id.val());
     if (
       id.val() == "" || name.val() == "" || dob.val() == "" ||
@@ -438,7 +475,7 @@ $(document).ready(function () {
             $("#success-msg").html("Faculty Added").slideDown().delay(2000).slideUp();
             limit = $(".select-menu .sBtn-text").text();
             loadTable(limit,1);
-            document.querySelector(".container .card-background4").style.display = "none";
+            document.querySelector(".faculty .container .card-background4").style.display = "none";
           }
           else if (data == 0) {
             $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
@@ -447,8 +484,8 @@ $(document).ready(function () {
       })
     }
   })
-  $(document).on("click", ".data table td:nth-child(2)", function () {
-    document.querySelector(".container .card-background").style.display = "block"
+  $(document).on("click", ".faculty .data table td:nth-child(2)", function () {
+    document.querySelector(".faculty .container .card-background").style.display = "block"
     var facultyId = $(this).data('id');
 
     $.ajax({
@@ -460,14 +497,14 @@ $(document).ready(function () {
         // console.log(data);
         if (data) {
           $.each(data, (key, value) => {
-            $(".card-background #id").val(value.id);
-            $(".card-background #name").val(value.name);
-            $(".card-background #dob").val(value.dob);
-            $(".card-background #email").val(value.email);
-            $(".card-background #contact").val(value.contact);
-            $(".card-background #address").val(value.address);
-            $(".card-background #department").val(value.department);
-            $(".card-background #designation").val(value.designation);
+            $(".faculty .card-background #id").val(value.id);
+            $(".faculty .card-background #name").val(value.name);
+            $(".faculty .card-background #dob").val(value.dob);
+            $(".faculty .card-background #email").val(value.email);
+            $(".faculty .card-background #contact").val(value.contact);
+            $(".faculty .card-background #address").val(value.address);
+            $(".faculty .card-background #department").val(value.department);
+            $(".faculty .card-background #designation").val(value.designation);
 
           })
         }
@@ -477,21 +514,58 @@ $(document).ready(function () {
       }
     })
   })
-  $(document).on("click", ".card-background .card .close-card", function () {
-    document.querySelector(".container .card-background").style.display = "none"
-  })
+  $(document).on("click", ".students .data table td:nth-child(2)", function () {
+    document.querySelector(".students .container .card-background").style.display = "block"
+    var studentId = $(this).data('id');
 
-  $(".search-bar #search").on("keyup", () => {
-    var search_value = $(".search-bar #search").val();
     $.ajax({
       url: "/php/admin.php",
       type: "POST",
-      data: { action: "searchFaculty", value: search_value},
+      dataType: "JSON",
+      data: { action: "studentData", id: studentId },
       success: function (data) {
-        $("#table-data").html(data);
+        if (data) {
+          console.log(data);
+
+          $.each(data, (key, value) => {
+            $(".students .card-background #id").val(value.id);
+            $(".students .card-background #name").val(value.name);
+            $(".students .card-background #class").val(value.class);
+            $(".students .card-background #rollno").val(value.rollno);
+            $(".students .card-background #contact").val(value.contact);
+            $(".students .card-background #dob").val(value.dob);
+            $(".students .card-background #email").val(value.email);
+            $(".students .card-background #address").val(value.address);
+
+          })
+        }
+        else {
+          $("#error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+        }
       }
     })
   })
- 
+  $(".card-background .card .close-card").on("click",function () {
+    document.querySelector(".faculty .card-background").style.display = "none";
+    document.querySelector(".students .card-background").style.display = "none"
+  })
+
+  $(".search-bar #search").on("keyup", function() {
+    tableName = $(this).gparent(4)[0].classList[1];
+    var search_value = $("."+tableName+" .search-bar #search").val();
+    $.ajax({
+      url: "/php/admin.php",
+      type: "POST",
+      data: { action: "searchFaculty", value: search_value, tableName : tableName},
+      success: function (data) {
+        console.log(data);
+        $("."+tableName+" #table-data").html(data);
+      }
+    })
+  })
+  $("#logout").on("click",function(){
+    window.location.href="/adminLogin.html";
+    sessionStorage.clear();
+  })
 
 });

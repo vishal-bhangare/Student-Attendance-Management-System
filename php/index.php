@@ -2,12 +2,13 @@
 
 try {
     $name = "vishal";
+    
     $conn = mysqli_connect(
-        'iec.h.filess.io',
-        'projectams_unknownbuy',
-        '762c30c8c3b48dc2e82833ba5018c0d35aecb510',
-        'projectams_unknownbuy',
-        3307
+        'pal.h.filess.io',
+        'projectams_starraceam',
+        '1be59674ef7040c39135fe87671a20efe42d9dde',
+        'projectams_starraceam',
+        3306
     )
         or die("Connection Failed" . mysqli_connect_error());
     if ($conn) {

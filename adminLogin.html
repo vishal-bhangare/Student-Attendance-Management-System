@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Admin Login</title>
     <link rel="stylesheet" href="/css/adminLogin.css">
+  
+    <!--<script>
+      window.LoginPage = true; 
+    </script> -->
   </head>
   <body>
     <div class="center">
@@ -44,12 +47,14 @@
               if(data == 1){
                 $("#username").val("");
                 $("#password").val("");
-                window.location.href = '/html/adminDashboard.html';
+                window.location.href = '/adminDashboard.html';
+                sessionStorage.setItem("username",user );
+                sessionStorage.setItem("status","user-logged-in")
               }
               else if(data == 0){
                 $("#username").val("");
                 $("#password").val("");
-                alert("Invalid username and password");
+                alert("Invalid username or password");
               }
             }
           })

@@ -8,16 +8,22 @@
   <title>Admin</title>
   <link rel="stylesheet" href="/css/adminDashboard.css" />
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <script>
+    /*if(!window.LoginPage)
+    {
+        window.location.href = "http://127.0.0.1:8080/"
+    }*/
+  </script>
 </head>
 
-<body>
+<body onload="if (document.referrer == '') self.location='index.html';">
   <div class="toggle-sidebar">
     <i class='bx bx-chevrons-right'></i>
   </div>
   <div class="sidebar">
     <div class="user-details">
       <i class="bx bxs-user-circle"></i>
-      <span class="user-name">Admin</span>
+      <span id="username">Admin</span>
     </div>
 
     <ul class="nav-links">
@@ -31,7 +37,7 @@
           <span>Faculty</span>
         </a>
       </li>
-      <li data-li="students" class="studentBtn">
+      <li data-li="students" class="studentBtn" id="studentsBtn">
         <a href="#">
           <span>student</span>
         </a>
@@ -47,32 +53,13 @@
         </a>
       </li>
     </ul>
-    <div class="logout">
+    <div class="logout" id = "logout">
       <i class="bx bx-log-out"></i>
       <span>Logout</span>
     </div>
   </div>
   <section class="main">
     <div class="item home">
-
-
-      <!-- buttons with text and icons -->
-      <!-- <button type="button" class="button">
-        <span>Edit</span>
-       <i class='bx bx-edit'></i>
-      </button>
-      <button type="button" class="button">
-        <span>Delete</span>
-        <i class='bx bx-trash-alt' ></i>
-      </button> -->
-      <!-- buttons with only text -->
-
-      <!-- <button type="button" class="editBtn">
-        <span>Edit</span>
-      </button>
-      <button type="button" class="deleteBtn">
-        <span>Remove</span>
-      </button> -->
 
     </div>
     <!-- <span>home Panel</span> -->
@@ -145,10 +132,10 @@
             </div>
             <span id="info"></span>
             <div class="nav">
-              <i class='bx bx-skip-previous' id="previous"></i>
-              <i class='bx bx-chevron-left' id="left"></i>
-              <i class='bx bx-chevron-right' id="right"></i>
-              <i class='bx bx-skip-next' id="next"></i>
+              <i class='bx bx-skip-previous previous'></i>
+              <i class='bx bx-chevron-left left' ></i>
+              <i class='bx bx-chevron-right right' ></i>
+              <i class='bx bx-skip-next next' ></i>
             </div>
           </div>
         </div>
@@ -228,7 +215,77 @@
       <div id="success-msg"></div>
     </div>
     <div class="item students">
-      <!-- <span>students Panel</span> -->
+      <div class="container">
+
+        <div class="header">
+          <div>Students</div>
+        </div>
+        <div class="data">
+          <div class="search-bar">
+            <input type="text" placeholder="Search" id="search" autocomplete="off">
+          </div>
+          <div id="table-data">
+            <table>
+              <thead>
+                <tr>
+                  <th id="id" style="width:5%;">Id</th>
+                  <th id="name" style="width: 20%;" class="name-field">Name</th>
+                  <th id="class">Class</th>
+                  <th id="rollno">Roll no</th>
+                  <th id="dob">DOB</th>
+                  <th id="contact">contact</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pages">
+            <span>Items per page:</span>
+            <div class="select-menu">
+              <div class="select-btn">
+                <span class="sBtn-text">10</span>
+                <i class="bx bx-chevron-down"></i>
+              </div>
+
+              <ul class="options">
+                <li class="option">
+                  <span class="option-text">10</span>
+                </li>
+                <li class="option">
+                  <span class="option-text">25</span>
+                </li>
+                <li class="option">
+                  <span class="option-text">50</span>
+                </li>
+              </ul>
+            </div>
+            <span id="info"></span>
+            <div class="nav">
+              <i class='bx bx-skip-previous previous'></i>
+              <i class='bx bx-chevron-left left' ></i>
+              <i class='bx bx-chevron-right right' ></i>
+              <i class='bx bx-skip-next next' ></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-background">
+          <div class="card">
+            <i class='bx bx-x close-card'></i>
+            <span>id</span>:<input type="text" id="id" disabled>
+            <span>Name</span>:<input type="text" id="name" disabled>
+            <span>Class</span>:<input type="text" id="class" disabled>
+            <span>Roll no</span>:<input type="number" id="rollno" disabled>
+            <span>DOB</span>:<input type="date" id="dob" disabled>
+            <span>Contact</span>: <input type="number" id="contact" disabled>
+            <span>email</span>:<input type="text" id="email" disabled>
+            <span>Address</span>:<textarea name="" id="address" cols="30" rows="2" disabled></textarea>
+          </div>
+        </div>
+        
+        </div>
+      </div>
     </div>
     <div class="item academics">
       <!-- <span>academics Panel</span> -->
