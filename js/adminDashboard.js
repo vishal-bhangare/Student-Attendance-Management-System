@@ -304,9 +304,10 @@ $(document).ready(function () {
     loadTable(limit, cur,tableName);
   });
 
-  $(".faculty .data .options .option").on("click", () => {
-    limit = $(".select-menu .sBtn-text").text();
-    loadTable(limit, 1);
+  $(".data .options .option").on("click", function() {
+    tableName = $(this).gparent(6)[0].classList[1];
+    limit = $("."+ tableName+" .select-menu .sBtn-text").text();
+    loadTable(limit, 1,tableName);
   })
 
   function loadTable(pageLimit, curPage,tableName) {
