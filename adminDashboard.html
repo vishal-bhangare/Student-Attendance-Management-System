@@ -163,8 +163,19 @@
 
             <span>Address</span>: <textarea name="" id="address" cols="30" rows="2"></textarea>
             <!-- <input type="text" id="address"> -->
-            <span>Department</span>:<input type="text" id="department">
-            <span>Designation</span>:<input type="designation" id="designation">
+            <span>Department</span>:<select id="department">
+              <option disabled selected value=""> -- select an option -- </option>
+              <option value="it">Information technology</option>
+              <option value="cs">Computer science</option>
+            </select>
+            <span>Designation</span>:
+            <select id="designation">
+              <option disabled selected value=""> -- select an option -- </option>
+              <option value="hod">Head of Department</option>
+              <option value="prof">Professor</option>
+            </select>
+            <!-- <span>Department</span>:<input type="text" id="department">
+            <span>Designation</span>:<input type="designation" id="designation"> -->
             <div id="btns">
               <button type="button" class="addBtn">Add</button>
               <button type="button" class="closeBtn">
@@ -197,7 +208,6 @@
               oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 
             <span>Address</span>: <textarea name="" id="address" cols="30" rows="2"></textarea>
-            <!-- <input type="text" id="address"> -->
             <span>Department</span>:<input type="text" id="department">
             <span>Designation</span>:<input type="designation" id="designation">
             <div id="btns">
@@ -207,7 +217,7 @@
             </div>
             </button>
           </div>
-
+          
         </div>
       </div>
 
@@ -231,6 +241,7 @@
                   <th id="id" style="width:5%;">Id</th>
                   <th id="name" style="width: 20%;" class="name-field">Name</th>
                   <th id="class">Class</th>
+                  <th id="div">Div</th>                  
                   <th id="rollno">Roll no</th>
                   <th id="dob">DOB</th>
                   <th id="contact">contact</th>
@@ -276,6 +287,7 @@
             <span>id</span>:<input type="text" id="id" disabled>
             <span>Name</span>:<input type="text" id="name" disabled>
             <span>Class</span>:<input type="text" id="class" disabled>
+            <span>Div</span>:<input type="text" id="div" disabled>
             <span>Roll no</span>:<input type="number" id="rollno" disabled>
             <span>DOB</span>:<input type="date" id="dob" disabled>
             <span>Contact</span>: <input type="number" id="contact" disabled>

@@ -215,7 +215,7 @@ $.fn.gparent = function( recursion ){
 $(document).ready(function () {
   var user = sessionStorage.getItem("username");
   $("#username").text(user);
-  $(".card-background2 .addBtn").on("click", (btn) => {
+  $(".card-background2 .addBtn").on("click", function(btn) {
 
     btn.preventDefault();
     var name = $(".card-background2 #name");
@@ -244,7 +244,6 @@ $(document).ready(function () {
           designation: designation.val(),
         },
         success: function (data) {
-          console.log(data);
           if (data == 1) {
             name.val("");
             dob.val("");
@@ -254,8 +253,8 @@ $(document).ready(function () {
             department.val("");
             designation.val("");
             $("#success-msg").html("Faculty Added").slideDown().delay(2000).slideUp();
-            limit = $(".select-menu .sBtn-text").text();
-            loadTable(limit,1);
+            limit = $(".faculty .select-menu .sBtn-text").text();
+            loadTable(limit,1,"faculty");
             
           }
           else if (data == 0) {
@@ -532,6 +531,7 @@ $(document).ready(function () {
             $(".students .card-background #id").val(value.id);
             $(".students .card-background #name").val(value.name);
             $(".students .card-background #class").val(value.class);
+            $(".students .card-background #div").val(value.div);
             $(".students .card-background #rollno").val(value.rollno);
             $(".students .card-background #contact").val(value.contact);
             $(".students .card-background #dob").val(value.dob);

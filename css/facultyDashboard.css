@@ -26,7 +26,8 @@ body {
   width: 260px;
   background: #fff;
   padding: 0px 10px;
-  box-shadow: 0 20px 25px 5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px 5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .sidebar .user-details {
@@ -37,6 +38,7 @@ body {
   /* top right bottom left */
   padding: 33px 10px;
   border-bottom: 2px solid gray;
+  overflow: hidden;
 }
 
 .sidebar .user-details i {
@@ -66,7 +68,7 @@ body {
 }
 
 .sidebar > .nav-links > li > a {
-  transition:color 0.3s, background 0.3s;
+  transition: color 0.3s, background 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,19 +83,19 @@ body {
   color: #ffffff;
   border-radius: 7px;
 }
-.sidebar .nav-links .active a{
+.sidebar .nav-links .active a {
   color: #fff;
 }
 .sidebar .nav-links li a:hover {
   background: #6260df81;
   border-radius: 7px;
-  transition:color 0.3s, background 0.3s;
+  transition: color 0.3s, background 0.3s;
 }
 
 .sidebar .logout {
   position: fixed;
   bottom: 6px;
-    left: 1px;
+  left: 1px;
   height: 50px;
   width: inherit;
   max-width: inherit;
@@ -103,7 +105,7 @@ body {
   justify-content: space-evenly;
   padding: 0px 10px;
 }
-.sidebar .logout div{
+.sidebar .logout div {
   width: 100%;
   font-size: 22px;
   border-top: 2px solid gray;
@@ -207,7 +209,9 @@ body {
   background: #f13854;
   color: #fff;
 }
-.Btn, .addBtn, .timetable .manageBtn {
+.Btn,
+.addBtn,
+.timetable .manageBtn {
   padding: 2px 10px;
   background: #fff;
   color: #e9972c;
@@ -216,7 +220,9 @@ body {
   font-size: 16px;
   font-weight: 550;
 }
-.Btn:hover, .addBtn:hover, .timetable .manageBtn:hover {
+.Btn:hover,
+.addBtn:hover,
+.timetable .manageBtn:hover {
   background: #e9972c;
   color: #fff;
 }
@@ -228,29 +234,31 @@ body {
   height: 60px;
   /* background: pink; */
   padding: 20px;
-
 }
 .students .container .header div {
   font-size: 30px;
   font-weight: 800;
   /* margin-left: 50px; */
 }
-.students .container .header .addBtn{
+.students .container .header .addBtn {
   display: none;
 }
-.students .container .data, .attendance > .data, .attendance .studentData > .data,.timetable > .takeAttendance > .data {
+.students .container .data,
+.attendance > .data,
+.attendance .studentData > .data,
+.timetable > .takeAttendance > .data {
   padding: 10px;
   width: 100%;
   height: fit-content;
 }
-.students .container .data .filter,
- .attendance > .data .filter {
+.students .container .data .search-bar,
+.attendance > .data .search-bar {
   width: 100%;
   height: 50px;
   /* background:rgba(0, 0, 0, 1); */
 }
-.students .container .data .filter #filter-value,
-.attendance > .data #filter-value {
+.students .container .data .search-bar #search,
+.attendance > .data #search {
   height: 100%;
   width: 100%;
   border-radius: 3px 3px 0px 0px;
@@ -259,27 +267,26 @@ body {
   font-size: 15px;
   outline: none;
 }
-.students .container .data .filter #filter-value:focus,
-.attendance .data .filter #filter-value:focus {
+.students .container .data .search-bar #search:focus,
+.attendance .data .search-bar #search:focus {
   border-bottom: 2px solid #006e58;
 }
 .students > .container .data table,
 .attendance > .data table,
 .attendance > .studentData > .data table,
-.timetable > .takeAttendance > .data table{
+.timetable > .takeAttendance > .data table {
   width: 100%;
   height: calc(100% - 160px);
   text-align: left;
   border-collapse: collapse;
-  
 }
-.attendance .data table{
+.attendance .data table {
   text-align: center;
 }
 .students > .container .data table tr,
 .attendance > .data table tr,
 .attendance > .studentData > .data table tr,
-.timetable > .takeAttendance > .data table tr{
+.timetable > .takeAttendance > .data table tr {
   border: 1px solid rgb(180, 180, 180);
   border-top: none;
   height: 45px;
@@ -289,19 +296,15 @@ body {
 .attendance > .data table tr td,
 .attendance > .data tr th,
 .attendance > .studentData > .data table tr th,
-.attendance > .studentData > .data table tr td, .timetable > .takeAttendance > .data table tr td, .timetable > .takeAttendance > .data table tr th {
+.attendance > .studentData > .data table tr td,
+.timetable > .takeAttendance > .data table tr td,
+.timetable > .takeAttendance > .data table tr th {
   padding: 5px;
   height: 45px;
 }
-.students >.container .data table tr td:last-child{
-  display: none;
-}
-.students >  .container .data table thead th:last-child{
-  display: none;
-}
 
 .students .container .data .pages,
-.attendance .data .pages{
+.attendance .data .pages {
   width: 100%;
   height: 50px;
   /* background: rgba(13, 202, 114, 1); */
@@ -318,7 +321,7 @@ body {
   margin: 0;
   display: inline-block;
 }
-.select-menu span{
+.select-menu span {
   margin: 0px auto;
 }
 .select-menu .select-btn {
@@ -352,7 +355,6 @@ body {
   transform: rotate(-180deg);
 }
 .select-menu .options {
-  
   width: fit-content;
   position: absolute;
   padding: 10px;
@@ -397,7 +399,8 @@ body {
 .data table td:nth-child(2) {
   cursor: pointer;
 }
-.card-background, .timetable .content .card-background{
+.card-background,
+.timetable .content .card-background {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -407,16 +410,19 @@ body {
   background: #0000002f;
   display: none;
 }
-.card-background .card , .timetable .content .card-background .card{
+.card-background .card,
+.timetable .content .card-background .card {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
+  min-height: fit-content;
   height: 70%;
   background: #333837;
   border-radius: 4px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   padding: 4px;
   font-size: 18px;
   padding: 5px;
@@ -425,7 +431,8 @@ body {
   overflow: hidden;
   overflow-y: auto;
 }
-.card-background .card .content, .timetable .content .card-background .card .content{
+.card-background .card .content,
+.timetable .content .card-background .card .content {
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto;
   gap: 8px;
@@ -440,7 +447,8 @@ body {
   width: 100%;
   height: fit-content;
 }
-.card-background .card i, .timetable .content .card-background .card i {
+.card-background .card i,
+.timetable .content .card-background .card i {
   position: sticky;
   top: 0;
   left: 100%;
@@ -449,13 +457,15 @@ body {
   color: #fff;
   z-index: 2;
 }
-.card-background .card i:hover, .timetable .content .card-background .card i:hover{
-  color:#f13854;
+.card-background .card i:hover,
+.timetable .content .card-background .card i:hover {
+  color: #f13854;
 }
-.card-background  .card span:nth-child(even) {
+.card-background .card span:nth-child(even) {
   padding-left: 10px;
 }
-.container .card-background2 {
+.container .card-background2,
+.container .card-background4 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -465,16 +475,19 @@ body {
   background: #0000002f;
   display: none;
 }
-.container .card-background2 .card {
+.container .card-background2 .card,
+.container .card-background4 .card {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 70%;
+  min-height: fit-content;
+  /* height: 70%; */
   background: #333837;
   border-radius: 4px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   padding: 4px;
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto;
@@ -487,7 +500,8 @@ body {
   border: 2px solid rgb(216, 216, 216);
   color: #fff;
 }
-.container .card-background2 .card i {
+.container .card-background2 .card i,
+.container .card-background4 .card i {
   position: absolute;
   right: 0;
   top: -5px;
@@ -495,14 +509,22 @@ body {
   font-size: 25px;
   color: #fff;
 }
-.container .card-background2 .card span:nth-child(even) {
+.container
+  .card-background2
+  .card
+  span:nth-child(even)
+  .container
+  .card-background4
+  .card
+  span:nth-child(even) {
   padding-left: 10px;
 }
-.container .card-background2 form input{
+.container .card-background2 form input {
   outline: none;
   padding: 2px;
 }
-.card-background2 .card div {
+.card-background2 .card div,
+.card-background4 .card div {
   grid-column: 1/4;
   width: 100%;
   height: fit-content;
@@ -510,9 +532,10 @@ body {
   align-items: center;
   justify-content: space-evenly;
 }
-.card-background2 .card div .saveBtn,
- .timetable .content table .unscheduled button,
- .timetable .content .takeAttendanceBtn{
+.card-background2 .card div .addBtn,
+.card-background4 .card div .saveBtn,
+.timetable .content table .unscheduled button,
+.timetable .content .takeAttendanceBtn {
   padding: 1px 6px;
   background: #239dc5;
   color: #fff;
@@ -522,12 +545,13 @@ body {
   font-weight: 500;
 }
 
-.card-background2 .card div .saveBtn:hover,
-.timetable .content table .unscheduled button:hover{
+.card-background2 .card div .addBtn:hover,
+.card-background4 .card div .saveBtn:hover,
+.timetable .content table .unscheduled button:hover {
   background: #072f3b;
   color: #fff;
 }
-.card-background2 .card div .closeBtn {
+.card-background2 .card div .closeBtn,.card-background4 .card div .closeBtn {
   padding: 1px 6px;
   background: #ef476f;
   color: #fff;
@@ -536,11 +560,11 @@ body {
   font-size: 15px;
   font-weight: 500;
 }
-.timetable .content .takeAttendanceBtn:hover{
+.timetable .content .takeAttendanceBtn:hover {
   background: #0f91c5;
   border: 2px solid #0f91c5;
 }
-.card-background2 .card div .closeBtn:hover {
+.card-background2 .card div .closeBtn:hover ,.card-background4 .card div .closeBtn:hover{
   background: #7e031f;
   color: #fff;
 }
@@ -560,10 +584,12 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
-  height: 60%;
+  min-height: fit-content;
+  /* height: 60%; */
   background: #fff;
   border-radius: 4px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   padding: 4px;
   display: flex;
   flex-direction: column;
@@ -575,15 +601,15 @@ body {
 .container .card-background3 .card > * {
   margin: 5px 0px;
 }
-.container .card-background3 .card i{
+.container .card-background3 .card i {
   position: relative;
   font-size: 35px;
   color: #d90429;
-  border-radius: 430%;  
-  background:rgba(255, 163, 163, 0.486);
+  border-radius: 430%;
+  background: rgba(255, 163, 163, 0.486);
   padding: 7px;
 }
-.container .card-background3 .card .removeBtn{
+.container .card-background3 .card .removeBtn {
   padding: 1px 6px;
   background: #ef233c;
   color: #fff;
@@ -594,10 +620,10 @@ body {
   width: 80%;
   height: 40px;
 }
-.container .card-background3 .card .removeBtn:hover{
+.container .card-background3 .card .removeBtn:hover {
   background: #d81128;
 }
-.container .card-background3 .card .cancelBtn{
+.container .card-background3 .card .cancelBtn {
   padding: 1px 6px;
   background: #ffffff;
   color: #000000;
@@ -609,52 +635,55 @@ body {
   width: 80%;
   height: 40px;
 }
-.container .card-background3 .card .cancelBtn:hover{
+.container .card-background3 .card .cancelBtn:hover {
   background-color: #f0f0f0;
 }
-.timetable{
+.timetable {
   overflow: auto;
 }
-.timetable::-webkit-scrollbar, .timetable >.takeAttendance::-webkit-scrollbar {
+.timetable::-webkit-scrollbar,
+.timetable > .takeAttendance::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 
-.timetable,.timetable .takeAttendance {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+.timetable,
+.timetable .takeAttendance {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-.timetable > .header, .attendance >.header{
+.timetable > .header,
+.attendance > .header {
   width: 100%;
   height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgb(226, 195, 255);;
+  background: rgb(226, 195, 255);
   padding: 20px;
 }
 
-.timetable .header > span, .attendance > .header > span{
+.timetable .header > span,
+.attendance > .header > span {
   font-size: 18px;
   margin: 10px;
 }
-.timetable > .content{
+.timetable > .content {
   width: 100%;
   background: rgb(226, 195, 255);
   padding: 20px;
-
 }
-.timetable .content > table{
+.timetable .content > table {
   width: 100%;
   border-collapse: collapse;
 }
-.timetable .content > table thead{
+.timetable .content > table thead {
   height: 50px;
   background: #ffffff;
 }
-.timetable .content > table thead tr th{
+.timetable .content > table thead tr th {
   width: 14%;
 }
 .timetable .content > table thead tr th button.selected {
@@ -679,44 +708,44 @@ body {
   height: 35px;
   margin: 5px 0px;
 }
-.timetable .content > table thead tr th:first-child{
+.timetable .content > table thead tr th:first-child {
   background: none;
   width: 10%;
 }
-.timetable .content >  table tbody{
+.timetable .content > table tbody {
   background: #8d74eb;
 }
-.timetable .content > table tbody tr{
+.timetable .content > table tbody tr {
   height: 100px;
   /* border-bottom: 1px solid rgb(255, 255, 255); */
-  vertical-align:top;
+  vertical-align: top;
   text-align: right;
 }
-.timetable .content > table tbody tr td{
-  padding:0px 5px;
+.timetable .content > table tbody tr td {
+  padding: 0px 5px;
   height: inherit;
 }
-.timetable .content > table tbody tr td:nth-child(1){
+.timetable .content > table tbody tr td:nth-child(1) {
   border-right: 1px solid #fff;
   display: flex;
   flex-direction: column;
 }
-.timetable .content > table tbody tr td:nth-child(1) span:nth-child(1){
+.timetable .content > table tbody tr td:nth-child(1) span:nth-child(1) {
   margin-top: 4px;
   width: 100%;
-  margin-bottom:calc((50% - (15px * 1.1)));
+  margin-bottom: calc((50% - (15px * 1.1)));
   font-size: 15px;
 }
-.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2){
+.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2) {
   width: 100%;
-  margin-bottom:calc(50% - (12px * 1.1));
+  margin-bottom: calc(50% - (12px * 1.1));
   font-size: 12px;
 }
-.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2){
+.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2) {
   font-size: 12px;
 }
 
-.timetable .content > table tbody tr td div{
+.timetable .content > table tbody tr td div {
   background: red;
   color: #fff;
   height: 100%;
@@ -728,38 +757,38 @@ body {
   align-items: center;
   margin: 5px 0px;
 }
-.timetable .content > table tbody tr:nth-child(1) td div{
+.timetable .content > table tbody tr:nth-child(1) td div {
   margin-top: 4px;
 }
-.timetable .content > table tbody tr td .unscheduled{
+.timetable .content > table tbody tr td .unscheduled {
   display: none;
 }
 
-.timetable .content .card-background{
+.timetable .content .card-background {
   position: fixed;
   top: 0;
   left: 0;
-  transform: translate(0, 0)
+  transform: translate(0, 0);
 }
-.timetable .content .card-background .card{
+.timetable .content .card-background .card {
   top: 50%;
   left: 50%;
   transform: translate(-18%, -50%);
 }
-.timetable .card-background .card .content div{
+.timetable .card-background .card .content div {
   grid-column: 1/4;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    row-gap: 15px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 15px;
 }
-.timetable .content .card-background .card{
+.timetable .content .card-background .card {
   height: fit-content;
   padding-bottom: 20px;
 }
-.timetable .content .card-background .card .content{
+.timetable .content .card-background .card .content {
   gap: 8px;
   position: relative;
 }
@@ -772,13 +801,14 @@ body {
   font-size: 33px;
   color: #fff;
 }
-.attendance .data table tbody tr td{
+.attendance .data table tbody tr td {
   display: table-cell;
 }
-.attendance > .data > table tbody tr td i{
+.attendance > .data > table tbody tr td i {
   font-size: 1.5rem;
 }
-.attendance > .studentData,.timetable > .takeAttendance {
+.attendance > .studentData,
+.timetable > .takeAttendance {
   position: absolute;
   top: 0;
   background: #fff;
@@ -786,10 +816,11 @@ body {
   height: 100%;
   display: none;
 }
-.attendance .studentData > .header{
+.attendance .studentData > .header {
   width: 100%;
 }
-.attendance .studentData > .header .info,.timetable > .takeAttendance  > .header .info{
+.attendance .studentData > .header .info,
+.timetable > .takeAttendance > .header .info {
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto;
   gap: 8px;
@@ -800,10 +831,11 @@ body {
   z-index: 1;
   /* width: calc(100% - (1.8rem + 16px)); */
 }
-.attendance > .studentData table thead, .timetable > .takeAttendance table thead{
+.attendance > .studentData table thead,
+.timetable > .takeAttendance table thead {
   border: 1px solid rgb(180, 180, 180);
 }
-.toggle-sidebar{
+.toggle-sidebar {
   font-size: 1.4rem;
   background-color: #4b49ac;
   color: #fff;
@@ -816,45 +848,48 @@ body {
   padding: 0px;
   width: calc(1.4rem - 2px);
 }
-.toggle-sidebar > i{
+.toggle-sidebar > i {
   transition: 0.3s;
   transform: rotate(-180deg);
   translate: -2px 0;
 }
 
-.attendance .studentData .close-card,.timetable > .takeAttendance .close-card {
+.attendance .studentData .close-card,
+.timetable > .takeAttendance .close-card {
   font-size: 1.8rem;
   background: transparent;
   position: sticky;
   top: 0;
-  left:  calc(100% - (1.8rem + 16px));
+  left: calc(100% - (1.8rem + 16px));
   padding: 8px;
   float: right;
   z-index: 5;
 }
-.attendance .studentData .close-card:hover,.timetable > .takeAttendance .close-card:hover{
+.attendance .studentData .close-card:hover,
+.timetable > .takeAttendance .close-card:hover {
   color: #f13854;
 }
 .timetable > .takeAttendance {
   display: none;
   overflow-y: scroll;
 }
-.timetable > .takeAttendance .header{
+.timetable > .takeAttendance .header {
   position: sticky;
   top: 0;
   width: 100%;
   background: #fff;
 }
-.timetable > .takeAttendance .header > .info{
-  
+.timetable > .takeAttendance .header > .info {
   display: grid;
-  grid-template-columns: fit-content(100%) fit-content(100%) auto fit-content(100%) fit-content(100%) auto ;
+  grid-template-columns: fit-content(100%) fit-content(100%) auto fit-content(
+      100%
+    ) fit-content(100%) auto;
   gap: 8px;
   align-items: baseline;
   grid-auto-rows: minmax(fit-content(100%), 20px);
 }
 
-.timetable > .takeAttendance table tbody .status{
+.timetable > .takeAttendance table tbody .status {
   padding: 4px 12px;
   background-color: #e71f4d;
   width: 35px;
@@ -864,11 +899,11 @@ body {
   cursor: pointer;
   user-select: none;
 }
-.timetable .takeAttendance .data > .submitAttendance{
+.timetable .takeAttendance .data > .submitAttendance {
   height: fit-content;
   /* background-color: #b3cec8; */
   width: 100%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
@@ -876,16 +911,58 @@ body {
   padding-right: 50px;
   font-size: 1rem;
 }
-.timetable .takeAttendance > .data > .submitAttendance .Btn{
+.timetable .takeAttendance > .data > .submitAttendance .Btn {
   /* 06d6a0 */
   background: #fff;
   color: #06d6a0;
   border: 2px solid #06d6a0;
   margin-left: 20px;
 }
-.timetable .takeAttendance .data > .submitAttendance .Btn:hover{
+.timetable .takeAttendance .data > .submitAttendance .Btn:hover {
   background: #06d6a0;
   color: #fff;
+}
+.card-background2 textarea {
+  resize: none;
+  overflow: hidden;
+}
+/* .card-background2 input[type="date"]::-webkit-inner-spin-button,
+.card-background2 input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+} */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#success-msg {
+  background: #def1d8;
+  color: green;
+  padding: 10px;
+  margin: 10px;
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 5px;
+}
+#error-msg {
+  background: #efdcdd;
+  color: red;
+  padding: 10px;
+  margin: 10px;
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 5px;
 }
 
 /* @media screen and (max-width:768px) {

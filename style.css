@@ -23,6 +23,8 @@
     text-align: center;
     line-height: 50px;
     font-weight: 500;
+    min-width: fit-content;
+    padding: 0px 5px;
 }
 .btns:hover{
     background: #ef476f;

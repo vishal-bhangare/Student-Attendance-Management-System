@@ -4,15 +4,51 @@ const moveBtn = document.querySelector(".moveBtn");
 const studentForm = document.querySelector("#studentForm");
 const facultyForm = document.querySelector("#facultyForm");
 
-facultyBtn.addEventListener("click", ()=>{
-    moveBtn.classList.add("right");
-    facultyForm.classList.add("facultyForm");
-    studentForm.classList.remove("studentForm");
-    moveBtn.innerHTML = "Faculty";
+facultyBtn.addEventListener("click", () => {
+  moveBtn.classList.add("right");
+  document.querySelector("#facultyForm").classList.add("facultyForm");
+  document.querySelector("#studentForm").classList.remove("studentForm");
+  moveBtn.innerHTML = "Faculty";
 })
-studentBtn.addEventListener("click", ()=>{
-    moveBtn.classList.remove("right");
-    facultyForm.classList.remove("facultyForm");
-    studentForm.classList.add("studentForm");
-    moveBtn.innerHTML = "Student";
+studentBtn.addEventListener("click", () => {
+  moveBtn.classList.remove("right");
+  document.querySelector("#facultyForm").classList.remove("facultyForm");
+  document.querySelector("#studentForm").classList.add("studentForm");
+  moveBtn.innerHTML = "Student";
 })
+$(document).ready(function () {
+  $("#facultyForm #login").on("click", (btn) => {
+    btn.preventDefault();
+    var user = $("#facultyForm #username");
+    var pass = $("#facultyForm #password");
+
+    $.ajax({
+      url: "/php/studentFacultyLogin.php",
+      type: "POST",
+      data: { action: "facultyLogin", username: user.val(), password: pass.val() },
+      success: function (data) {
+        console.log(data);
+        if (data) {
+          var data = JSON.parse(data);
+          if (data[0].status == 1) {
+            window.location.href = '/facultyDashboard.html';
+            sessionStorage.setItem("email", user.val());
+            sessionStorage.setItem("username", data[0].name);
+            sessionStorage.setItem("role", data[0].role);
+            sessionStorage.setItem("status", "user-logged-in")
+            user.val("");
+            pass.val("");
+          }
+          else if (data[0].status == 0) {
+            user.val("");
+            pass.val("");
+            alert("Invalid username or password");
+          }
+        }
+        else{
+          alert("Error occured!");
+        }
+      }
+    })
+  })
+});

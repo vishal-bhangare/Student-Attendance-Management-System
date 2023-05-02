@@ -43,68 +43,11 @@
                 <label>Password</label>
             </div>
             <!-- <div class="pass">Forgot Password?</div> -->
-            <input type="submit" value="Login" class="login">
+            <input type="submit" value="Login" id="login">
         </div>
     </div>
     <script src="/res/jquery-3.6.4.min.js"></script>
     <script src="/js/studentFacultyLogin.js"></script>
-    <script>
-        $(document).ready(function () {
-
-            $(".login").on("click", (btn) => {
-                btn.preventDefault;
-                let user_type = $(".moveBtn").text();
-
-                if (user_type == "Faculty") {
-                    var user = $("#facultyForm #username").val();
-                    var pass = $("#facultyForm #password").val();
-                    console.log(user +"--"+pass);
-                    
-                    $.ajax({
-                        url: "/php/validate.php",
-                        type: "POST",
-                        data: { action: "faculty", username: user, password: pass },
-                        success: function (data) {
-                            console.log(data);
-                            if (data == 1) {
-                                $("#username").val("");
-                                $("#password").val("");
-                                window.location.href = '/html/facultyDashboard.html';
-                            }
-                            else if (data == 0) {
-                                $("#username").val("");
-                                $("#password").val("");
-                                alert("Invalid username and password");
-                            }
-                        }
-                    })
-                }
-                else if (user_type == "Student") {
-                    var user = $("#studentForm #username").val();
-                    var pass = $("#studentForm #password").val();
-                    console.log(user +"--"+pass);
-                    $.ajax({
-                        url: "/php/validate.php",
-                        type: "POST",
-                        data: { action: "student", username: user, password: pass },
-                        success: function (data) {
-                            console.log(data);
-                            if (data == 1) {
-                                $("#username").val("");
-                                $("#password").val("");
-                                window.location.href = '/html/studentDashboard.html';
-                            }
-                            else if (data == 0) {
-                                $("#username").val("");
-                                $("#password").val("");
-                                alert("Invalid username and password");
-                            }
-                        }
-                    })
-                }
-            })
-        });
-    </script>
 </body>
 
 </html>
