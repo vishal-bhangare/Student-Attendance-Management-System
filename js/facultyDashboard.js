@@ -54,10 +54,7 @@ optionMenus.forEach((optionMenu) => {
   }
   // console.log(max);
 
-  var temp = document.querySelector("." + optionMenu.parentElement.parentElement.classList[1] + " .sBtn-text");
-  if (temp != null) {
-    temp.style.width = max + 4 + "px";
-  }
+
   document.querySelector("." + optionMenu.parentElement.parentElement.classList[0] + " .select-menu").style.minWidth = "fit-content";
 
   const selectBtns = optionMenu.querySelectorAll(".select-btn"),
@@ -79,6 +76,10 @@ optionMenus.forEach((optionMenu) => {
       sBtn_text.innerText = selectedOption;
       option.classList.add("selected");
       optionMenu.classList.remove("active2");
+      var temp = document.querySelector("." + optionMenu.parentElement.parentElement.classList[1] + " .sBtn-text");
+      if (temp != null) {
+        temp.style.width = max + 4 + "px";
+      }
     });
   });
 })
@@ -91,7 +92,6 @@ closeCardBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".card-background").forEach((card) => {
       card.style.display = "none";
-      console.log(card);
     })
 
   })
@@ -114,7 +114,6 @@ function getTextWidth(text) {
   return formattedWidth;
 }
 
-
 const mediaQuery = window.matchMedia('(max-width: 480px)');
 if (mediaQuery.matches) {
   const dayBtns = document.querySelectorAll(".timetable .content button");
@@ -135,8 +134,6 @@ else {
   })
 
 }
-const tableCells = document.querySelectorAll(".timetable .content table tbody tr td .unscheduled");
-
 document.querySelector(".timetable .header .manageBtn").addEventListener("click", () => {
   tableCells.forEach((addBtn) => {
     addBtn.style.display = "flex";
@@ -262,32 +259,11 @@ document.querySelector(".attendance .studentData .close-card").addEventListener(
   document.querySelector(".attendance > .studentData").style.display = "none";
 })
 
-
-const attendanceStatusBtns = document.querySelectorAll(".timetable > .takeAttendance table tbody .status");
-
-attendanceStatusBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const status = btn.innerText;
-    if (status == "A") {
-      btn.innerText = "P";
-      btn.style.cssText = `
-      background-color: #11d84d;
-      `;
-    } else {
-      btn.innerText = "P";
-      btn.style.cssText = `
-      background-color: #e71f4d;
-    `;
-    }
-  })
-})
-
-document.querySelector(".timetable > .content .card .takeAttendanceBtn").addEventListener("click", () => {
-  document.querySelector(".timetable > .takeAttendance").style.display = "block";
-})
-document.querySelector(".timetable > .takeAttendance .close-card ").addEventListener("click", () => {
-  document.querySelector(".timetable > .takeAttendance").style.display = "none";
-})
+$.fn.gparent = function (recursion) {
+  //console.log( 'recursion: ' + recursion );
+  if (recursion > 1) return $(this).parent().gparent(recursion - 1);
+  return $(this).parent();
+};
 
 $(document).ready(function () {
   let start, end, total, nop, limit;
@@ -414,7 +390,7 @@ $(document).ready(function () {
     cur -= 1;
     loadTable(limit, cur, role);
   });
-  $(".students .data .options .option").on("click", function () {
+  $(".students .data .select-menu .options .option").on("click", function () {
     limit = $(".students .select-menu .sBtn-text").text();
     loadTable(limit, 1, role);
   })
@@ -512,7 +488,7 @@ $(document).ready(function () {
     var element = this;
     var studentId = $(this).data('id');
 
-    $(document).on("click", ".students .card-background3 .removeBtn", function () {
+    $(document).on("click", ".students > .card-background3 .removeBtn", function () {
       $.ajax({
         url: "/php/faculty.php",
         type: "POST",
@@ -611,4 +587,455 @@ $(document).ready(function () {
     })
 
   })
+  function loadAttendanceTable(pageLimit, curPage, class_name) {
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      dataType: "json",
+      data: { action: "loadAttendanceTable", pageLimit: pageLimit, curPage: curPage, className: class_name },
+      success: (data) => {
+        console.log(data);
+        if (data) {
+          $.each(data, (key, value) => {
+            $(".attendance > .data #table-data").empty();
+            $(".attendance > .data #table-data").append(value.table);
+            start = value.start;
+            end = value.end;
+            total = value.total;
+            nop = value.nop;
+            $(".attendance .pages #info").text(start + " - " + end + " of " + total);
+
+            if (nop == 1) {
+              $(".attendance .previous").css("color", "grey").css("pointer-events", "none");
+              $(".attendance .left").css("color", "grey").css("pointer-events", "none");
+              $(".attendance .next").css("color", "grey").css("pointer-events", "none");
+              $(".attendance .right").css("color", "grey").css("pointer-events", "none");
+
+            }
+            else if (curPage == 1 && nop > 1) {
+              $(".attendance .previous").css("color", "grey").css("pointer-events", "none");
+              $(".attendance .left").css("color", "grey").css("pointer-events", "none");
+
+              $(".attendance .next").css("color", "#111").css("pointer-events", "auto");
+              $(".attendance .right").css("color", "#111").css("pointer-events", "auto");
+            }
+            else if ((curPage > 1 && curPage < nop) && (nop > 1)) {
+              $(".attendance .previous").css("color", "#111").css("pointer-events", "auto");
+              $(".attendance .left").css("color", "#111").css("pointer-events", "auto");
+              $(".attendance .next").css("color", "#111").css("pointer-events", "auto");
+              $(".attendance .right").css("color", "#111").css("pointer-events", "auto");
+            }
+            else if (curPage == nop && nop > 1) {
+              $(".attendance .next").css("color", "grey").css("pointer-events", "none");
+              $(".attendance .right").css("color", "grey").css("pointer-events", "none");
+              $(".attendance .previous").css("color", "#111").css("pointer-events", "auto");
+              $(".attendance .left").css("color", "#111").css("pointer-events", "auto");
+            }
+          });
+        }
+
+      }
+    })
+  }
+  $(".attendance .header .select-menu .options .option").on("click", function () {
+    $(".attendance .select-class").css("display", "none");
+    $(".attendance .data").css("display", "block");
+    class_name = $(".attendance .header .select-menu .sBtn-text").text();
+    loadAttendanceTable(10, 1, class_name);
+    console.log(class_name);
+  })
+  $(document).on("click", ".attendance #table-data tbody td:last-child", function () {
+    $(".attendance .studentData").css("display", "block");
+    var studentId = $(this).data('id');
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      dataType: "json",
+      data: { action: "loadStudentAttendanceTable", studentId: studentId },
+      success: (data) => {
+        console.log(data);
+        if (data) {
+          $.each(data, (key, value) => {
+            $(".attendance > .studentData #table-data").empty();
+            $(".attendance > .studentData #table-data").append(value.table);
+            $(".attendance > .studentData .info #studentName").text(value.name);
+            $(".attendance > .studentData .info #studentClass").text(value.class);
+            $(".attendance > .studentData .info #studentRollno").text(value.rollno);
+            console.log(value.name + "--" + value.class + "--" + value.rollno);
+          });
+        }
+
+      }
+    })
+  })
+  function loadTimetable(class_name) {
+    console.log(class_name);
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      data: { action: "loadTimetable", className: class_name },
+      success: (data) => {
+        // console.log(data);
+        if (data) {
+          $(".timetable .content > #table-data").html(data);
+        }
+
+      }
+    })
+  }
+  manageBtn = $(".timetable .header .manageBtn");
+  $(".timetable .header .select-menu .options .option").on("click", function () {
+    $(".timetable .select-class").css("display", "none");
+    $(".timetable .content").css("display", "block");
+    manageBtn.css("display", "block");
+
+    class_name = $(".timetable .header .select-menu .sBtn-text").text();
+
+    loadTimetable(class_name);
+  })
+  addBtn = $(".timetable .header .addBtn");
+  removeBtn = $(".timetable .header .removeBtn");
+  modifyBtn = $(".timetable .header .modifyBtn");
+
+  isManageBtnClicked = false;
+  manageBtn.on("click", function () {
+    isManageBtnClicked = !isManageBtnClicked;
+
+    if (isManageBtnClicked) {
+      $(this).css("background", "#e9972c");
+      $(this).css("color", "#fff");
+      modifyBtn.css("display", "block")
+      removeBtn.css("display", "block")
+      addBtn.css("display", "block")
+    } else {
+      $(this).css("background", "#fff");
+      $(this).css("color", "#e9972c");
+      isAddBtnClicked = false;
+      isRemoveBtnClicked = false;
+      isModifyBtnClicked = false;
+      modifyBtn.css("color", "#e9972c").css("display", "none")
+      removeBtn.css("color", "#ef476f").css("display", "none")
+      addBtn.css("color", "#239dc5").css("display", "none")
+      $(".timetable .header button").css("background", "#fff");
+    }
+  })
+  isAddBtnClicked = false;
+  addBtn.on("click", function () {
+    $(".timetable .card-background").css("display", "block");
+  })
+  isModifyBtnClicked = false;
+  modifyBtn.on("click", function () {
+    isModifyBtnClicked = !isModifyBtnClicked;
+    if (isModifyBtnClicked) {
+      $(this).css("background", "#e9972c")
+      $(this).css("color", "#fff")
+    } else {
+      $(this).css("background", "#fff")
+      $(this).css("color", "#e9972c")
+    }
+  })
+
+  isRemoveBtnClicked = false;
+  removeBtn.on("click", function () {
+    isRemoveBtnClicked = !isRemoveBtnClicked;
+    if (isRemoveBtnClicked) {
+      $(this).css("background", "#ef476f")
+      $(this).css("color", "#fff")
+    } else {
+      $(this).css("background", "#fff")
+      $(this).css("color", "#ef476f")
+    }
+  })
+  $(".timetable .card-background .closeBtn").on("click", () => {
+    $(".timetable .card-background").css("display", "none")
+    isAddBtnClicked = false;
+  })
+
+  $(".timetable #from_time").change(function () {
+    if ($(this).val() < "07:00") {
+      alert("Value must be 07:00 or later.")
+    }
+    else if ($(this).val() > "12:10") {
+      alert("Value must be 12:10 or earlier.")
+    }
+    else {
+      if ($(".timetable #subject").val() != "break") {
+        var raw = $(this).val();
+        var from = new Date(2023, 00, 01, raw.substring(0, 2), raw.substring(3, 6));
+        var to = new Date(from.getTime() + 50 * 60000);
+        $(".timetable #to_time").val(to.toLocaleTimeString('it-IT').substring(0, 5));
+      }
+      else if ($(".timetable #subject").val() == "break") {
+        var raw = $(this).val();
+        var from = new Date(2023, 00, 01, raw.substring(0, 2), raw.substring(3, 6));
+        var to = new Date(from.getTime() + 15 * 60000);
+        $(".timetable #to_time").val(to.toLocaleTimeString('it-IT').substring(0, 5));
+      }
+    }
+
+  });
+  $(".timetable #subject").on("click", function () {
+    $(".timetable #from_time").val("")
+    $(".timetable #to_time").val("")
+  })
+  $(".timetable .add-lecture .card .addBtn").on("click", function () {
+    from = $(".timetable .add-lecture #from_time").val();
+    to = $(".timetable .add-lecture #to_time").val();;
+    subject = $(".timetable .add-lecture #subject").val();
+    faculty = $(".timetable .add-lecture #faculty").val();
+    day = $(".timetable .add-lecture #day").val();
+    class_name = $(".timetable .header .select-menu .sBtn-text").text();
+    console.log(from, to, subject, faculty, day);
+    if (from != "" && to != "" && subject != null && faculty != null && day != null) {
+      $.ajax({
+        url: "/php/faculty.php",
+        type: "POST",
+        dataType: "JSON",
+        data: { action: "scheduleLecture", className: class_name, day: day, subject: subject, faculty: faculty, from: from, to: to },
+        success: function (data) {
+          console.log(data);
+          if (data == 1) {
+            $(".timetable #success-msg").html("Lecture scheduled").slideDown().delay(2000).slideUp();
+            $(".timetable .add-lecture #from_time").val("");
+            $(".timetable .add-lecture #to_time").val("");
+            $(".timetable .add-lecture #subject").val("");
+            $(".timetable .add-lecture #faculty").val("");
+            $(".timetable .add-lecture #day").val("");
+            class_name = $(".timetable .header .select-menu .sBtn-text").text();
+            loadTimetable(class_name);
+          }
+          else {
+            $(".timetable #error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+            $(".timetable .add-lecture #from_time").val("");
+            $(".timetable .add-lecture #to_time").val("");
+            $(".timetable .add-lecture #subject").val("");
+            $(".timetable .add-lecture #faculty").val("");
+            $(".timetable .add-lecture #day").val("");
+          }
+        }
+      })
+    }
+    else {
+      alert("all fields required")
+    }
+
+  })
+  $(document).on("click", ".timetable > .content #table-data tbody tr td div", function () {
+    lectureId = $(this).data('id');
+    if (isModifyBtnClicked) {
+      $.ajax({
+        url: "/php/faculty.php",
+        type: "POST",
+        dataType: "json",
+        data: { action: "lectureDetails", lectureId: lectureId },
+        success: (data) => {
+          console.log(data);
+          if (data) {
+            $.each(data, (key, value) => {
+              $(".timetable > .content .modify-lecture #day").val(value.day);
+              $(".timetable > .content .modify-lecture #from_time").val(value.from_time);
+              $(".timetable > .content .modify-lecture #to_time").val(value.to_time);
+              $(".timetable > .content .modify-lecture #subject").val(value.subject);
+              $(".timetable > .content .modify-lecture #faculty").val(value.faculty);
+              $(".timetable > .content .modify-lecture #id").val(value.id);
+            });
+          }
+          $(".timetable > .content .modify-lecture").css("display", "block");
+        }
+      })
+    }
+    else if (isRemoveBtnClicked) {
+      $(".timetable > .content .remove-lecture #id").text(lectureId);
+      $(".timetable > .content .remove-lecture").css("display", "block");
+    }
+    else {
+      $.ajax({
+        url: "/php/faculty.php",
+        type: "POST",
+        dataType: "json",
+        data: { action: "lectureDetails", lectureId: lectureId },
+        success: (data) => {
+          // console.log(data);
+          if (data) {
+            $.each(data, (key, value) => {
+              $(".timetable > .content .lecture-details #id").text(lectureId);
+              $(".timetable > .content .lecture-details #day").text(value.day);
+              $(".timetable > .content .lecture-details #from_time").text(value.from_time);
+              $(".timetable > .content .lecture-details #to_time").text(value.to_time);
+              $(".timetable > .content .lecture-details #subject").text(value.subject);
+              $(".timetable > .content .lecture-details #faculty").text(value.faculty);
+            });
+          }
+          $(".timetable > .content .lecture-details").css("display", "block");
+        }
+      })
+    }
+  })
+  $(".timetable > .content .lecture-details i").on("click", function () {
+    $(".timetable > .content .lecture-details").css("display", "none");
+  })
+  $(".timetable > .content .modify-lecture .closeBtn").on("click", function () {
+    $(".timetable > .content .modify-lecture").css("display", "none");
+  })
+  $(".timetable > .content .modify-lecture .closeBtn").on("click", function () {
+    $(".timetable > .content .modify-lecture").css("display", "none");
+  })
+  $(".timetable > .content .remove-lecture .cancelBtn").on("click", function () {
+    $(".timetable > .content .remove-lecture").css("display", "none");
+  })
+
+  $(".timetable > .content .modify-lecture .saveBtn").on("click", () => {
+    class_name = $(".timetable .header .select-menu .sBtn-text").text();
+    id = $(".timetable > .content .modify-lecture #id").val();
+    day = $(".timetable > .content .modify-lecture #day").val();
+    from = $(".timetable > .content .modify-lecture #from_time").val();
+    to = $(".timetable > .content .modify-lecture #to_time").val();
+    subject = $(".timetable > .content .modify-lecture #subject").val();
+    faculty = $(".timetable > .content .modify-lecture #faculty").val();
+    if (from != "" && to != "" && subject != null && faculty != null && day != null) {
+      $.ajax({
+        url: "/php/faculty.php",
+        type: "POST",
+        data: { action: "modifyLecture", id: id, className: class_name, day: day, subject: subject, faculty: faculty, from: from, to: to },
+        success: function (data) {
+          console.log(data);
+          if (data == 1) {
+            $(".timetable #success-msg").html("Data saved").slideDown().delay(2000).slideUp();
+            loadTimetable(class_name);
+
+            $(".timetable > .content .modify-lecture").css("display", "none");
+          }
+          else {
+            $(".timetable #error-msg").html("Error occured !!!").slideDown().delay(2000).slideUp();
+          }
+        }
+      })
+    }
+    else {
+      alert("all fields required")
+    }
+  })
+  $(".timetable > .content .remove-lecture #removeBtn").on("click", function () {
+    class_name = $(".timetable .header .select-menu .sBtn-text").text();
+    $(this).data('id');
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      dataType: "json",
+      data: { action: "removeLecture", lectureId: lectureId },
+      success: (data) => {
+        console.log(data);
+        if (data == 1) {
+          $(".timetable #success-msg").html("Record removed").slideDown().delay(2000).slideUp();
+          loadTimetable(class_name);
+          $(".timetable > .content .remove-lecture").css("display", "none");
+        }
+        else {
+          $("#error-msg").html("Error occured!!!").slideDown().delay(2000).slideUp();
+        }
+      }
+    })
+  })
+  $(document).on("click", ".timetable .lecture-details button.takeAttendanceBtn", function () {
+    $(".timetable .takeAttendance").css("display", "block");
+    $(".timetable > .content .lecture-details").css("display", "none");
+    lectureId = $(".timetable > .content .lecture-details #id").text();
+
+    faculty = $(".timetable > .content .lecture-details #faculty").text();
+    subject = $(".timetable > .content .lecture-details #subject").text();
+    from = $(".timetable > .content .lecture-details #from_time").text();
+    to = $(".timetable > .content .lecture-details #to_time").text();
+    time = from + "-" + to;
+    class_name = $(".timetable .header .select-menu .sBtn-text").text();
+
+    $(".timetable .takeAttendance .header #class").text(class_name);
+    $(".timetable .takeAttendance .header #time").text(time);
+    $(".timetable .takeAttendance .header #faculty").text(faculty);
+    $(".timetable .takeAttendance .header #subject").text(subject);
+
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      dataType: "json",
+      data: { action: "loadSubmissionAttendanceTable", className: class_name, facutlyName: faculty, subjectName: subject },
+      success: (data) => {
+        console.log(data);
+        if (data) {
+          $.each(data, (key, value) => {
+            $(".timetable .takeAttendance #table-classdata").html(value.table);
+            $(".timetable .takeAttendance .header #subject_code").text(value.subjectCode);
+            $(".timetable .takeAttendance .header #faculty_id").text(value.facutlyID);
+          });
+        }
+
+      },
+      error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+      }
+
+    })
+
+  })
+  $(document).on("click", ".timetable .takeAttendance .header .close-card", function () {
+    $(".timetable .takeAttendance").css("display", "none");
+  })
+
+  $(document).on("click", ".timetable .takeAttendance .data table tbody td .remark", function () {
+    remark = $(this).text()
+    if (remark == "A") {
+      $(this).text("P");
+      $(this).css("background-color", "#25df6f")
+    }
+    else if (remark == "P") {
+      $(this).text("A");
+      $(this).css("background-color", "#e71f4d");
+    }
+  })
+  $(document).on("click", ".timetable .takeAttendance .data #submitAttendanceBtn", function () {
+    if ($(".timetable .takeAttendance .data #confirmAttendance").is(":checked")) {
+      faculty_id = $(".timetable .takeAttendance .header #faculty_id").text();
+      subject_code = $(".timetable .takeAttendance .header #subject_code").text();
+      class_name = $(".timetable .header .select-menu .sBtn-text").text();
+
+      var attendance_data = [];
+      $(".timetable .takeAttendance #table-classdata tr").each(function () {
+        var rowDataArray = [];
+        var actualData = $(this).find('td');
+        if (actualData.length > 0) {
+          actualData.each(function () {
+            rowDataArray.push($(this).text());
+          });
+          attendance_data.push(rowDataArray);
+        }
+      });
+      $.ajax({
+        url: "/php/faculty.php",
+        type: "POST",
+        data: { action: "submitAttendance", className: class_name, facutlyId: faculty_id, subjectCode: subject_code, attendanceData: attendance_data },
+        success: (data) => {
+          console.log(data);
+          if (data > 0) {
+            $(".timetable #success-msg").html("Attendance submitted.").slideDown().delay(2000).slideUp();
+            $(".timetable .takeAttendance").css("display", "none");
+          }
+          else {
+            $(".timetable #error-msg").html("Error occured, try again.").slideDown().delay(2000).slideUp();
+          }
+
+        },
+        error: function (xhr, status, error) {
+          var errorMessage = xhr.status + ': ' + xhr.statusText
+          alert('Error - ' + errorMessage);
+        }
+
+      })
+    }
+    else {
+      $(".timetable #error-msg").html("please confirm attendance!!").slideDown().delay(2000).slideUp();
+    }
+
+  })
+  // confirmAttendance
+  // submitAttendanceBtn
 })

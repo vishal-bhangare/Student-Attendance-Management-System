@@ -1,0 +1,200 @@
+select student_id,
+(select rollno from students where id = student_id) as rollno,
+(select name from students where id = student_id) as name,
+count(*) as total,
+(select count(*) from attendance where student_id = A.student_id and remark="P") as present,
+(select count(*) from attendance where student_id = A.student_id and remark="A") as absent
+from attendance as A group by student_id
+
+
+
+SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+select 
+(select subject_name from departments where subject_code = A.subject_code) as sub_name,
+(select name from faculty where id = A.faculty_id)as faculty_name,
+ count(*) as total ,
+(select count(*) from attendance where student_id = 7 and subject_code = A.subject_code and remark="P") as present,
+(select count(*) from attendance where student_id = 7 and subject_code = A.subject_code and remark="A") as absent,
+(select name from students where id = 7) as student_name,
+(select class from students where  id= 7) as student_class,
+(select division from students where  id= 7) as student_div,
+(select rollno from students where  id= 7) as student_rollno
+from attendance as A 
+where student_id = 7 
+group by subject_code;
+
+
+
+$timeslot = "07:15-08:05";
+
+$from = strtotime(substr($timeslot,0,5));
+$to = strtotime(substr($timeslot,6,5));
+$interval  = abs($to - $from);
+$minutes   = round($interval / 60);
+echo 'Diff. in minutes is: '.$minutes; 
+
+var from = new Date(2023,00,01,07,15);
+var to = new Date(from.getTime()+50*60000);
+console.log(from.toLocaleTimeString('it-IT').substring(0,5));
+console.log(to.toLocaleTimeString('it-IT').substring(0,5));
+
+
+for($i=3;$i<9;$i++){
+            if($row[$i] != ""){
+              echo $i+1;
+            }
+          }
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$arr = array();
+$arr[] = ["1","SYCS","monday","07:15:00","08:05:00","Python","prof.prakash"];
+$arr[] = ["2","SYCS","monday","08:15:00","08:05:00","iot","prof.prakash"];
+$arr[] = ["1","SYCS","monday","10:15:00","08:05:00","Python","prof.prakash"];
+$arr[] = ["2","SYCS","monday","11:15:00","08:05:00","iot","prof.prakash"];
+$arr[] = ["1","SYCS","tuseday","07:15:00","08:05:00","cnn","prof.prakash"];
+$arr[] = ["2","SYCS","tuseday","12:15:00","08:05:00","iot","prof.prakash"];
+$slots = array(array(),
+array(),
+array(),
+array(),
+array(),
+array()
+);
+for($i = 0; $i<count($arr);$i++){
+	$from = (int)substr($arr[$i][3],0,2) ;
+    if($from == 7){
+    	$slots[0][] = $arr[$i];
+    }
+    else if($from == 8){
+    	$slots[1][] = $arr[$i];
+    }
+    else if($from == 9){
+    	$slots[2][] = $arr[$i];
+    }
+    else if($from == 10){
+    	$slots[3][] = $arr[$i];
+    }
+    else if($from == 11){
+    	$slots[4][] = $arr[$i];
+    }
+    else if($from == 12){
+    	$slots[5][] = $arr[$i];
+    }
+    
+}
+$table = '<table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>
+            <button type="button" class="monday selected">
+              <span>Monday</span>
+            </button>
+          </th>
+          <th>
+            <button type="button" class="tuesday">
+              <span>Tuesday</span>
+            </button>
+          </th>
+          <th>
+            <button type="button" class="wednesday">
+              <span>Wednesday</span>
+            </button>
+          </th>
+          <th>
+            <button type="button" class="thursday">
+              <span>Thursday</span>
+            </button>
+          </th>
+          <th>
+            <button type="button" class="friday">
+              <span>Friday</span>
+            </button>
+          </th>
+          <th>
+            <button type="button" class="saturday">
+              <span>Saturday</span>
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>';
+for($i = 0; $i < sizeof($slots);$i++){
+	//for($j=0;$j<count($slots[$i]);$j++){
+    $x = $i +1; $y = $i + 7;
+          $table .="<tr data-slot='slot-{$x}'>
+          <td><span>0{$y}:00</span><span>{$y}:30</span></td>"; 
+	if(empty($slots[$i])) {
+    	for($j=0;$j<6;$j++){
+        	$table .= "<td>empty</td>";
+        }
+    }
+    else{
+    	for($j=0;$j<6;$j++){
+        	if($slots[$i][$j][2] == "monday"){
+            	$table .="<td><div class='scheduled'>
+                      <span class='time'>{$slots[$i][$j][3]}-{$slots[$i][$j][4]}</span>
+                      <span class='subject'>{$slots[$i][$j][4]}</span>
+                      <span class='faculty'>{$slots[$i][$j][5]}</span>
+                    </div></td>";
+            }
+            else if($slots[$i][$j][2] == "tuesday"){
+            	$table .="<td><div class='scheduled'>
+                      <span class='time'>{$slots[$i][$j][3]}-{$slots[$i][$j][4]}</span>
+                      <span class='subject'>{$slots[$i][$j][4]}</span>
+                      <span class='faculty'>{$slots[$i][$j][5]}</span>
+                    </div></td>";
+            }
+            else if($slots[$i][$j][2] == "wednesday"){
+            	$table .="<td><div class='scheduled'>
+                      <span class='time'>{$slots[$i][$j][3]}-{$slots[$i][$j][4]}</span>
+                      <span class='subject'>{$slots[$i][$j][5]}</span>
+                      <span class='faculty'>{$slots[$i][$j][6]}</span>
+                    </div></td>";
+            }
+            else if($slots[$i][$j][2] == "thursday"){
+            	$table .="<td><div class='scheduled'>
+                      <span class='time'>{$slots[$i][$j][3]}-{$slots[$i][$j][4]}</span>
+                      <span class='subject'>{$slots[$i][$j][5]}</span>
+                      <span class='faculty'>{$slots[$i][$j][6]}</span>
+                    </div></td>";
+            }
+            else if($slots[$i][$j][2] == "friday"){
+            	$table .="<td><div class='scheduled'>
+                      <span class='time'>{$slots[$i][$j][3]}-{$slots[$i][$j][4]}</span>
+                      <span class='subject'>{$slots[$i][$j][5]}</span>
+                      <span class='faculty'>{$slots[$i][$j][6]}</span>
+                    </div></td>";
+            }
+            else if($slots[$i][$j][2] == "saturday"){
+            	$table .="<td><div class='scheduled'>
+                      <span class='time'>{$slots[$i][$j][3]}-{$slots[$i][$j][4]}</span>
+                      <span class='subject'>{$slots[$i][$j][5]}</span>
+                      <span class='faculty'>{$slots[$i][$j][6]}</span>
+                    </div></td>";
+            }
+            else{
+            	$table .="<td>xx</td>";
+            }
+            
+        	
+        }
+    }
+    $table .= "</tr>";
+    //}
+}
+$table .= "</tbody></table>";
+echo $table;
+?>
+</body>
+</html>

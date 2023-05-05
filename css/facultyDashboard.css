@@ -212,6 +212,7 @@ body {
 .Btn,
 .addBtn,
 .timetable .manageBtn {
+  display: none;
   padding: 2px 10px;
   background: #fff;
   color: #e9972c;
@@ -220,6 +221,7 @@ body {
   font-size: 16px;
   font-weight: 550;
 }
+
 .Btn:hover,
 .addBtn:hover,
 .timetable .manageBtn:hover {
@@ -246,7 +248,7 @@ body {
 .students .container .data,
 .attendance > .data,
 .attendance .studentData > .data,
-.timetable > .takeAttendance > .data {
+.timetable .takeAttendance > .data {
   padding: 10px;
   width: 100%;
   height: fit-content;
@@ -274,7 +276,7 @@ body {
 .students > .container .data table,
 .attendance > .data table,
 .attendance > .studentData > .data table,
-.timetable > .takeAttendance > .data table {
+.timetable .takeAttendance > .data table {
   width: 100%;
   height: calc(100% - 160px);
   text-align: left;
@@ -286,7 +288,7 @@ body {
 .students > .container .data table tr,
 .attendance > .data table tr,
 .attendance > .studentData > .data table tr,
-.timetable > .takeAttendance > .data table tr {
+.timetable .takeAttendance > .data table tr {
   border: 1px solid rgb(180, 180, 180);
   border-top: none;
   height: 45px;
@@ -297,8 +299,8 @@ body {
 .attendance > .data tr th,
 .attendance > .studentData > .data table tr th,
 .attendance > .studentData > .data table tr td,
-.timetable > .takeAttendance > .data table tr td,
-.timetable > .takeAttendance > .data table tr th {
+.timetable .takeAttendance > .data table tr td,
+.timetable .takeAttendance > .data table tr th {
   padding: 5px;
   height: 45px;
 }
@@ -347,6 +349,7 @@ body {
 .select-btn .sBtn-text {
   margin: 5px;
   /* width: 113px; */
+  width: fit-content;
 }
 .active2 {
   background: none;
@@ -399,8 +402,7 @@ body {
 .data table td:nth-child(2) {
   cursor: pointer;
 }
-.card-background,
-.timetable .content .card-background {
+.card-background{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -410,8 +412,10 @@ body {
   background: #0000002f;
   display: none;
 }
-.card-background .card,
-.timetable .content .card-background .card {
+.card-background .card
+
+
+.card {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -432,7 +436,7 @@ body {
   overflow-y: auto;
 }
 .card-background .card .content,
-.timetable .content .card-background .card .content {
+.timetable .content .lecture-details .card .content {
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto;
   gap: 8px;
@@ -448,7 +452,7 @@ body {
   height: fit-content;
 }
 .card-background .card i,
-.timetable .content .card-background .card i {
+.timetable .content .lecture-details .card i {
   position: sticky;
   top: 0;
   left: 100%;
@@ -458,13 +462,13 @@ body {
   z-index: 2;
 }
 .card-background .card i:hover,
-.timetable .content .card-background .card i:hover {
+.timetable .content .lecture-details .card i:hover {
   color: #f13854;
 }
 .card-background .card span:nth-child(even) {
   padding-left: 10px;
 }
-.container .card-background2,
+.container .card-background2,.timetable .card-background,
 .container .card-background4 {
   position: absolute;
   top: 50%;
@@ -476,7 +480,8 @@ body {
   display: none;
 }
 .container .card-background2 .card,
-.container .card-background4 .card {
+.container .card-background4 .card,
+.timetable .card-background .card {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -535,7 +540,7 @@ body {
 .card-background2 .card div .addBtn,
 .card-background4 .card div .saveBtn,
 .timetable .content table .unscheduled button,
-.timetable .content .takeAttendanceBtn {
+.timetable .content .takeAttendanceBtn ,.timetable .card .addBtn,.timetable > .content .modify-lecture .saveBtn{
   padding: 1px 6px;
   background: #239dc5;
   color: #fff;
@@ -547,11 +552,15 @@ body {
 
 .card-background2 .card div .addBtn:hover,
 .card-background4 .card div .saveBtn:hover,
-.timetable .content table .unscheduled button:hover {
+.timetable .content table .unscheduled button:hover
+,.timetable .card .addBtn:hover,
+.timetable > .content .modify-lecture .saveBtn:hover {
   background: #072f3b;
   color: #fff;
 }
-.card-background2 .card div .closeBtn,.card-background4 .card div .closeBtn {
+.card-background2 .card div .closeBtn,
+.card-background4 .card div .closeBtn,
+.timetable .card .closeBtn {
   padding: 1px 6px;
   background: #ef476f;
   color: #fff;
@@ -564,11 +573,13 @@ body {
   background: #0f91c5;
   border: 2px solid #0f91c5;
 }
-.card-background2 .card div .closeBtn:hover ,.card-background4 .card div .closeBtn:hover{
+.card-background2 .card div .closeBtn:hover ,
+.card-background4 .card div .closeBtn:hover,
+.timetable .card .closeBtn:hover{
   background: #7e031f;
   color: #fff;
 }
-.container .card-background3 {
+.card-background3 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -578,7 +589,7 @@ body {
   background: #0000002f;
   display: none;
 }
-.container .card-background3 .card {
+.card-background3 .card {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -598,10 +609,10 @@ body {
   padding: 10px;
   text-align: center;
 }
-.container .card-background3 .card > * {
+.card-background3 .card > * {
   margin: 5px 0px;
 }
-.container .card-background3 .card i {
+.card-background3 .card i {
   position: relative;
   font-size: 35px;
   color: #d90429;
@@ -609,7 +620,7 @@ body {
   background: rgba(255, 163, 163, 0.486);
   padding: 7px;
 }
-.container .card-background3 .card .removeBtn {
+.card-background3 .card .removeBtn {
   padding: 1px 6px;
   background: #ef233c;
   color: #fff;
@@ -620,10 +631,10 @@ body {
   width: 80%;
   height: 40px;
 }
-.container .card-background3 .card .removeBtn:hover {
+.card-background3 .card .removeBtn:hover{
   background: #d81128;
 }
-.container .card-background3 .card .cancelBtn {
+.card-background3 .card .cancelBtn {
   padding: 1px 6px;
   background: #ffffff;
   color: #000000;
@@ -635,14 +646,14 @@ body {
   width: 80%;
   height: 40px;
 }
-.container .card-background3 .card .cancelBtn:hover {
+.card-background3 .card .cancelBtn:hover {
   background-color: #f0f0f0;
 }
 .timetable {
   overflow: auto;
 }
 .timetable::-webkit-scrollbar,
-.timetable > .takeAttendance::-webkit-scrollbar {
+.timetable .takeAttendance::-webkit-scrollbar {
   display: none;
 }
 
@@ -670,23 +681,24 @@ body {
   font-size: 18px;
   margin: 10px;
 }
-.timetable > .content {
+.timetable #table-data > .content {
   width: 100%;
   background: rgb(226, 195, 255);
   padding: 20px;
+  display:none;
 }
-.timetable .content > table {
+.timetable .content #table-data > table {
   width: 100%;
   border-collapse: collapse;
 }
-.timetable .content > table thead {
+.timetable .content #table-data > table thead {
   height: 50px;
   background: #ffffff;
 }
-.timetable .content > table thead tr th {
+.timetable .content #table-data > table thead tr th {
   width: 14%;
 }
-.timetable .content > table thead tr th button.selected {
+.timetable .content #table-data > table thead tr th button.selected {
   padding: 1px 6px;
   background: #ef476f;
   color: #fff;
@@ -698,7 +710,7 @@ body {
   height: 35px;
   margin: 5px 0px;
 }
-.timetable .content > table thead tr th button {
+.timetable .content #table-data > table thead tr th button {
   padding: 1px 6px;
   border: none;
   background: #fff;
@@ -708,73 +720,61 @@ body {
   height: 35px;
   margin: 5px 0px;
 }
-.timetable .content > table thead tr th:first-child {
+.timetable .content #table-data > table thead tr th:first-child {
   background: none;
   width: 10%;
 }
-.timetable .content > table tbody {
+.timetable .content #table-data > table tbody {
   background: #8d74eb;
 }
-.timetable .content > table tbody tr {
+.timetable .content #table-data > table tbody tr {
   height: 100px;
   /* border-bottom: 1px solid rgb(255, 255, 255); */
   vertical-align: top;
   text-align: right;
 }
-.timetable .content > table tbody tr td {
+.timetable .content #table-data > table tbody tr td {
   padding: 0px 5px;
   height: inherit;
 }
-.timetable .content > table tbody tr td:nth-child(1) {
+.timetable .content #table-data > table tbody tr td:nth-child(1) {
   border-right: 1px solid #fff;
   display: flex;
   flex-direction: column;
 }
-.timetable .content > table tbody tr td:nth-child(1) span:nth-child(1) {
+.timetable .content #table-data > table tbody tr td:nth-child(1) span:nth-child(1) {
   margin-top: 4px;
   width: 100%;
   margin-bottom: calc((50% - (15px * 1.1)));
   font-size: 15px;
 }
-.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2) {
+.timetable .content #table-data > table tbody tr td:nth-child(1) span:nth-child(2) {
   width: 100%;
   margin-bottom: calc(50% - (12px * 1.1));
   font-size: 12px;
 }
-.timetable .content > table tbody tr td:nth-child(1) span:nth-child(2) {
+.timetable .content #table-data > table tbody tr td:nth-child(1) span:nth-child(2) {
   font-size: 12px;
 }
 
-.timetable .content > table tbody tr td div {
+.timetable .content #table-data > table tbody tr td div {
   background: red;
   color: #fff;
-  height: 100%;
+  height: 90%;
+  width: 90%;
   font-size: 0.9rem;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5px 0px;
+  padding: 2px;
+  position: relative;
 }
-.timetable .content > table tbody tr:nth-child(1) td div {
+.timetable .content #table-data > table tbody tr:nth-child(1) td div {
   margin-top: 4px;
 }
-.timetable .content > table tbody tr td .unscheduled {
-  display: none;
-}
 
-.timetable .content .card-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translate(0, 0);
-}
-.timetable .content .card-background .card {
-  top: 50%;
-  left: 50%;
-  transform: translate(-18%, -50%);
-}
 .timetable .card-background .card .content div {
   grid-column: 1/4;
   width: 100%;
@@ -808,7 +808,7 @@ body {
   font-size: 1.5rem;
 }
 .attendance > .studentData,
-.timetable > .takeAttendance {
+.timetable .takeAttendance {
   position: absolute;
   top: 0;
   background: #fff;
@@ -820,7 +820,7 @@ body {
   width: 100%;
 }
 .attendance .studentData > .header .info,
-.timetable > .takeAttendance > .header .info {
+.timetable .takeAttendance > .header .info {
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto;
   gap: 8px;
@@ -832,7 +832,7 @@ body {
   /* width: calc(100% - (1.8rem + 16px)); */
 }
 .attendance > .studentData table thead,
-.timetable > .takeAttendance table thead {
+.timetable .takeAttendance table thead {
   border: 1px solid rgb(180, 180, 180);
 }
 .toggle-sidebar {
@@ -855,7 +855,7 @@ body {
 }
 
 .attendance .studentData .close-card,
-.timetable > .takeAttendance .close-card {
+.timetable .takeAttendance .close-card {
   font-size: 1.8rem;
   background: transparent;
   position: sticky;
@@ -866,20 +866,20 @@ body {
   z-index: 5;
 }
 .attendance .studentData .close-card:hover,
-.timetable > .takeAttendance .close-card:hover {
+.timetable .takeAttendance .close-card:hover {
   color: #f13854;
 }
-.timetable > .takeAttendance {
+.timetable .takeAttendance {
   display: none;
   overflow-y: scroll;
 }
-.timetable > .takeAttendance .header {
+.timetable .takeAttendance .header {
   position: sticky;
   top: 0;
   width: 100%;
   background: #fff;
 }
-.timetable > .takeAttendance .header > .info {
+.timetable .takeAttendance .header > .info {
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto fit-content(
       100%
@@ -889,7 +889,7 @@ body {
   grid-auto-rows: minmax(fit-content(100%), 20px);
 }
 
-.timetable > .takeAttendance table tbody .status {
+.timetable .takeAttendance table tbody .remark {
   padding: 4px 12px;
   background-color: #e71f4d;
   width: 35px;
@@ -964,6 +964,107 @@ input[type="number"] {
   top: 15px;
   border-radius: 5px;
 }
+.header{
+  padding-left: 40px !important;
+}
+
+.attendance > .data{
+  display: none;
+}
+.select-class{
+  overflow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100% - 70px)
+}
+
+.timetable .header .addBtn {
+  display: none;
+  padding: 1px 6px;
+  background: #fff;
+  color: #239dc5;
+  border: 2px solid #239dc5;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.timetable > .content .modify-lecture .saveBtn {
+  display: block;
+}
+
+.timetable .header .addBtn:hover {
+  background: #239dc5;
+    color: #fff;
+}
+.timetable .header .removeBtn {
+  display: none;
+  padding: 1px 6px;
+  background: #fff;
+  color: #ef476f;
+  border: 2px solid #ef476f;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.timetable .header .removeBtn:hover{
+  background: #ef476f;
+  color: #fff;
+}
+.timetable .header .modifyBtn {
+  display: none;
+  padding: 1px 6px;
+  background: #fff;
+  color: #e9972c;
+  border: 2px solid #e9972c;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.timetable .header .modifyBtn:hover {
+  background: #e9972c;
+  color: #fff;
+}
+
+.timetable .header .btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timetable .header button{
+  margin: 0px 2px;
+}
+
+/* .timetable .card-background {display: block;} */
+.timetable .card-background .card{
+  grid-gap: 25px !important;
+  height: fit-content !important;
+  grid-template-columns: 10fr 1fr 1fr !important;
+  display: grid;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.timetable .card .closeBtn,.timetable .card .addBtn{display: block;}
+.timetable .card #btns{
+  grid-column: 1/4;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.timetable .lecture-details{
+  /* display: block !important; */
+  grid-template-columns: 1fr 1fr 1fr !important;
+}
+.timetable .takeAttendance #submitAttendanceBtn{
+  display: block;
+}
+
 
 /* @media screen and (max-width:768px) {
   .sidebar{
