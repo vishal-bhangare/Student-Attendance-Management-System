@@ -221,7 +221,9 @@ body {
   font-size: 16px;
   font-weight: 550;
 }
-
+.addBtn{
+  display: block;
+}
 .Btn:hover,
 .addBtn:hover,
 .timetable .manageBtn:hover {
@@ -285,6 +287,7 @@ body {
 .attendance .data table {
   text-align: center;
 }
+
 .students > .container .data table tr,
 .attendance > .data table tr,
 .attendance > .studentData > .data table tr,
@@ -412,10 +415,7 @@ body {
   background: #0000002f;
   display: none;
 }
-.card-background .card
-
-
-.card {
+.card-background .card {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -469,7 +469,7 @@ body {
   padding-left: 10px;
 }
 .container .card-background2,.timetable .card-background,
-.container .card-background4 {
+.students .container .card-background4 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -480,7 +480,7 @@ body {
   display: none;
 }
 .container .card-background2 .card,
-.container .card-background4 .card,
+.students .container .card-background4 .card,
 .timetable .card-background .card {
   position: absolute;
   top: 50%;
@@ -506,7 +506,7 @@ body {
   color: #fff;
 }
 .container .card-background2 .card i,
-.container .card-background4 .card i {
+.students .container .card-background4 .card i {
   position: absolute;
   right: 0;
   top: -5px;
@@ -538,7 +538,7 @@ body {
   justify-content: space-evenly;
 }
 .card-background2 .card div .addBtn,
-.card-background4 .card div .saveBtn,
+.students .card-background4 .card div .saveBtn,
 .timetable .content table .unscheduled button,
 .timetable .content .takeAttendanceBtn ,.timetable .card .addBtn,.timetable > .content .modify-lecture .saveBtn{
   padding: 1px 6px;
@@ -1065,6 +1065,9 @@ input[type="number"] {
   display: block;
 }
 
+.students table tr:nth-child(even),.attendance table tr:nth-child(even){
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
 
 /* @media screen and (max-width:768px) {
   .sidebar{

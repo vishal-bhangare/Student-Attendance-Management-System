@@ -272,6 +272,7 @@ $(document).ready(function () {
   username = sessionStorage.getItem("username");
   role = sessionStorage.getItem("role");
   $(".user-details #username").text(username);
+  
   if (role == "hod") {
     $(".students .header").css("justify-content", "space-between");
     $(".students .header .addBtn").css("display", "block")
@@ -352,7 +353,7 @@ $(document).ready(function () {
             $(".students .card-background #id").text(value.id);
             $(".students .card-background #name").text(value.name);
             $(".students .card-background #class").text(value.class);
-            $(".students .card-background #div").text(value.div);
+            $(".students .card-background #div").text(value.division);
             $(".students .card-background #rollno").text(value.rollno);
             $(".students .card-background #dob").text(value.dob);
             $(".students .card-background #contact").text(value.contact);
@@ -488,7 +489,7 @@ $(document).ready(function () {
     var element = this;
     var studentId = $(this).data('id');
 
-    $(document).on("click", ".students > .card-background3 .removeBtn", function () {
+    $(document).on("click", ".students .card-background3 .removeBtn", function () {
       $.ajax({
         url: "/php/faculty.php",
         type: "POST",
@@ -508,7 +509,9 @@ $(document).ready(function () {
       })
     })
   })
-
+  $(document).on("click", ".students .container .card-background3 .cancelBtn", function () {
+    document.querySelector(".students .container .card-background3").style.display = "none";
+  })
   $(document).on("click", ".students .container .data table tr .editBtn", function () {
     var element = this;
     var studentId = $(this).data('id');
@@ -518,7 +521,6 @@ $(document).ready(function () {
       dataType: "JSON",
       data: { action: "studentData", id: studentId },
       success: function (data) {
-        // console.log(data);
         if (data) {
           $.each(data, (key, value) => {
             $(".students .card-background4 #id").val(value.id);
@@ -952,8 +954,9 @@ $(document).ready(function () {
     $(".timetable .takeAttendance .header #time").text(time);
     $(".timetable .takeAttendance .header #faculty").text(faculty);
     $(".timetable .takeAttendance .header #subject").text(subject);
+    $(".timetable .takeAttendance .header #lecture_id").text(lectureId);
 
-    $.ajax({
+    $.ajax({ 
       url: "/php/faculty.php",
       type: "POST",
       dataType: "json",
@@ -996,6 +999,7 @@ $(document).ready(function () {
     if ($(".timetable .takeAttendance .data #confirmAttendance").is(":checked")) {
       faculty_id = $(".timetable .takeAttendance .header #faculty_id").text();
       subject_code = $(".timetable .takeAttendance .header #subject_code").text();
+      lecture_id = $(".timetable .takeAttendance .header #lecture_id").text();
       class_name = $(".timetable .header .select-menu .sBtn-text").text();
 
       var attendance_data = [];
@@ -1012,7 +1016,7 @@ $(document).ready(function () {
       $.ajax({
         url: "/php/faculty.php",
         type: "POST",
-        data: { action: "submitAttendance", className: class_name, facutlyId: faculty_id, subjectCode: subject_code, attendanceData: attendance_data },
+        data: { action: "submitAttendance", className: class_name, facutlyId: faculty_id, subjectCode: subject_code, attendanceData: attendance_data,lectureId:lecture_id },
         success: (data) => {
           console.log(data);
           if (data > 0) {

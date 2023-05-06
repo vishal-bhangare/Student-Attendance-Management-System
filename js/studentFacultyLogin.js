@@ -17,7 +17,7 @@ studentBtn.addEventListener("click", () => {
   moveBtn.innerHTML = "Student";
 })
 $(document).ready(function () {
-  $("#facultyForm #login").on("click", (btn) => {
+  $("#facultyForm #loginBtn").on("click", (btn) => {
     btn.preventDefault();
     var user = $("#facultyForm #username");
     var pass = $("#facultyForm #password");
@@ -40,6 +40,42 @@ $(document).ready(function () {
             pass.val("");
           }
           else if (data[0].status == 0) {
+            user.val("");
+            pass.val("");
+            alert("Invalid username or password");
+          }
+        }
+        else{
+          alert("Error occured!");
+        }
+      }
+    })
+  })
+  $("#studentForm #loginBtn").on("click", (btn) => {
+    btn.preventDefault();
+    var user = $("#studentForm #studentUsername");
+    var pass = $("#studentForm #studentPassword");
+    console.log( user.val(),pass.val());
+    $.ajax({
+      url: "/php/studentFacultyLogin.php",
+      type: "POST",
+      data: { action: "studentLogin", username: user.val(), password: pass.val() },
+      success: function (data) {
+        console.log(data);
+        if (data) {
+          var data = JSON.parse(data);
+          if (data[0].status == 1) {
+            alert("yes");
+            window.location.href = '/studentDashboard.html';
+            sessionStorage.setItem("email", user.val());
+            sessionStorage.setItem("username", data[0].name);
+            sessionStorage.setItem("userid", data[0].id)
+            sessionStorage.setItem("class", data[0].class)
+            user.val("");
+            pass.val("");
+          }
+          else if (data[0].status == 0) {
+            alert("no");
             user.val("");
             pass.val("");
             alert("Invalid username or password");

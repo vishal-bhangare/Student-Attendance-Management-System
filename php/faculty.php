@@ -135,6 +135,19 @@
         // echo "Yes";
         echo json_encode($output);
       }
+      else{
+        $table = '<table>
+        <thead>
+          <tr>
+          <th id="id" style="width:100%;">No Data Found</th>
+        </thead>
+        <tbody>
+          </tbody>
+      </table>';
+      $output[] = array("table"=>$table, "start"=>0,"end"=>0,"total"=>0,"nop"=>0);
+        
+        echo json_encode($output);
+      }
       
     }catch (\Throwable $th) {
       $output = '<table>
@@ -365,27 +378,22 @@
         
         // echo "Yes";
         echo json_encode($output);
+      }else{
+        $table = '<table>
+        <thead>
+          <tr>
+          <th id="id" style="width:100%;">No Data Found</th>
+        </thead>
+        <tbody>
+          </tbody>
+      </table>';
+      $output[] = array("table"=>$table, "start"=>0,"end"=>0,"total"=>0,"nop"=>0);
+        
+        echo json_encode($output);
       }
       
     }catch (\Throwable $th) {
-      $output = '<table>
-        <thead>
-          <tr>
-          <th id="id" style="width:5%;">Id</th>
-            <th id="name" style="width: 20%;" class="name-field">Name</th>
-            <th id="dob">DOB</th>
-            <th id="department">Department</th>
-            <th>Designation</th>
-            <th style="width: 20%;"></th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr style="
-        text-align: center;
-      "><td colspan = "6"}>No Data Found</td></tr>
-          </tbody>
-      </table>';
-      echo $output;
+      echo $th;
     }
     
   }
@@ -442,6 +450,7 @@
         // echo "Yes";
         echo json_encode($output);
       }
+      
       
     }catch (\Throwable $th) {
       $output = '<table>
@@ -755,6 +764,7 @@
     $className = $_POST["className"];
     $facutlyId = $_POST["facutlyId"];
     $subjectCode = $_POST["subjectCode"];
+    $lectureId = $_POST["lectureId"];
     $attendanceData = $_POST["attendanceData"];
     $total_rows = count($attendanceData);
     $count = 0;
@@ -768,7 +778,7 @@
         else{
           $remark = "P";
         }
-        $sql = "insert into attendance(academic_year,class_name,timestamp,subject_code,faculty_id,student_id,remark) values('{$aca_year}','{$className}','{$timestamp}','{$subjectCode}',{$facutlyId},{$studentId},'{$remark}');";
+        $sql = "insert into attendance(academic_year,class_name,timestamp,subject_code,faculty_id,student_id,remark,lecture_id) values('{$aca_year}','{$className}','{$timestamp}','{$subjectCode}',{$facutlyId},{$studentId},'{$remark}',{$lectureId});";
         $result = mysqli_query($conn, $sql);
         if($result > 0){
             $count++;
