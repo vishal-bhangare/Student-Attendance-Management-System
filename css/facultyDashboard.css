@@ -942,28 +942,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-#success-msg {
-  background: #def1d8;
-  color: green;
-  padding: 10px;
-  margin: 10px;
-  display: none;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  border-radius: 5px;
-}
-#error-msg {
-  background: #efdcdd;
-  color: red;
-  padding: 10px;
-  margin: 10px;
-  display: none;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  border-radius: 5px;
-}
 .header{
   padding-left: 40px !important;
 }
@@ -1068,6 +1046,137 @@ input[type="number"] {
 .students table tr:nth-child(even),.attendance table tr:nth-child(even){
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
+
+
+.leaves .data {
+  width: 100%;
+  height: fit-content;
+}
+.leaves .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: antiquewhite;
+  padding: 20px ;
+  padding-left: 40px;
+}
+.leaves .data #table-data {
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+}
+.leaves .data #table-data table {
+  width: 100%;
+  height: calc(100% - 160px);
+  text-align: left;
+  border-collapse: collapse;
+  text-align: center;
+  border: 1px solid gray;
+}
+.leaves .data #table-data table tr {
+  border: 1px solid rgb(180, 180, 180);
+  border-top: none;
+  height: 45px;
+}
+.leaves .leave-details {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: #0000002f;
+  display: none;
+}
+.leaves .leave-details .card {
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    min-width: 400px;
+    max-width: 70%;
+    min-height: fit-content;
+    /* height: 70%; */
+    background: #333837;
+    border-radius: 4px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    padding: 4px;
+    display: grid;
+    grid-template-columns: fit-content(100%) fit-content(100%) auto;
+    gap: 8px;
+    align-items: baseline;
+    grid-auto-rows: minmax(fit-content(100%), 20px);
+    font-size: 18px;
+    padding: 10px;
+    padding-top: 10px;
+    border: 2px solid rgb(216, 216, 216);
+    color: #fff;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.leaves .leave-details .card {
+  grid-gap: 20px !important;
+  height: fit-content !important;
+  display: grid;
+  padding-top: 25px;
+  padding-bottom: 20px;
+}
+
+.leaves .leave-details .card i{
+  position: absolute;
+    top: 0;
+    right: 0;
+    left: unset;
+    padding: 8px;
+    font-size: 33px;
+    color: #fff;
+}
+.leaves .leave-details .card i:hover {
+  color: #f13854;
+}
+.leaves .leave-details div {
+  grid-column: span 3;
+}
+.leaves .leave-details div button {
+  margin: 20px;
+}
+
+
+#success-msg {
+  background: #def1d8;
+  color: green;
+  padding: 10px;
+  margin: 10px;
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 5px;
+}
+#error-msg {
+  background: #efdcdd;
+  color: red;
+  padding: 10px;
+  margin: 10px;
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* @media screen and (max-width:768px) {
   .sidebar{

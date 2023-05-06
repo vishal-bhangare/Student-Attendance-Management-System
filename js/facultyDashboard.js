@@ -3,7 +3,7 @@ var li_elements = document.querySelectorAll(".sidebar ul li");
 var item_elements = document.querySelectorAll(".item");
 
 item_elements.forEach(function (item) {
-  if (item.classList[1] != "timetable")
+  if (item.classList[1] != "leaves")
     item.style.display = "none";
 });
 
@@ -272,7 +272,7 @@ $(document).ready(function () {
   username = sessionStorage.getItem("username");
   role = sessionStorage.getItem("role");
   $(".user-details #username").text(username);
-  
+
   if (role == "hod") {
     $(".students .header").css("justify-content", "space-between");
     $(".students .header .addBtn").css("display", "block")
@@ -956,7 +956,7 @@ $(document).ready(function () {
     $(".timetable .takeAttendance .header #subject").text(subject);
     $(".timetable .takeAttendance .header #lecture_id").text(lectureId);
 
-    $.ajax({ 
+    $.ajax({
       url: "/php/faculty.php",
       type: "POST",
       dataType: "json",
@@ -1016,7 +1016,7 @@ $(document).ready(function () {
       $.ajax({
         url: "/php/faculty.php",
         type: "POST",
-        data: { action: "submitAttendance", className: class_name, facutlyId: faculty_id, subjectCode: subject_code, attendanceData: attendance_data,lectureId:lecture_id },
+        data: { action: "submitAttendance", className: class_name, facutlyId: faculty_id, subjectCode: subject_code, attendanceData: attendance_data, lectureId: lecture_id },
         success: (data) => {
           console.log(data);
           if (data > 0) {
@@ -1039,6 +1039,122 @@ $(document).ready(function () {
       $(".timetable #error-msg").html("please confirm attendance!!").slideDown().delay(2000).slideUp();
     }
 
+  })
+
+  $(".leaves .header .select-menu .options .option").on("click", function () {
+    $(".leaves .select-class").css("display", "none");
+    $(".leaves .data").css("display", "block");
+
+    class_name = $(".leaves .header .select-menu .sBtn-text").text();
+
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      dataType: "JSON",
+      data: { action: "leavesData", className: class_name },
+      success: function (data) {
+        if (data) {
+          $(".leaves .data #table-data").html(data[0].table)
+
+        } else {
+          $("#error-msg")
+            .html("Error occured !!!")
+            .slideDown()
+            .delay(2000)
+            .slideUp();
+        }
+      },
+    });
+  })
+  $(".leaves .leave-details .card i").on("click", function () {
+    $(".leaves .leave-details").css("display", "none");
+    $(".leaves #table-data").css("display", "block");
+  });
+
+  $(document).on("click", ".leaves .data #table-data tbody td:last-child", function () {
+    $(".leaves .leave-details").css("display", "block");
+    
+    var leaveId = $(this).data('id');
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      dataType: "JSON",
+      data: { action: "leaveData", leaveId: leaveId },
+      success: function (data) {
+        if (data) {
+          console.log(data);
+          console.log(data[0].id);
+          // $.each(data, (key, value) => {
+            $("#success-msg").html("application rejected.").slideDown().delay(2000).slideUp();
+            $(".leaves .leave-details #id").text(data[0].id);
+            $(".leaves .leave-details #app_date").text(data[0].application_date);
+            $(".leaves .leave-details #student_id").text(data[0].student_id);
+            $(".leaves .leave-details #student_class").text(data[0].student_class);
+            $(".leaves .leave-details #from_date").text(data[0].from_date);
+            $(".leaves .leave-details #to_date").text(data[0].to_date);
+            $(".leaves .leave-details #subject").text(data[0].reason_subject);
+            $(".leaves .leave-details #body").text(data[0].reason_body);
+            if(data[0].status == 1){
+              $(".leaves .leave-details .card div").css("display","none")
+            }
+            else{
+              $(".leaves .leave-details .card div").css("display","block")
+            }
+          // });
+        } else {
+          $("#error-msg")
+            .html("Error occured !!!")
+            .slideDown()
+            .delay(2000)
+            .slideUp();
+        }
+      },
+    });
+  })
+  $(".leaves .leave-details #reject").on("click",function(){
+    leaveId =  $(".leaves .leave-details #id").text();
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      data: { action: "rejectLeaveApplication", leaveId: leaveId },
+      success: function (data) {
+        if (data == 1) {
+          $(".leaves #success-msg").html("application rejected.").slideDown().delay(2000).slideUp();
+          $(".leaves .leave-details").css("display", "none");
+        } else {
+          $(".leaves #error-msg")
+            .html("Error occured !!!")
+            .slideDown()
+            .delay(2000)
+            .slideUp();
+        }
+      },
+    });
+  })
+  $(".leaves .leave-details #accept").on("click",function(){
+    leaveId =  $(".leaves .leave-details #id").text();
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      data: { action: "acceptLeaveApplication", leaveId: leaveId },
+      success: function (data) {
+        if (data == 1) {
+          $(".leaves .leave-details").css("display", "none");
+          $(".leaves #success-msg")
+          .html("application accepted.")
+          .slideDown()
+          .delay(2000)
+          .slideUp();
+          // });
+        } else {
+          $(".leaves #error-msg")
+            .html("Error occured !!!")
+            .slideDown()
+            .delay(2000)
+            .slideUp();
+        }
+      },
+    });
   })
   // confirmAttendance
   // submitAttendanceBtn

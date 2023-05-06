@@ -379,15 +379,16 @@ $(document).ready(function () {
       dataType: "JSON",
       data: { action: "studentData", id: userId },
       success: function (data) {
-        // console.log(data);
         if (data) {
-          $.each(data, (key, value) => {
-            $(".leaves .container #student_id").val(value.id);
-            $(".leaves .container #name").val(value.name);
-            $(".leaves .container #class").val(value.class);
-            $(".leaves .container #div").val(value.division);
-            $(".leaves .container #rollno").val(value.rollno);
-          });
+          console.log(data);
+          // $.each(data, (key, value) => {
+            $(".leaves .container #student_id").val(data[0].studentData[0].id);
+            $(".leaves .container #name").val(data[0].studentData[0].name);
+            $(".leaves .container #class").val(data[0].studentData[0].class);
+            $(".leaves .container #div").val(data[0].studentData[0].division);
+            $(".leaves .container #rollno").val(data[0].studentData[0].rollno);
+            $(".leaves .data #table-data").html(data[0].table)
+          // });
         } else {
           $("#error-msg")
             .html("Error occured !!!")
@@ -398,11 +399,15 @@ $(document).ready(function () {
       },
     });
   });
+  $(".leaves .data .header #new").on("click",function(){
+    $(".leaves .container").css("display","grid");
+    $(" .leaves .data").css("display","none");
+  })
   $(".leaves .container #submit").on("click", function () {
     student_id = sessionStorage.getItem("userid");
     student_name = $(".leaves .container #name").val();
     student_rollno = $(".leaves .container #rollno").val();
-    student_class = $(".leaves .container #class").val();
+    student_class = ($(".leaves .container #class").val()).toUpperCase();
     student_div = $(".leaves .container #div").val();
     from_date = $(".leaves .container #from_date").val();
     to_date = $(".leaves .container #to_date").val();
@@ -465,4 +470,9 @@ $(document).ready(function () {
     });
    }
   });
+  $(".leaves .container #close").on("click", function () {
+    $(".leaves .container").css("display","none");
+    $(" .leaves .data").css("display","block");
+  });
+
 });

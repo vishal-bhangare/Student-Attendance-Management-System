@@ -259,6 +259,32 @@
 			</div>
 		</div>
 		<div class="item leaves">
+				<div class="data">
+					<div class="header">
+						<span>History</span>
+						<button type="button" id="new">New Application</button>
+					</div>
+					<div id="table-data">
+						<table>
+							<thead>
+								<th>Id</th>
+								<th>Application date</th>
+								<th>Reason</th>
+								<th>Status</th>
+								<th></th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>2023-09-29</td>
+									<td>xyz reason</td>
+									<td>pending</td>
+									<td><i class='bx bx-chevron-right'></i></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 				<div class="container">
 					<span>Student ID</span>:<input type="text" name="student_id" id="student_id" readonly>
 					<span>Name</span>:<input type="text" name="name" id="name" readonly>
@@ -270,7 +296,8 @@
 					<span>Subject</span>:<textarea name="reason_subject" id="reason_subject" cols="30" rows="2" required></textarea>
 					<span>Body</span>:<textarea name="reason_body" id="reason_body" cols="30" rows="5" required></textarea>
 					<span>Attachment</span>:<input type="file" name="attachment" id="attachment" accept="image/*,.pdf">
-					<div><center><button type="button" id="submit">Submit</button></center></div>
+					<div><center><button type="button" id="submit">Submit</button>
+						<button type="button" id="close">Close</button></center></div>
 				</div>
 			<!-- <span>records Panel</span> -->
 			<div id="error-msg"></div>

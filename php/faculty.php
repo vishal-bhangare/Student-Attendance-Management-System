@@ -790,6 +790,81 @@
     }
     echo $count;
   }
+  elseif($action == "leavesData"){
+    $className = $_POST["className"];
+    // $sql = "select * from leaves where student_class = '{$className}'";
+    $sql = "select * from leaves where student_class = '{$className}' ORDER BY CASE status WHEN -1 THEN 3 WHEN 1 THEN 2 WHEN 0 THEN 1 ELSE 0 END;";
+    $result = mysqli_query($conn,$sql);
+    $table = '<table>
+    <thead>
+      <th>Id</th>
+      <th>Application date</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th></th>
+    </thead>
+    <tbody>';
+    if(mysqli_num_rows($result) > 0){
+      while($row = mysqli_fetch_array($result)){
+        $status = "unknown";
+        if($row["status"] == 0){
+          $status = "pending";
+        }
+        elseif($row["status"] == -1){
+          $status = "rejected";
+        }
+        elseif($row["status"] == 1){
+          $status = "accepted";
+        }
+        $table .="<tr>
+        <td>{$row["id"]}</td>
+        <td>{$row["application_date"]}</td>
+        <td>{$row["reason_subject"]}</td>
+        <td>{$status}</td>
+        <td data-id='{$row["id"]}'><i class='bx bx-chevron-right'></i></td>
+      </tr>";
+      }
+      $table .= "</tbody></table>";
+    }else{
+      $table = '<table>
+      <thead>
+        <tr>
+        <th id="id" style="width:100%;">No Data Found</th>
+      </thead>
+      <tbody>
+        </tbody>
+    </table>';
+    }
+    $output[] = array("table"=>$table);
+    echo json_encode($output);
+  }
+  elseif($action == "leaveData"){
+    $leaveId = $_POST["leaveId"];
+    $sql = "select * from leaves where id = {$leaveId}";
+    $result = mysqli_query($conn,$sql);
+    $output = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    echo json_encode($output);
+  }
+  elseif($action == "acceptLeaveApplication"){
+    $leaveId = $_POST["leaveId"];
+    $sql = "update leaves set status = 1 where id = {$leaveId}";
+    if( mysqli_query($conn, $sql) > 0){
+      echo 1;
+    }
+    else{
+        echo 0;
+    }
+  }
+  elseif($action == "rejectLeaveApplication"){
+    $leaveId = $_POST["leaveId"];
+    $sql = "update leaves set status = -1 where id = {$leaveId}";
+    if( mysqli_query($conn, $sql) > 0){
+      echo 1;
+    }
+    else{
+      echo 0;
+    }
+  }
   mysqli_close($conn);
 //   select id from faculty where name = "rahul";
 // select subject_code from departments where subject_name = "iot";

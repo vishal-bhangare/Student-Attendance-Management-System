@@ -256,7 +256,7 @@ body {
 metable {
   overflow: auto;
 }
-.timetable{
+.timetable {
   overflow: auto;
 }
 .timetable::-webkit-scrollbar,
@@ -515,7 +515,7 @@ metable {
   border: 2px solid rgb(216, 216, 216);
   color: #fff;
   overflow: hidden;
-    overflow-y: auto;
+  overflow-y: auto;
 }
 .timetable .card-background .card {
   grid-gap: 25px !important;
@@ -538,7 +538,7 @@ metable {
 .timetable .card-background .card i:hover {
   color: #f13854;
 }
-.leaves .container{
+.leaves .container {
   display: grid;
   grid-template-columns: fit-content(100%) fit-content(100%) auto;
   gap: 8px;
@@ -549,17 +549,22 @@ metable {
   margin: 0 auto;
   width: 70%;
   justify-content: center;
+  display: none;
 }
-.leaves .container input,.leaves .container textarea{
+.leaves .container input,
+.leaves .container textarea {
   padding: 0px 5px;
 }
-.leaves .container div{
+.leaves .container div {
   grid-column: span 3;
-  
-}.leaves .container div button{
+}
+.leaves .container div button {
   margin: 20px;
 }
-
+.leaves .data {
+  width: 100%;
+  height: fit-content;
+}
 #success-msg {
   background: #def1d8;
   color: green;
@@ -581,4 +586,47 @@ metable {
   right: 15px;
   top: 15px;
   border-radius: 5px;
+}
+.leaves .data .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: antiquewhite;
+  padding: 20px;
+  padding-left: 40px;
+}
+.leaves .data .header span {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.leaves .data #table-data {
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+}
+.leaves .data #table-data table {
+  width: 100%;
+  height: calc(100% - 160px);
+  text-align: left;
+  border-collapse: collapse;
+  text-align: center;
+  border: 1px solid gray;
+}
+.leaves .data #table-data table tr {
+  border: 1px solid rgb(180, 180, 180);
+  border-top: none;
+  height: 45px;
+}
+.leaves .data .header button {
+  padding: 2px 10px;
+  background: #fff;
+  color: #e9972c;
+  border: 2px solid #e9972c;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 550;
+}
+.leaves .data .header button:hover {
+  background: #e9972c;
+  color: #fff;
 }

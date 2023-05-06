@@ -289,7 +289,41 @@
     $id = $_POST["id"];
     $sql = "select * from students where id = {$id}";
     $result = mysqli_query($conn,$sql);
-    $output = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $studentData = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    $sql = "select * from leaves where student_id = {$id}";
+    $result = mysqli_query($conn,$sql);
+    $table = '<table>
+    <thead>
+      <th>Id</th>
+      <th>Application date</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th></th>
+    </thead>
+    <tbody>';
+    if(mysqli_num_rows($result) > 0){
+      while($row = mysqli_fetch_array($result)){
+        $status = "unknown";
+        if($row["status"] == 0){
+          $status = "pending";
+        }
+        elseif($row["status"] == -1){
+          $status = "rejected";
+        }
+        elseif($row["status"] == 1){
+          $status = "accepted";
+        }
+        $table .="<tr>
+        <td>{$row["id"]}</td>
+        <td>{$row["application_date"]}</td>
+        <td>{$row["reason_subject"]}</td>
+        <td>{$status}</td>
+        <td data-id='{$row["id"]}'><i class='bx bx-chevron-right'></i></td>
+      </tr>";
+      }
+      $table .= "</tbody></table>";
+    }
+    $output[] = array("studentData"=>$studentData, "table"=>$table);
     echo json_encode($output);
   }
   elseif($action == "leaveApplication"){
@@ -304,7 +338,9 @@
     $reasonBody = $_POST["reasonBody"];
     $attachment = $_POST["attachment"];
     $status = 0;
-    $sql = "insert into leaves(student_id,student_name,student_class,student_rollno,student_div,from_date,to_date,reason_subject,reason_body,attachment,status) values({$studentId},'{$studentName}','{$studentClass}',{$studentRollno},'{$studentDiv}','{$fromDate}','{$toDate}','{$reasonSubject}','{$reasonBody}',{$attachment},{$status})";
+    date_default_timezone_set('Asia/Kolkata');
+    $date = date('Y-m-d');
+    $sql = "insert into leaves(student_id,student_name,student_class,student_rollno,student_div,from_date,to_date,reason_subject,reason_body,attachment,status,application_date) values({$studentId},'{$studentName}','{$studentClass}',{$studentRollno},'{$studentDiv}','{$fromDate}','{$toDate}','{$reasonSubject}','{$reasonBody}',{$attachment},{$status},'{$date}')";
     if( mysqli_query($conn, $sql) > 0){
       echo 1;
     }
