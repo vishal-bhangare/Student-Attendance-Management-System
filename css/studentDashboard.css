@@ -78,7 +78,7 @@ body {
   padding: 10px 0px;
 }
 .active {
-  background: #4b49ac;
+  background: #fa8246;
   color: #ffffff;
   border-radius: 7px;
 }
@@ -86,9 +86,12 @@ body {
   color: #fff;
 }
 .sidebar .nav-links li a:hover {
-  background: #6260df81;
+  background: #ffd2bb;
   border-radius: 7px;
   transition: color 0.3s, background 0.3s;
+}
+.active a:hover{
+  background: #f06622 !important;
 }
 
 .sidebar .logout {
@@ -123,7 +126,7 @@ body {
   margin: 0px auto;
 }
 .sidebar .logout div:hover {
-  background: #6260df81;
+  background: #ffd2bb;
   border-radius: 7px;
   border-color: #fff;
 }
@@ -265,7 +268,7 @@ metable {
 }
 .timetable > .content {
   width: 100%;
-  background: rgb(226, 195, 255);
+  background: #ffe8dc;
   padding: 20px;
 }
 .timetable .content #table-data > table {
@@ -306,7 +309,7 @@ metable {
   width: 10%;
 }
 .timetable .content #table-data > table tbody {
-  background: #8d74eb;
+  background: #ffc8ab;
 }
 .timetable .content #table-data > table tbody tr {
   height: 100px;
@@ -360,7 +363,7 @@ metable {
 }
 
 .timetable .content #table-data > table tbody tr td div {
-  background: red;
+  background: #ff5722;
   color: #fff;
   height: 100%;
   font-size: 0.9rem;
@@ -384,7 +387,7 @@ metable {
 }
 .toggle-sidebar {
   font-size: 1.4rem;
-  background-color: #4b49ac;
+  background-color: #fda172;
   color: #fff;
   border-radius: 0px 5px 5px 0px;
   position: fixed;
@@ -629,4 +632,110 @@ metable {
 .leaves .data .header button:hover {
   background: #e9972c;
   color: #fff;
+}
+
+.leaves .leave-details {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: #0000002f;
+  display: none;
+}
+.leaves .leave-details .card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  min-width: 400px;
+  max-width: 70%;
+  min-height: fit-content;
+  background: #333837;
+  border-radius: 4px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 4px;
+  display: grid;
+  grid-template-columns: fit-content(100%) fit-content(100%) auto;
+  gap: 8px;
+  align-items: baseline;
+  grid-auto-rows: minmax(fit-content(100%), 20px);
+  font-size: 18px;
+  padding: 10px;
+  padding-top: 10px;
+  border: 2px solid rgb(216, 216, 216);
+  color: #fff;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.leaves .leave-details .card {
+  grid-gap: 20px !important;
+  height: fit-content !important;
+  display: grid;
+  padding-top: 25px;
+  padding-bottom: 20px;
+}
+
+.leaves .leave-details .card i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: unset;
+  padding: 8px;
+  font-size: 33px;
+  color: #fff;
+}
+.leaves .leave-details .card i:hover {
+  color: #f13854;
+}
+.leaves .leave-details a {
+  color: lightskyblue;
+}
+.leaves .leave-details a:hover {
+  color: rgb(39, 165, 243);
+}
+.home {
+  overflow: auto;
+}
+.home::-webkit-scrollbar{
+  display: none;
+}
+.home .container .header {
+  height: 70px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  margin: 10px 0px;
+}
+.home .container .header span {
+  display: inline-block;
+  margin: auto 0px;
+  line-height: 70px;
+  margin-left: 40px;
+  font-size: 1.3rem;
+  font-weight: 500;
+
+}
+
+.home .container .data {
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home .container .data .schedule {
+  display: grid;
+  grid-template-columns: fit-content(100%) fit-content(100%) auto;
+  gap: 8px;
+  align-items: baseline;
+  width: 70%;
+  background-color: #c3e9e1;
+  height: fit-content;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 5px 0px;
 }

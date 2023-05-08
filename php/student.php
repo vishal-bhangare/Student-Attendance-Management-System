@@ -74,7 +74,8 @@
         <tbody>
           </tbody>
       </table>';
-      echo $output;
+      $output[] = array("table"=>$table);
+      echo json_encode($output);
       }
       
       
@@ -346,6 +347,43 @@
     }
     else{
         echo 0;
+    }
+  }
+  elseif($action == "todaysSchedule"){
+    $studentClass = $_POST["studentClass"];
+    date_default_timezone_set('Asia/Kolkata');
+    $day = strtolower(date('l'));
+    try {
+      $sql = "select * from schedule where day = '{$day}'";
+      $result = mysqli_query($conn,$sql);
+      if(mysqli_num_rows($result) > 0){
+        $container = "<div class='header'><span>Today's schedule</span></div>
+				<div class='data'>";  
+        $no = 1;
+        while($row = mysqli_fetch_array($result)){
+          $container .= "<div class='schedule' data-no='{$no}'>
+          <span>Time</span>:<span id='time'>{$row["from_time"]}-{$row["to_time"]}</span>
+          <span>Subject</span>:<span id='subject'>{$row["subject"]}</span>
+          <span>Faculty</span>:<span id='faculty'>{$row["faculty"]}</span>
+        </div>";
+        $no += 1;
+        }
+        $container .= "</div>";
+        echo $container;
+      }
+      else{
+        $output = '<table>
+        <thead>
+          <tr>
+          <th id="id" style="width:100%;">No Data Found</th>
+        </thead>
+        <tbody>
+          </tbody>
+      </table>';
+      echo $output;
+      }
+    } catch (\Throwable $th) {
+      echo "error occured!!!";
     }
   }
   mysqli_close($conn); 

@@ -3,7 +3,7 @@ var li_elements = document.querySelectorAll(".sidebar ul li");
 var item_elements = document.querySelectorAll(".item");
 
 item_elements.forEach(function (item) {
-  if (item.classList[1] != "leaves")
+  if (item.classList[1] != "home")
     item.style.display = "none";
 });
 
@@ -266,16 +266,51 @@ $.fn.gparent = function (recursion) {
 };
 
 $(document).ready(function () {
-  let start, end, total, nop, limit;
-  let cur = 1;
 
   username = sessionStorage.getItem("username");
+  userEmail = sessionStorage.getItem("email");
   role = sessionStorage.getItem("role");
   $(".user-details #username").text(username);
 
+  function loadTodaysSchedule(className, facutlyId) {
+    $.ajax({
+      url: "/php/faculty.php",
+      type: "POST",
+      data: { action: "todaysSchedule", className: className, facultyEmail: facutlyId },
+      success: function (data) {
+        if (data) {
+          console.log(data);
+          $(".home .container").html(data);
+          // });
+        } else {
+          $("#error-msg")
+            .html("Error occured !!!")
+            .slideDown()
+            .delay(2000)
+            .slideUp();
+        }
+      },
+    });
+  }
+  $(".home .header .select-menu .options .option").on("click", function () {
+    className = $(".home .header .select-menu .sBtn-text").text();
+    loadTodaysSchedule(className, userEmail);
+  })
+  loadTodaysSchedule("", userEmail);
+
+  let start, end, total, nop, limit;
+  let cur = 1;
+
+
   if (role == "hod") {
     $(".students .header").css("justify-content", "space-between");
-    $(".students .header .addBtn").css("display", "block")
+    $(".students .header .addBtn").css("display", "block");
+    $(".students .header").css("background-color", "rgb(226, 195, 255)");
+  }
+  else {
+    $(".timetable .header .btns").css("display", "none").off("click");
+    $(".timetable .header .btns").css("display", "none").off("click");
+    $(".students .header .addBtn").off("click");
   }
   $("#logout").on("click", function () {
     window.location.href = "/studentFacultyLogin.html";
@@ -1040,21 +1075,17 @@ $(document).ready(function () {
     }
 
   })
-
-  $(".leaves .header .select-menu .options .option").on("click", function () {
-    $(".leaves .select-class").css("display", "none");
-    $(".leaves .data").css("display", "block");
-
-    class_name = $(".leaves .header .select-menu .sBtn-text").text();
+  function loadLeavesData(className) {
 
     $.ajax({
       url: "/php/faculty.php",
       type: "POST",
       dataType: "JSON",
-      data: { action: "leavesData", className: class_name },
+      data: { action: "leavesData", className: className },
       success: function (data) {
         if (data) {
           $(".leaves .data #table-data").html(data[0].table)
+          $(".leaves .data #temp-data").css("display", "none");
 
         } else {
           $("#error-msg")
@@ -1065,6 +1096,13 @@ $(document).ready(function () {
         }
       },
     });
+  }
+  $(".leaves .header .select-menu .options .option").on("click", function () {
+    $(".leaves .select-class").css("display", "none");
+    $(".leaves .data").css("display", "block");
+
+    class_name = $(".leaves .header .select-menu .sBtn-text").text();
+    loadLeavesData(class_name);
   })
   $(".leaves .leave-details .card i").on("click", function () {
     $(".leaves .leave-details").css("display", "none");
@@ -1073,7 +1111,7 @@ $(document).ready(function () {
 
   $(document).on("click", ".leaves .data #table-data tbody td:last-child", function () {
     $(".leaves .leave-details").css("display", "block");
-    
+
     var leaveId = $(this).data('id');
     $.ajax({
       url: "/php/faculty.php",
@@ -1082,25 +1120,24 @@ $(document).ready(function () {
       data: { action: "leaveData", leaveId: leaveId },
       success: function (data) {
         if (data) {
-          console.log(data);
-          console.log(data[0].id);
-          // $.each(data, (key, value) => {
-            $("#success-msg").html("application rejected.").slideDown().delay(2000).slideUp();
-            $(".leaves .leave-details #id").text(data[0].id);
-            $(".leaves .leave-details #app_date").text(data[0].application_date);
-            $(".leaves .leave-details #student_id").text(data[0].student_id);
-            $(".leaves .leave-details #student_class").text(data[0].student_class);
-            $(".leaves .leave-details #from_date").text(data[0].from_date);
-            $(".leaves .leave-details #to_date").text(data[0].to_date);
-            $(".leaves .leave-details #subject").text(data[0].reason_subject);
-            $(".leaves .leave-details #body").text(data[0].reason_body);
-            if(data[0].status == 1){
-              $(".leaves .leave-details .card div").css("display","none")
-            }
-            else{
-              $(".leaves .leave-details .card div").css("display","block")
-            }
-          // });
+          $("#success-msg").html("application rejected.").slideDown().delay(2000).slideUp();
+          $(".leaves .leave-details #id").text(data[0].id);
+          $(".leaves .leave-details #app_date").text(data[0].application_date);
+          $(".leaves .leave-details #student_id").text(data[0].student_id);
+          $(".leaves .leave-details #student_class").text(data[0].student_class);
+          $(".leaves .leave-details #from_date").text(data[0].from_date);
+          $(".leaves .leave-details #to_date").text(data[0].to_date);
+          $(".leaves .leave-details #subject").text(data[0].reason_subject);
+          $(".leaves .leave-details #body").text(data[0].reason_body);
+          leaveStatus = data[0].status;
+          if (leaveStatus == 0) {
+
+            $(".leaves .leave-details .card > div").css("display", "block")
+          }
+          else {
+            $(".leaves .leave-details .card > div").css("display", "none")
+          }
+
         } else {
           $("#error-msg")
             .html("Error occured !!!")
@@ -1111,14 +1148,16 @@ $(document).ready(function () {
       },
     });
   })
-  $(".leaves .leave-details #reject").on("click",function(){
-    leaveId =  $(".leaves .leave-details #id").text();
+  $(".leaves .leave-details #reject").on("click", function () {
+    leaveId = $(".leaves .leave-details #id").text();
     $.ajax({
       url: "/php/faculty.php",
       type: "POST",
       data: { action: "rejectLeaveApplication", leaveId: leaveId },
       success: function (data) {
         if (data == 1) {
+          class_name = $(".leaves .header .select-menu .sBtn-text").text();
+          loadLeavesData(class_name);
           $(".leaves #success-msg").html("application rejected.").slideDown().delay(2000).slideUp();
           $(".leaves .leave-details").css("display", "none");
         } else {
@@ -1131,20 +1170,22 @@ $(document).ready(function () {
       },
     });
   })
-  $(".leaves .leave-details #accept").on("click",function(){
-    leaveId =  $(".leaves .leave-details #id").text();
+  $(".leaves .leave-details #accept").on("click", function () {
+    leaveId = $(".leaves .leave-details #id").text();
     $.ajax({
       url: "/php/faculty.php",
       type: "POST",
       data: { action: "acceptLeaveApplication", leaveId: leaveId },
       success: function (data) {
         if (data == 1) {
+          class_name = $(".leaves .header .select-menu .sBtn-text").text();
+          loadLeavesData(class_name);
           $(".leaves .leave-details").css("display", "none");
           $(".leaves #success-msg")
-          .html("application accepted.")
-          .slideDown()
-          .delay(2000)
-          .slideUp();
+            .html("application accepted.")
+            .slideDown()
+            .delay(2000)
+            .slideUp();
           // });
         } else {
           $(".leaves #error-msg")

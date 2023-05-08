@@ -1056,8 +1056,9 @@ input[type="number"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: antiquewhite;
+  background-color: rgb(226, 195, 255);
   padding: 20px ;
+ height: 70px;
   padding-left: 40px;
 }
 .leaves .data #table-data {
@@ -1137,9 +1138,16 @@ input[type="number"] {
 }
 .leaves .leave-details div {
   grid-column: span 3;
+  display: none;
 }
 .leaves .leave-details div button {
   margin: 20px;
+}
+.leaves .leave-details a {
+  color: lightskyblue;;
+}
+.leaves .leave-details a:hover {
+  color: rgb(39, 165, 243);
 }
 
 
@@ -1165,7 +1173,45 @@ input[type="number"] {
   top: 15px;
   border-radius: 5px;
 }
-
+.home {
+  overflow: auto;
+}
+.home::-webkit-scrollbar{
+  display: none;
+}
+.home  .header {
+  height: 70px;
+  width: 100%;
+  margin: 10px 0px;
+  padding: 20px;
+  padding-left: 40px;
+}
+.home .header > .select-menu{
+  float: right;
+}
+.home .header > span {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.home .container .data {
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home .container .data .schedule {
+  display: grid;
+  grid-template-columns: fit-content(100%) fit-content(100%) auto;
+  gap: 8px;
+  align-items: baseline;
+  width: 70%;
+  background-color: #c3e9e1;
+  height: fit-content;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
 
 
 

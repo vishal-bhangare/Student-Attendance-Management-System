@@ -65,7 +65,6 @@ $(document).ready(function () {
         if (data) {
           var data = JSON.parse(data);
           if (data[0].status == 1) {
-            alert("yes");
             window.location.href = '/studentDashboard.html';
             sessionStorage.setItem("email", user.val());
             sessionStorage.setItem("username", data[0].name);
@@ -75,7 +74,6 @@ $(document).ready(function () {
             pass.val("");
           }
           else if (data[0].status == 0) {
-            alert("no");
             user.val("");
             pass.val("");
             alert("Invalid username or password");
