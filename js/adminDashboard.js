@@ -216,8 +216,9 @@ $(document).ready(function () {
   var user = sessionStorage.getItem("username");
   $("#username").text(user);
   $(".card-background2 .addBtn").on("click", function(btn) {
-
+``
     btn.preventDefault();
+    console.log("yes");
     var name = $(".card-background2 #name");
     var dob = $(".card-background2 #dob");
     var email = $(".card-background2 #email");
@@ -525,13 +526,12 @@ $(document).ready(function () {
       data: { action: "studentData", id: studentId },
       success: function (data) {
         if (data) {
-          console.log(data);
-
           $.each(data, (key, value) => {
+              console.log(value.division);
             $(".students .card-background #id").val(value.id);
             $(".students .card-background #name").val(value.name);
             $(".students .card-background #class").val(value.class);
-            $(".students .card-background #div").val(value.div);
+            $(".students .card-background #div").val(value.division);
             $(".students .card-background #rollno").val(value.rollno);
             $(".students .card-background #contact").val(value.contact);
             $(".students .card-background #dob").val(value.dob);

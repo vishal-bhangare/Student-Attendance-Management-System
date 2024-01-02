@@ -2,11 +2,11 @@
   $action = $_POST["action"];
   // $action = "addFaculty";
   $conn = mysqli_connect(
-    'pal.h.filess.io',
-    'projectams_starraceam',
-    '1be59674ef7040c39135fe87671a20efe42d9dde',
-    'projectams_starraceam',
-    3306
+        'localhost',
+        'id21649519_admin',
+        'Vishal@2108',
+        'id21649519_studpunch',
+         3306
 )or die("Connection Failed");
   
 
@@ -125,7 +125,7 @@
             <td>{$row["id"]}</td>
             <td data-id='{$row["id"]}'>{$row["name"]}</td>
             <td>{$row["class"]}</td>
-            <td>{$row["div"]}</td>
+            <td>{$row["division"]}</td>
             <td>{$row["rollno"]}</td>
             <td>{$row["dob"]}</td>
             <td>{$row["contact"]}</td>
@@ -284,7 +284,7 @@
             <td data-id='{$row["id"]}'>{$row["name"]}</td>
             <td>{$row["name"]}</td>
             <td>{$row["class"]}</td>
-            <td>{$row["div"]}</td>
+            <td>{$row["division"]}</td>
             <td>{$row["rollno"]}</td>
             <td>{$row["contact"]}</td>
             <td>

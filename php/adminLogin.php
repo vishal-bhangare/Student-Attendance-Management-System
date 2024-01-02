@@ -2,10 +2,10 @@
     $action = $_POST["action"];
 
     $conn = mysqli_connect(
-        'pal.h.filess.io',
-        'projectams_starraceam',
-        '1be59674ef7040c39135fe87671a20efe42d9dde',
-        'projectams_starraceam',
+        'localhost',
+        'id21649519_admin',
+        'Vishal@2108',
+        'id21649519_studpunch',
         3306
     )or die("Connection Failed");
     

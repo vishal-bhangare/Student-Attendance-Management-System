@@ -2,17 +2,17 @@
   $action = $_POST["action"];
   // $action = "todaysSchedule";
   $conn = mysqli_connect(
-    'pal.h.filess.io',
-    'projectams_starraceam',
-    '1be59674ef7040c39135fe87671a20efe42d9dde',
-    'projectams_starraceam',
+    'localhost',
+        'id21649519_admin',
+        'Vishal@2108',
+        'id21649519_studpunch',
     3306
   )or die("Connection Failed");
 
   if($action == "addStudent"){
     $name = $_POST["name"];
-    $student_class = $_POST["student_class"];
-    $division = $_POST["div"];
+    $student_class = strtoupper($_POST["student_class"]);
+    $div = $_POST["div"];
     $rollno = $_POST["rollno"];
     $dob = $_POST["dob"];
     $email = $_POST["email"];
@@ -25,9 +25,9 @@
     $encryption_key = "Vishal@#2108";
     $options = 0;
     $encrypted_password = openssl_encrypt($password, $ciphering,$encryption_key, $options, $encryption_iv);
-    // insert into students(name,class,division,rollno,dob,contact,email,address,password) values("vishal","sycs","d",10,"2003-01-01",0909,"eme","titit","student");
+    // insert into students(name,class,div,rollno,dob,contact,email,address,password) values("vishal","sycs","d",10,"2003-01-01",0909,"eme","titit","student");
     global $conn;
-    $sql = "insert into students(name,class,division,rollno,dob,contact,email,address,password) values('{$name}','{$student_class}','{$division}','{$rollno}','{$dob}','{$contact}','{$email}','{$address}','{$encrypted_password}')";
+    $sql = "insert into students(name,class,division,rollno,dob,contact,email,address,password) values('{$name}','{$student_class}','{$div}','{$rollno}','{$dob}','{$contact}','{$email}','{$address}','{$encrypted_password}')";
     $result = mysqli_query($conn, $sql);
     try {
         if( $result > 0){
@@ -104,7 +104,7 @@
             <td>{$row["class"]}</td>
             <td>{$row["division"]}</td>
             <td>{$row["rollno"]}</td>
-            <td>{$row["contact"]}</td>
+            <td>{$row["dob"]}</td>
             <td>
             <button type='button' class='editBtn' data-id='{$row[0]}'>
               <span>Edit</span>
@@ -122,7 +122,7 @@
             <td>{$row["class"]}</td>
             <td>{$row["division"]}</td>
             <td>{$row["rollno"]}</td>
-            <td>{$row["contact"]}</td>
+            <td>{$row["dob"]}</td>
           </tr>";
           }
         }
@@ -194,8 +194,8 @@
 
     $id = $_POST["id"];
     $name = $_POST["name"];
-    $student_class = $_POST["student_class"];
-    $division = $_POST["div"];
+    $student_class = strtoupper($_POST["student_class"]);
+    $div = $_POST["div"];
     $rollno = $_POST["rollno"];
     $dob = $_POST["dob"];
     $email = $_POST["email"];
@@ -203,7 +203,7 @@
     $address = $_POST["address"];
 
     global $conn;
-    $sql = "update students set name = '{$name}',class = '{$student_class}',division = '{$division}',rollno = '{$rollno}',dob = '{$dob}',email = '{$email}',contact = {$contact},address = '{$address}' where id = {$id}";
+    $sql = "update students set name = '{$name}',class = '{$student_class}',division = '{$div}',rollno = '{$rollno}',dob = '{$dob}',email = '{$email}',contact = {$contact},address = '{$address}' where id = {$id}";
     $result = mysqli_query($conn, $sql);
     try {
         if(mysqli_affected_rows($conn) > 0){

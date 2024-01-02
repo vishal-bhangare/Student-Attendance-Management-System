@@ -600,7 +600,7 @@ $(document).ready(function () {
         action: "updateStudent",
         id: id.val(),
         name: name.val(),
-        student_class: student_class.val(),
+        student_class: student_class.val().toUpperCase(),
         div: div.val(),
         rollno: rollno.val(),
         dob: dob.val(),

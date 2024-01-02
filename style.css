@@ -1,39 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-.wrapper{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(90deg, #ebf4f5 35%, #b5c6e0 100%);
-}
-.btns{
-    width: 150px;
-    height: 50px;
-    background: rgb(0, 0, 0);
-    margin: 5px;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    line-height: 50px;
-    font-weight: 500;
-    min-width: fit-content;
-    padding: 0px 5px;
-}
-.btns:hover{
-    background: #ef476f;
+
+div[style*="text-align: right;position: fixed;z-index:9999999;bottom: 0;width: auto;right: 1%;cursor: pointer;line-height: 0;display:block !important;"] {
+  display: none !important;
 }
 
+img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]
+{
+  display: none !important;
+}
 
-@media (max-width:480px)  {
-    .wrapper{
-        flex-direction: column;
-    }
+a[href*="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website&utm_content=footer_img"]
+{
+  display: none !important;
+}
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #ebf4f5 35%, #b5c6e0 100%);
+}
+.btns {
+  width: 150px;
+  height: 50px;
+  background: rgb(0, 0, 0);
+  margin: 5px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 500;
+  min-width: fit-content;
+  padding: 0px 5px;
+}
+.btns:hover {
+  background: #ef476f;
+}
+.name {
+  color: #fff;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+}
 
+.home {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #fff;
+  color: #333;
+  padding: 0.1rem 0.2rem;
+  border: 2px solid #aaa;
+  border-radius: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.home:hover {
+  background: #eee;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    flex-direction: column;
+  }
 }
