@@ -8,6 +8,14 @@ I have build this project to :
 - Manage leaves
 - Organize data of students and facutly.
 
+## DEMO VIDEO
+
+
+
+https://github.com/vishal-bhangare/studpunch/assets/61643919/ce4ae8f3-9e61-4315-b250-b14039763c44
+
+
+
 Your are free to use this project.
 
 ## Usage
